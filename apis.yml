@@ -12,7 +12,7 @@ image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - API
 created: '2025-05-02'
-modified: '2025-05-02'
+modified: '2026-03-16'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/solcast/refs/heads/main/apis.yml
 specificationVersion: '0.19'
@@ -24,12 +24,32 @@ apis:
       power. Created using a global fleet of weather satellites. Independently
       validated. Free to try. Access our data in just a few minutes with the
       Solcast API Toolkit. 
-    humanURL: ' https://solcast.com/'
+    humanURL: https://docs.solcast.com.au/
     tags:
-      - API
+      - Solar
+      - Forecasting
+      - Irradiance
+      - PV Power
     properties:
       - type: Documentation
-        url: ' https://solcast.com/'
+        url: https://docs.solcast.com.au/
+      - type: Getting Started
+        url: https://docs.solcast.com.au/docs/getting-started
+      - type: Authentication
+        url: https://docs.solcast.com.au/docs/api-authentication
+common:
+  - type: Portal
+    url: https://solcast.com/
+  - type: Documentation
+    url: https://docs.solcast.com.au/
+  - type: SDKs
+    url: https://solcast.com/sdk
+  - type: Sign Up
+    url: https://toolkit.solcast.com.au/register
+  - type: Change Log
+    url: https://solcast.com/changelog
+  - type: Website
+    url: https://solcast.com
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
