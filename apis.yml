@@ -8,8 +8,7 @@ type: Index
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-tags:
-  - API
+tags: []
 created: '2025-05-02'
 modified: '2026-03-16'
 url: >-
@@ -24,10 +23,10 @@ apis:
       Free to try. Access our data in just a few minutes with the Solcast API Toolkit.
     humanURL: https://docs.solcast.com.au/
     tags:
-      - Solar
       - Forecasting
       - Irradiance
       - PV Power
+      - Solar
     properties:
       - type: Documentation
         url: https://docs.solcast.com.au/
