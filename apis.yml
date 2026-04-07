@@ -1,10 +1,9 @@
 aid: solcast
 name: Solcast
 description: >-
-  Solar resource assessment and forecasting data for irradiance and PV power.
-  Created using a global fleet of weather satellites. Independently validated.
-  Free to try. Access our data in just a few minutes with the Solcast API
-  Toolkit. 
+  Solar resource assessment and forecasting data for irradiance and PV power. Created
+  using a global fleet of weather satellites. Independently validated. Free to try.
+  Access our data in just a few minutes with the Solcast API Toolkit.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -20,10 +19,9 @@ apis:
   - aid: solcast:solcast
     name: Solcast
     description: >-
-      Solar resource assessment and forecasting data for irradiance and PV
-      power. Created using a global fleet of weather satellites. Independently
-      validated. Free to try. Access our data in just a few minutes with the
-      Solcast API Toolkit. 
+      Solar resource assessment and forecasting data for irradiance and PV power.
+      Created using a global fleet of weather satellites. Independently validated.
+      Free to try. Access our data in just a few minutes with the Solcast API Toolkit.
     humanURL: https://docs.solcast.com.au/
     tags:
       - Solar
