@@ -1,0 +1,52 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.solcast.com.au/data/forecast/radiation_and_weather",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY",
+      "Accept": "application/json"
+    },
+    "parameters": {
+      "latitude": -33.856784,
+      "longitude": 151.215297,
+      "output_parameters": "ghi,dni,dhi,air_temp",
+      "hours": 48,
+      "period": "PT30M",
+      "format": "json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "forecasts": [
+        {
+          "period_end": "2026-05-02T07:00:00.0000000Z",
+          "period": "PT30M",
+          "ghi": 880.4,
+          "dni": 770.2,
+          "dhi": 110.2,
+          "air_temp": 29.1
+        },
+        {
+          "period_end": "2026-05-02T07:30:00.0000000Z",
+          "period": "PT30M",
+          "ghi": 890.0,
+          "dni": 778.5,
+          "dhi": 111.5,
+          "air_temp": 29.5
+        },
+        {
+          "period_end": "2026-05-02T08:00:00.0000000Z",
+          "period": "PT30M",
+          "ghi": 870.3,
+          "dni": 760.0,
+          "dhi": 110.3,
+          "air_temp": 29.8
+        }
+      ]
+    }
+  }
+}

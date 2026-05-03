@@ -1,0 +1,67 @@
+{
+  "title": "PV Power Response Structure",
+  "description": "Hierarchical structure of Solcast PV power API responses. Used across rooftop_pv_power and advanced_pv_power endpoints in live, forecast, historic, and TMY categories.",
+  "type": "object",
+  "structure": {
+    "root": {
+      "description": "Top-level response envelope.",
+      "fields": {
+        "estimated_actuals": {
+          "type": "array",
+          "description": "Present for live and historic endpoints. PV power actuals ordered by period_end ascending.",
+          "items": {
+            "$ref": "pv-power-data-point"
+          }
+        },
+        "forecasts": {
+          "type": "array",
+          "description": "Present for forecast and TMY endpoints. PV power forecasts ordered by period_end ascending.",
+          "items": {
+            "$ref": "pv-power-data-point"
+          }
+        }
+      }
+    },
+    "pv-power-data-point": {
+      "description": "A single time-period data point containing PV power output estimates.",
+      "fields": {
+        "period_end": {
+          "type": "string (ISO 8601 datetime)",
+          "description": "End timestamp of the time period in UTC.",
+          "required": true
+        },
+        "period": {
+          "type": "string (ISO 8601 duration)",
+          "description": "Duration of the time interval (e.g., PT30M).",
+          "required": true
+        },
+        "pv_estimate": {
+          "type": "number (0–1)",
+          "description": "PV output as a fraction of system capacity. Central estimate (P50)."
+        },
+        "pv_estimate10": {
+          "type": "number (0–1)",
+          "description": "P10 pessimistic estimate — 10% of outcomes are at or below this value."
+        },
+        "pv_estimate90": {
+          "type": "number (0–1)",
+          "description": "P90 optimistic estimate — 90% of outcomes are at or below this value."
+        },
+        "pv_power_rooftop": {
+          "type": "number (kW)",
+          "description": "Rooftop PV power output in kilowatts. Only present from rooftop_pv_power endpoints."
+        },
+        "pv_power_advanced": {
+          "type": "number (kW)",
+          "description": "Advanced model PV power output in kilowatts. Only present from advanced_pv_power endpoints."
+        }
+      }
+    }
+  },
+  "notes": [
+    "pv_estimate, pv_estimate10, and pv_estimate90 are dimensionless capacity fractions (0–1).",
+    "pv_power_rooftop and pv_power_advanced are absolute kilowatt values tied to registered capacity.",
+    "Rooftop endpoints use lat/lon only; advanced endpoints require a registered resource_id.",
+    "P10/P90 bands provide probabilistic uncertainty for energy trading and storage sizing."
+  ]
+}

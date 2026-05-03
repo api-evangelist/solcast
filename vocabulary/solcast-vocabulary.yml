@@ -1,0 +1,411 @@
+vocabulary:
+  name: Solcast Solar Energy Vocabulary
+  description: >-
+    Domain vocabulary for the Solcast API covering solar irradiance, PV power,
+    meteorological parameters, soiling models, grid aggregation, and resource
+    assessment. Aligned with IEC, ISO, and PVGIS conventions.
+  version: "1.0.0"
+  created: "2026-05-02"
+  modified: "2026-05-02"
+  source: https://docs.solcast.com.au/
+
+terms:
+  # ─── Core Solar Irradiance Terms ─────────────────────────────────────────
+  - term: GHI
+    label: Global Horizontal Irradiance
+    abbreviation: GHI
+    unit: "W/m²"
+    description: >-
+      The total solar radiation received on a horizontal surface, including both
+      direct beam radiation and scattered diffuse radiation. The primary metric
+      for evaluating solar resource potential at a location.
+    category: Irradiance
+    related:
+      - DNI
+      - DHI
+      - EBH
+
+  - term: DNI
+    label: Direct Normal Irradiance
+    abbreviation: DNI
+    unit: "W/m²"
+    description: >-
+      Solar radiation measured on a surface perpendicular (normal) to the direct
+      beam from the sun. Critical for concentrating solar power (CSP) systems.
+    category: Irradiance
+    related:
+      - GHI
+      - DHI
+
+  - term: DHI
+    label: Diffuse Horizontal Irradiance
+    abbreviation: DHI
+    unit: "W/m²"
+    description: >-
+      The scattered component of solar radiation arriving at a horizontal surface
+      from all parts of the sky dome excluding the direct beam. Significant on
+      cloudy days and for bifacial PV systems.
+    category: Irradiance
+    related:
+      - GHI
+      - DNI
+
+  - term: EBH
+    label: Beam Horizontal Irradiance
+    abbreviation: EBH
+    unit: "W/m²"
+    description: >-
+      The direct beam component of solar radiation received on a horizontal surface.
+      Equivalent to DNI multiplied by the cosine of the solar zenith angle.
+    category: Irradiance
+    related:
+      - GHI
+      - DNI
+
+  - term: clearsky_ghi
+    label: Clear-Sky GHI
+    unit: "W/m²"
+    description: >-
+      The GHI that would be measured under a completely clear (cloud-free)
+      atmosphere. Used as a reference to compute the clear-sky index and
+      diagnose cloud impacts.
+    category: Irradiance
+    related:
+      - GHI
+      - cloud_opacity
+
+  - term: cloud_opacity
+    label: Cloud Opacity
+    unit: "percent (0–100)"
+    description: >-
+      Solcast's proprietary measure of effective cloud cover derived from
+      satellite imagery. 0 = completely clear sky, 100 = fully overcast.
+      Used internally to compute irradiance attenuation.
+    category: Meteorology
+    related:
+      - GHI
+      - clearsky_ghi
+
+  # ─── PV Power Terms ───────────────────────────────────────────────────────
+  - term: pv_estimate
+    label: PV Estimate (Capacity Fraction)
+    unit: "dimensionless (0–1)"
+    description: >-
+      The estimated PV power output expressed as a fraction of the system's
+      rated DC capacity. A value of 1.0 means full-rated output. The central
+      (P50) probabilistic estimate.
+    category: PV Power
+    related:
+      - pv_estimate10
+      - pv_estimate90
+      - pv_power_rooftop
+
+  - term: pv_estimate10
+    label: PV Estimate P10
+    unit: "dimensionless (0–1)"
+    description: >-
+      10th-percentile PV power estimate. A pessimistic bound: actual output
+      is expected to exceed this value 90% of the time. Used for conservative
+      energy production forecasts in project financing.
+    category: PV Power
+    related:
+      - pv_estimate
+      - pv_estimate90
+
+  - term: pv_estimate90
+    label: PV Estimate P90
+    unit: "dimensionless (0–1)"
+    description: >-
+      90th-percentile PV power estimate. An optimistic bound: actual output
+      is expected to be at or below this value 90% of the time.
+    category: PV Power
+    related:
+      - pv_estimate
+      - pv_estimate10
+
+  - term: pv_power_rooftop
+    label: Rooftop PV Power
+    unit: "kW"
+    description: >-
+      Estimated PV power output in kilowatts for a rooftop installation, computed
+      using Solcast's basic PV model with latitude/longitude inputs. Does not
+      require site registration.
+    category: PV Power
+    related:
+      - pv_estimate
+      - pv_power_advanced
+
+  - term: pv_power_advanced
+    label: Advanced PV Power
+    unit: "kW"
+    description: >-
+      High-specification PV power output in kilowatts computed using Solcast's
+      advanced PV model for a registered site (resource_id required). Incorporates
+      full system specifications including tilt, azimuth, capacity, tracking type,
+      and loss factor.
+    category: PV Power
+    related:
+      - pv_power_rooftop
+      - resource_id
+
+  # ─── Meteorological Terms ─────────────────────────────────────────────────
+  - term: air_temp
+    label: Air Temperature
+    unit: "°C"
+    description: >-
+      Air temperature at 2 metres above ground level in degrees Celsius.
+      Affects PV panel efficiency (output decreases at high temperatures)
+      and is used in PV performance modelling.
+    category: Meteorology
+
+  - term: wind_speed_10m
+    label: Wind Speed at 10m
+    unit: "m/s"
+    description: >-
+      Horizontal wind speed at 10 metres height. Used for PV panel cooling
+      calculations, wind turbine power curves, and structural load assessments.
+    category: Meteorology
+
+  - term: wind_direction_10m
+    label: Wind Direction at 10m
+    unit: "degrees (0–360, clockwise from north)"
+    description: >-
+      Direction from which the wind is blowing at 10m height, in degrees
+      clockwise from north (0/360 = north, 90 = east, 180 = south, 270 = west).
+    category: Meteorology
+
+  - term: relative_humidity
+    label: Relative Humidity
+    unit: "percent (0–100)"
+    description: >-
+      Relative humidity at 2 metres height as a percentage. Used in soiling
+      models and atmospheric correction calculations.
+    category: Meteorology
+
+  - term: surface_pressure
+    label: Surface Pressure
+    unit: "hPa"
+    description: >-
+      Atmospheric pressure at the surface in hectopascals. Used in air mass
+      calculations and atmospheric correction of irradiance.
+    category: Meteorology
+
+  - term: precipitable_water
+    label: Precipitable Water
+    unit: "kg/m²"
+    description: >-
+      Total amount of water vapour in the atmosphere above a given location,
+      expressed as the equivalent depth of liquid water. Affects infrared
+      radiation absorption and DNI.
+    category: Meteorology
+
+  # ─── Solar Geometry Terms ─────────────────────────────────────────────────
+  - term: solar_zenith
+    label: Solar Zenith Angle
+    unit: "degrees (0–90)"
+    description: >-
+      Angle between the sun and the vertical (zenith). 0° = sun directly
+      overhead, 90° = sun at the horizon. Controls the air mass and
+      irradiance intensity at the surface.
+    category: Solar Geometry
+
+  - term: solar_azimuth
+    label: Solar Azimuth Angle
+    unit: "degrees (0–360)"
+    description: >-
+      Horizontal angle of the sun measured clockwise from north.
+      180° = due south (northern hemisphere mid-day peak).
+    category: Solar Geometry
+
+  - term: solar_elevation
+    label: Solar Elevation Angle
+    unit: "degrees (-90 to 90)"
+    description: >-
+      Angle of the sun above the horizon. Complement of the zenith angle.
+      Negative at night.
+    category: Solar Geometry
+
+  # ─── Soiling Terms ────────────────────────────────────────────────────────
+  - term: soiling_loss
+    label: Soiling Loss
+    unit: "fraction (0–1)"
+    description: >-
+      Cumulative soiling loss factor representing the fraction of output lost
+      due to accumulated dust, pollen, bird droppings, or other contaminants
+      on the panel surface. 0 = clean, 1 = fully soiled.
+    category: Soiling
+    related:
+      - cleanliness
+      - kimber_model
+      - hsu_model
+
+  - term: cleanliness
+    label: Panel Cleanliness
+    unit: "fraction (0–1)"
+    description: >-
+      Complement of soiling loss. 1.0 = perfectly clean panel. Derived from
+      the soiling model as (1 - soiling_loss).
+    category: Soiling
+    related:
+      - soiling_loss
+
+  - term: kimber_model
+    label: Kimber Soiling Model
+    description: >-
+      A physically-based PV soiling model implemented in pvlib that estimates
+      panel soiling as a function of time since last rain event, dust deposition
+      velocity, and local meteorology. Supported for live, forecast, and historic
+      data via Solcast.
+    category: Soiling
+    related:
+      - soiling_loss
+      - hsu_model
+
+  - term: hsu_model
+    label: HSU Soiling Model
+    description: >-
+      Solcast's internally developed soiling model (HSU) that uses satellite-
+      derived atmospheric dust loading (aerosol optical depth), precipitation,
+      and local meteorology to estimate cumulative panel soiling.
+    category: Soiling
+    related:
+      - soiling_loss
+      - kimber_model
+
+  - term: depo_veloc_pm10
+    label: PM10 Deposition Velocity
+    unit: "m/s"
+    description: >-
+      Gravitational settling velocity of PM10 particulate matter (diameter ≤10 µm).
+      Input parameter for the Kimber and HSU soiling models. Controls how fast
+      dust deposits on panel surfaces.
+    category: Soiling
+
+  - term: snow_soiling_rooftop
+    label: Snow Soiling Loss Factor
+    unit: "fraction (0–1)"
+    description: >-
+      Estimated fractional PV output loss due to snow accumulation on rooftop
+      panel surfaces. Derived from snow depth, temperature, and panel tilt.
+    category: Soiling
+    related:
+      - snow_depth
+
+  # ─── Time-Series Terms ────────────────────────────────────────────────────
+  - term: period_end
+    label: Period End Time
+    description: >-
+      The timestamp marking the end of a data interval in UTC (ISO 8601).
+      Solcast uses period-end conventions — data in a 30-minute period ending
+      at 06:30 UTC covers 06:00–06:30 UTC.
+    category: Time Series
+
+  - term: period
+    label: Time Period Duration
+    description: >-
+      ISO 8601 duration string specifying the length of each data interval
+      (e.g., PT5M = 5 minutes, PT30M = 30 minutes, PT60M = 60 minutes).
+      Solcast supports 5, 10, 15, 30, and 60-minute periods depending on the
+      endpoint and subscription.
+    category: Time Series
+
+  - term: TMY
+    label: Typical Meteorological Year
+    abbreviation: TMY
+    description: >-
+      A statistically derived annual dataset representing the long-run average
+      solar and weather conditions at a location. Solcast TMY is calculated from
+      2007 to 2023 satellite data. Used for solar project feasibility and
+      bankable energy yield assessments.
+    category: Resource Assessment
+    related:
+      - P50
+      - historical_data
+
+  - term: P50
+    label: P50 Energy Yield
+    description: >-
+      The median expected annual energy yield from a PV system — the value
+      exceeded in 50% of years. Standard reference for project valuation.
+    category: Resource Assessment
+    related:
+      - P90
+      - TMY
+
+  - term: P90
+    label: P90 Energy Yield
+    description: >-
+      The energy yield exceeded in 90% of years. Pessimistic benchmark used
+      by debt financiers and lenders for solar project risk assessment.
+    category: Resource Assessment
+    related:
+      - P50
+
+  # ─── Site Management Terms ────────────────────────────────────────────────
+  - term: resource_id
+    label: Resource ID
+    description: >-
+      A unique alphanumeric identifier (UUID-like format, e.g., ba75-e17a-7374-95ed)
+      assigned by Solcast to a registered PV power site. Used as the primary key
+      for all advanced PV power data queries.
+    category: Site Management
+
+  - term: tracking_type
+    label: Panel Tracking Type
+    description: >-
+      The mechanical mounting system of PV panels. Values: fixed (no movement),
+      horizontal_single_axis (rotates east–west on a north–south horizontal axis),
+      vertical_single_axis (rotates around a vertical axis), two_axis (tracks both
+      azimuth and elevation for maximum irradiance capture).
+    category: Site Management
+    values:
+      - fixed
+      - horizontal_single_axis
+      - vertical_single_axis
+      - two_axis
+
+  - term: loss_factor
+    label: System Loss Factor
+    unit: "fraction (0–1)"
+    description: >-
+      A single aggregate de-rating coefficient accounting for all system losses
+      including wiring resistance, inverter inefficiency, module mismatch, soiling,
+      shading, and degradation. Applied uniformly to the modelled PV output.
+      Typical values range from 0.75 to 0.95.
+    category: Site Management
+
+  # ─── Grid Aggregation Terms ───────────────────────────────────────────────
+  - term: collection_id
+    label: Collection ID
+    description: >-
+      Unique identifier for a Solcast grid aggregation collection — a group of
+      PV sites or regions aggregated for grid management purposes (e.g., a
+      distribution network service area or a portfolio of utility-scale farms).
+    category: Grid Aggregation
+
+  - term: aggregation_id
+    label: Aggregation ID
+    description: >-
+      Unique identifier for a sub-aggregation within a collection. Allows
+      hierarchical aggregation (e.g., regional zones within a national grid).
+    category: Grid Aggregation
+
+categories:
+  - name: Irradiance
+    description: Solar radiation parameters measured in W/m².
+  - name: PV Power
+    description: Photovoltaic power output estimates in kW or as capacity fractions.
+  - name: Meteorology
+    description: Atmospheric and weather parameters influencing solar resource.
+  - name: Solar Geometry
+    description: Sun position angles used in irradiance and PV calculations.
+  - name: Soiling
+    description: Panel soiling loss models and parameters.
+  - name: Time Series
+    description: Temporal metadata for all data points.
+  - name: Resource Assessment
+    description: Long-run average and probabilistic yield analysis terms.
+  - name: Site Management
+    description: PV power site registration and specification terms.
+  - name: Grid Aggregation
+    description: Fleet and portfolio aggregation identifiers and concepts.

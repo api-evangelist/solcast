@@ -1,0 +1,105 @@
+{
+  "title": "PV Power Site Structure",
+  "description": "Hierarchical structure of the Solcast PV power site resource, used by the /resources/pv_power_site and /resources/pv_power_sites management endpoints.",
+  "type": "object",
+  "structure": {
+    "root": {
+      "description": "Top-level PV power site object.",
+      "fields": {
+        "resource_id": {
+          "type": "string (UUID-like)",
+          "description": "Solcast-assigned unique identifier. Used as the key for all subsequent data queries.",
+          "required": true,
+          "example": "ba75-e17a-7374-95ed"
+        },
+        "name": {
+          "type": "string",
+          "description": "User-defined human-readable label for the site.",
+          "required": true,
+          "example": "Sydney Rooftop Array"
+        },
+        "location": {
+          "type": "group",
+          "description": "Geographic coordinates of the PV installation.",
+          "fields": {
+            "latitude": {
+              "type": "number",
+              "description": "Decimal degrees, -90 to 90 (north positive).",
+              "required": true
+            },
+            "longitude": {
+              "type": "number",
+              "description": "Decimal degrees, -180 to 180 (east positive).",
+              "required": true
+            }
+          }
+        },
+        "system_specs": {
+          "type": "group",
+          "description": "Physical PV system specifications influencing model output.",
+          "fields": {
+            "capacity": {
+              "type": "number (kW)",
+              "description": "DC array capacity in kilowatts. Primary sizing parameter."
+            },
+            "ac_capacity": {
+              "type": "number (kW)",
+              "description": "AC inverter capacity in kilowatts. If lower than DC capacity, clipping is modelled."
+            },
+            "dc_capacity": {
+              "type": "number (kW)",
+              "description": "Explicit DC capacity override."
+            },
+            "tilt": {
+              "type": "number (degrees)",
+              "description": "Panel tilt from horizontal. 0 = flat, 90 = vertical."
+            },
+            "azimuth": {
+              "type": "number (degrees)",
+              "description": "Panel facing direction. 0/360 = north, 90 = east, 180 = south, 270 = west."
+            },
+            "tracking_type": {
+              "type": "enum",
+              "values": ["fixed", "horizontal_single_axis", "vertical_single_axis", "two_axis"],
+              "description": "Panel mounting and tracking system type."
+            },
+            "loss_factor": {
+              "type": "number (0–1)",
+              "description": "Aggregate system losses (wiring, soiling, degradation). Typical 0.75–0.95."
+            }
+          }
+        },
+        "install_date": {
+          "type": "string (YYYY-MM-DD)",
+          "description": "Physical installation date. Used to model degradation and filter historical data."
+        },
+        "timestamps": {
+          "type": "group",
+          "description": "Audit timestamps for the site record.",
+          "fields": {
+            "created_at": "ISO 8601 datetime when the site was registered.",
+            "updated_at": "ISO 8601 datetime of the last modification."
+          }
+        }
+      }
+    },
+    "list-response": {
+      "description": "Response envelope from the /resources/pv_power_sites list endpoint.",
+      "fields": {
+        "pv_power_sites": {
+          "type": "array",
+          "description": "Array of PV Power Site objects.",
+          "items": {
+            "$ref": "root"
+          }
+        }
+      }
+    }
+  },
+  "notes": [
+    "resource_id is assigned by Solcast on site creation — it cannot be user-specified.",
+    "Tracking type affects how irradiance is computed — single-axis trackers significantly increase yield.",
+    "loss_factor is a global de-rating; site-specific soiling should use the separate soiling endpoints.",
+    "PATCH updates only the provided fields; PUT/overwrite replaces all fields."
+  ]
+}

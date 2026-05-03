@@ -1,0 +1,51 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.solcast.com.au/resources/pv_power_sites",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY",
+      "Accept": "application/json"
+    },
+    "parameters": {
+      "format": "json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "pv_power_sites": [
+        {
+          "resource_id": "ba75-e17a-7374-95ed",
+          "name": "Sydney Rooftop Array",
+          "latitude": -33.856784,
+          "longitude": 151.215297,
+          "capacity": 10.0,
+          "tilt": 25,
+          "azimuth": 180,
+          "install_date": "2020-06-01",
+          "loss_factor": 0.9,
+          "tracking_type": "fixed",
+          "created_at": "2020-06-15T10:00:00.0000000Z",
+          "updated_at": "2023-01-10T09:00:00.0000000Z"
+        },
+        {
+          "resource_id": "cf42-b19d-3821-76aa",
+          "name": "Melbourne Commercial Array",
+          "latitude": -37.814,
+          "longitude": 144.963,
+          "capacity": 50.0,
+          "tilt": 20,
+          "azimuth": 175,
+          "install_date": "2021-03-15",
+          "loss_factor": 0.92,
+          "tracking_type": "fixed",
+          "created_at": "2021-03-20T08:30:00.0000000Z",
+          "updated_at": "2022-11-05T12:00:00.0000000Z"
+        }
+      ]
+    }
+  }
+}

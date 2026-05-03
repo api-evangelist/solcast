@@ -1,0 +1,377 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Solcast Solar Resource Assessment"
+  description: >-
+    Workflow capability for solar resource assessment, project financing, and
+    long-term yield analysis. Combines historical irradiance, rooftop and advanced
+    PV power histories, TMY data, historical soiling models, and PV site management.
+    Used by project developers, asset managers, banks, and energy consultants performing
+    bankable resource assessments and yield studies.
+  tags:
+    - Solar
+    - Resource Assessment
+    - Historical Data
+    - TMY
+    - PV Power
+    - Soiling
+    - Project Finance
+    - Yield Analysis
+    - Renewable Energy
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SOLCAST_API_KEY: SOLCAST_API_KEY
+
+capability:
+  consumes:
+    - import: solcast
+      location: ./shared/solcast.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: solar-resource-assessment-api
+      description: "Unified REST API for solar resource assessment and long-term yield analysis."
+      resources:
+        - path: /v1/historic/radiation-and-weather
+          name: historic-radiation-and-weather
+          description: "Historical irradiance and weather data from 2007 onwards."
+          operations:
+            - method: GET
+              name: get-historic-radiation-and-weather
+              description: "Get historical irradiance and weather for up to 31 days at a time."
+              call: "solcast.get-historic-radiation-and-weather"
+              with:
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+                start: "rest.start"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/historic/rooftop-pv-power
+          name: historic-rooftop-pv-power
+          description: "Historical rooftop PV power data from 2007 onwards."
+          operations:
+            - method: GET
+              name: get-historic-rooftop-pv-power
+              description: "Get historical rooftop PV power estimated actuals for a location."
+              call: "solcast.get-historic-rooftop-pv-power"
+              with:
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+                start: "rest.start"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/historic/advanced-pv-power
+          name: historic-advanced-pv-power
+          description: "Historical advanced PV power data for registered sites."
+          operations:
+            - method: GET
+              name: get-historic-advanced-pv-power
+              description: "Get historical advanced PV power actuals for a registered site."
+              call: "solcast.get-historic-advanced-pv-power"
+              with:
+                resource_id: "rest.resource_id"
+                start: "rest.start"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/historic/soiling
+          name: historic-soiling
+          description: "Historical soiling loss data using Kimber or HSU models."
+          operations:
+            - method: GET
+              name: get-historic-soiling-kimber
+              description: "Get historical soiling loss using the Kimber model."
+              call: "solcast.get-historic-soiling-kimber"
+              with:
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+                start: "rest.start"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/tmy/radiation-and-weather
+          name: tmy-radiation-and-weather
+          description: "Typical Meteorological Year irradiance and weather (2007-2023)."
+          operations:
+            - method: GET
+              name: get-tmy-radiation-and-weather
+              description: "Get TMY irradiance and weather for a location."
+              call: "solcast.get-tmy-radiation-and-weather"
+              with:
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/tmy/rooftop-pv-power
+          name: tmy-rooftop-pv-power
+          description: "Typical Meteorological Year rooftop PV power (2007-2023)."
+          operations:
+            - method: GET
+              name: get-tmy-rooftop-pv-power
+              description: "Get TMY rooftop PV power data for a location."
+              call: "solcast.get-tmy-rooftop-pv-power"
+              with:
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/pv-power-sites
+          name: pv-power-sites
+          description: "Manage registered PV power sites for advanced model access."
+          operations:
+            - method: GET
+              name: list-pv-power-sites
+              description: "List all registered PV power sites."
+              call: "solcast.list-pv-power-sites"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+            - method: POST
+              name: create-pv-power-site
+              description: "Create a new PV power site."
+              call: "solcast.create-pv-power-site"
+              with:
+                name: "rest.name"
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/pv-power-sites/{resource_id}
+          name: pv-power-site
+          description: "Individual PV power site management."
+          operations:
+            - method: GET
+              name: get-pv-power-site
+              description: "Get a specific PV power site."
+              call: "solcast.get-pv-power-site"
+              with:
+                resource_id: "rest.resource_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+            - method: PATCH
+              name: patch-pv-power-site
+              description: "Partially update a PV power site."
+              call: "solcast.patch-pv-power-site"
+              with:
+                resource_id: "rest.resource_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+            - method: PUT
+              name: update-pv-power-site
+              description: "Fully overwrite a PV power site."
+              call: "solcast.update-pv-power-site"
+              with:
+                resource_id: "rest.resource_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+            - method: DELETE
+              name: delete-pv-power-site
+              description: "Delete a PV power site."
+              call: "solcast.delete-pv-power-site"
+              with:
+                resource_id: "rest.resource_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9081
+      namespace: solar-resource-assessment-mcp
+      transport: http
+      description: "MCP server for AI-assisted solar resource assessment and long-term yield analysis."
+      tools:
+        - name: get-historic-radiation-and-weather
+          description: "Get historical solar irradiance and weather from 2007 to 7 days before present (up to 31 days per call). Use for bankable resource assessment and P50/P90 yield studies."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-historic-radiation-and-weather"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+            start: "tools.start"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-historic-rooftop-pv-power
+          description: "Get historical rooftop PV power estimated actuals from 2007 onwards. Use for yield analysis and performance benchmarking."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-historic-rooftop-pv-power"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+            start: "tools.start"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-historic-advanced-pv-power
+          description: "Get historical advanced PV power actuals for a registered site. Use for detailed yield analysis with site-specific PV model."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-historic-advanced-pv-power"
+          with:
+            resource_id: "tools.resource_id"
+            start: "tools.start"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-historic-soiling-kimber
+          description: "Get historical soiling loss estimates using the Kimber model. Use for yield loss analysis and cleaning schedule optimization."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-historic-soiling-kimber"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+            start: "tools.start"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-historic-soiling-hsu
+          description: "Get historical soiling loss estimates using the HSU model."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-historic-soiling-hsu"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+            start: "tools.start"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-tmy-radiation-and-weather
+          description: "Get Typical Meteorological Year irradiance and weather (2007-2023). Use for long-run average yield studies and project feasibility."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-tmy-radiation-and-weather"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-tmy-rooftop-pv-power
+          description: "Get Typical Meteorological Year rooftop PV power data (2007-2023). Use for annual yield estimation and project financing."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-tmy-rooftop-pv-power"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-pv-power-sites
+          description: "List all registered PV power sites for this account."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "solcast.list-pv-power-sites"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-pv-power-site
+          description: "Get specifications for a specific registered PV power site."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "solcast.get-pv-power-site"
+          with:
+            resource_id: "tools.resource_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-pv-power-site
+          description: "Register a new PV power site with Solcast for advanced PV power model access. Requires site name, latitude, and longitude."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "solcast.create-pv-power-site"
+          with:
+            name: "tools.name"
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+            capacity: "tools.capacity"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: patch-pv-power-site
+          description: "Partially update an existing PV power site's specifications (e.g., update capacity or tilt after hardware changes)."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "solcast.patch-pv-power-site"
+          with:
+            resource_id: "tools.resource_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: update-pv-power-site
+          description: "Fully replace an existing PV power site's specifications."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "solcast.update-pv-power-site"
+          with:
+            resource_id: "tools.resource_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: delete-pv-power-site
+          description: "Permanently delete a registered PV power site."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "solcast.delete-pv-power-site"
+          with:
+            resource_id: "tools.resource_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

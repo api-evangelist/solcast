@@ -1,0 +1,350 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Solcast Solar Forecasting"
+  description: >-
+    Workflow capability for solar energy forecasting and real-time monitoring.
+    Combines live and forecast radiation, PV power, soiling, and grid aggregation
+    data to support energy market bidding, dispatch optimization, and grid management.
+    Used by energy traders, grid operators, and renewable energy portfolio managers.
+  tags:
+    - Solar
+    - Forecasting
+    - PV Power
+    - Grid Management
+    - Energy Market
+    - Renewable Energy
+    - Live Data
+    - Aggregations
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SOLCAST_API_KEY: SOLCAST_API_KEY
+
+capability:
+  consumes:
+    - import: solcast
+      location: ./shared/solcast.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: solar-forecasting-api
+      description: "Unified REST API for solar energy forecasting and real-time monitoring."
+      resources:
+        - path: /v1/live/radiation-and-weather
+          name: live-radiation-and-weather
+          description: "Real-time irradiance and weather for a location."
+          operations:
+            - method: GET
+              name: get-live-radiation-and-weather
+              description: "Get live solar irradiance and weather data for a lat/lon location."
+              call: "solcast.get-live-radiation-and-weather"
+              with:
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+                output_parameters: "rest.output_parameters"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/live/rooftop-pv-power
+          name: live-rooftop-pv-power
+          description: "Live rooftop PV power actuals."
+          operations:
+            - method: GET
+              name: get-live-rooftop-pv-power
+              description: "Get live rooftop PV power estimated actuals for a location."
+              call: "solcast.get-live-rooftop-pv-power"
+              with:
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/live/advanced-pv-power
+          name: live-advanced-pv-power
+          description: "Live advanced PV power actuals for registered sites."
+          operations:
+            - method: GET
+              name: get-live-advanced-pv-power
+              description: "Get live advanced PV power actuals for a registered site."
+              call: "solcast.get-live-advanced-pv-power"
+              with:
+                resource_id: "rest.resource_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/live/aggregations
+          name: live-aggregations
+          description: "Live grid aggregation data for portfolios and grid operators."
+          operations:
+            - method: GET
+              name: get-live-aggregations
+              description: "Get live aggregation data for a grid collection or sub-aggregation."
+              call: "solcast.get-live-aggregations"
+              with:
+                collection_id: "rest.collection_id"
+                aggregation_id: "rest.aggregation_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/live/soiling
+          name: live-soiling
+          description: "Live soiling loss data using Kimber or HSU models."
+          operations:
+            - method: GET
+              name: get-live-soiling-kimber
+              description: "Get live soiling loss using the Kimber model."
+              call: "solcast.get-live-soiling-kimber"
+              with:
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/forecast/radiation-and-weather
+          name: forecast-radiation-and-weather
+          description: "Forecast irradiance and weather up to 14 days ahead."
+          operations:
+            - method: GET
+              name: get-forecast-radiation-and-weather
+              description: "Get irradiance and weather forecasts up to 14 days ahead."
+              call: "solcast.get-forecast-radiation-and-weather"
+              with:
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+                output_parameters: "rest.output_parameters"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/forecast/rooftop-pv-power
+          name: forecast-rooftop-pv-power
+          description: "Rooftop PV power forecasts up to 14 days ahead."
+          operations:
+            - method: GET
+              name: get-forecast-rooftop-pv-power
+              description: "Get rooftop PV power forecasts up to 14 days ahead."
+              call: "solcast.get-forecast-rooftop-pv-power"
+              with:
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+                output_parameters: "rest.output_parameters"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/forecast/advanced-pv-power
+          name: forecast-advanced-pv-power
+          description: "Advanced PV power forecasts up to 14 days ahead for registered sites."
+          operations:
+            - method: GET
+              name: get-forecast-advanced-pv-power
+              description: "Get advanced PV power forecasts for a registered site."
+              call: "solcast.get-forecast-advanced-pv-power"
+              with:
+                resource_id: "rest.resource_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/forecast/aggregations
+          name: forecast-aggregations
+          description: "Forecast grid aggregation data for portfolio and grid management."
+          operations:
+            - method: GET
+              name: get-forecast-aggregations
+              description: "Get forecast aggregation data for a grid collection."
+              call: "solcast.get-forecast-aggregations"
+              with:
+                collection_id: "rest.collection_id"
+                aggregation_id: "rest.aggregation_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/forecast/soiling
+          name: forecast-soiling
+          description: "Soiling loss forecasts for maintenance planning."
+          operations:
+            - method: GET
+              name: get-forecast-soiling-kimber
+              description: "Get soiling loss forecasts using the Kimber model."
+              call: "solcast.get-forecast-soiling-kimber"
+              with:
+                latitude: "rest.latitude"
+                longitude: "rest.longitude"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9080
+      namespace: solar-forecasting-mcp
+      transport: http
+      description: "MCP server for AI-assisted solar energy forecasting and real-time monitoring."
+      tools:
+        - name: get-live-radiation-and-weather
+          description: "Get live solar irradiance and weather data for any lat/lon location (last 7 days, updated every 5 minutes). Use for real-time solar resource monitoring."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-live-radiation-and-weather"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+            output_parameters: "tools.output_parameters"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-live-rooftop-pv-power
+          description: "Get live rooftop PV power estimated actuals for a location. No site registration required."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-live-rooftop-pv-power"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-live-advanced-pv-power
+          description: "Get live advanced PV power actuals for a registered Solcast site (resource_id required)."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-live-advanced-pv-power"
+          with:
+            resource_id: "tools.resource_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-live-aggregations
+          description: "Get live aggregated PV generation data for a grid portfolio or collection. Used for grid management and large-scale monitoring."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-live-aggregations"
+          with:
+            collection_id: "tools.collection_id"
+            aggregation_id: "tools.aggregation_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-live-soiling-kimber
+          description: "Get live soiling loss estimates using the Kimber model. Use for monitoring panel cleanliness and scheduling cleaning."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-live-soiling-kimber"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-live-soiling-hsu
+          description: "Get live soiling loss estimates using Solcast's HSU model."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-live-soiling-hsu"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-forecast-radiation-and-weather
+          description: "Get solar irradiance and weather forecasts up to 14 days ahead. Use for energy market bidding and dispatch planning."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-forecast-radiation-and-weather"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+            output_parameters: "tools.output_parameters"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-forecast-rooftop-pv-power
+          description: "Get rooftop PV power forecasts up to 14 days ahead. No site registration needed."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-forecast-rooftop-pv-power"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+            output_parameters: "tools.output_parameters"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-forecast-advanced-pv-power
+          description: "Get high-specification PV power forecasts up to 14 days ahead for a registered site."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-forecast-advanced-pv-power"
+          with:
+            resource_id: "tools.resource_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-forecast-aggregations
+          description: "Get forecast aggregated PV generation data for a grid portfolio or collection up to 7 days ahead."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-forecast-aggregations"
+          with:
+            collection_id: "tools.collection_id"
+            aggregation_id: "tools.aggregation_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-forecast-soiling-kimber
+          description: "Get soiling loss forecasts using the Kimber model. Use for planning panel cleaning schedules."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-forecast-soiling-kimber"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-forecast-soiling-hsu
+          description: "Get soiling loss forecasts using the HSU model."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "solcast.get-forecast-soiling-hsu"
+          with:
+            latitude: "tools.latitude"
+            longitude: "tools.longitude"
+          outputParameters:
+            - type: object
+              mapping: "$."

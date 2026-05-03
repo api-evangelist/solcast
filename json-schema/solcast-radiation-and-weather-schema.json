@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/solcast/main/json-schema/solcast-radiation-and-weather-schema.json",
+  "title": "Radiation and Weather Estimated",
+  "description": "A single time period of solar irradiance and weather data returned by the Solcast API. Used across live, forecast, and historic endpoints.",
+  "type": "object",
+  "properties": {
+    "period_end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End time of the data period in UTC (ISO 8601).",
+      "examples": ["2026-05-02T06:30:00.0000000Z"]
+    },
+    "period": {
+      "type": "string",
+      "description": "Duration of the time period in ISO 8601 duration format.",
+      "examples": ["PT30M", "PT60M", "PT5M"]
+    },
+    "ghi": {
+      "type": "number",
+      "description": "Global Horizontal Irradiance in W/m². The total solar radiation received on a horizontal surface.",
+      "minimum": 0,
+      "maximum": 1400,
+      "examples": [850.2]
+    },
+    "ghi90": {
+      "type": "number",
+      "description": "GHI at the 90th percentile (optimistic scenario) in W/m².",
+      "minimum": 0
+    },
+    "ghi10": {
+      "type": "number",
+      "description": "GHI at the 10th percentile (pessimistic scenario) in W/m².",
+      "minimum": 0
+    },
+    "ebh": {
+      "type": "number",
+      "description": "Beam Horizontal Irradiance (direct beam on a horizontal surface) in W/m².",
+      "minimum": 0
+    },
+    "dni": {
+      "type": "number",
+      "description": "Direct Normal Irradiance — direct solar radiation on a surface perpendicular to the sun in W/m².",
+      "minimum": 0,
+      "maximum": 1200,
+      "examples": [750.5]
+    },
+    "dhi": {
+      "type": "number",
+      "description": "Diffuse Horizontal Irradiance — scattered solar radiation on a horizontal surface in W/m².",
+      "minimum": 0,
+      "examples": [99.7]
+    },
+    "air_temp": {
+      "type": "number",
+      "description": "Air temperature at 2m height in degrees Celsius.",
+      "examples": [28.3]
+    },
+    "cloud_opacity": {
+      "type": "number",
+      "description": "Cloud opacity as a percentage (0 = clear sky, 100 = fully overcast).",
+      "minimum": 0,
+      "maximum": 100,
+      "examples": [5.2]
+    },
+    "wind_speed_10m": {
+      "type": "number",
+      "description": "Wind speed at 10m height in m/s.",
+      "minimum": 0,
+      "examples": [3.7]
+    },
+    "wind_direction_10m": {
+      "type": "number",
+      "description": "Wind direction at 10m height in degrees clockwise from north (0–360).",
+      "minimum": 0,
+      "maximum": 360,
+      "examples": [215.0]
+    },
+    "clearsky_ghi": {
+      "type": "number",
+      "description": "Clear-sky Global Horizontal Irradiance (what GHI would be without clouds) in W/m².",
+      "minimum": 0,
+      "examples": [880.0]
+    },
+    "clearsky_ebh": {
+      "type": "number",
+      "description": "Clear-sky Beam Horizontal Irradiance in W/m².",
+      "minimum": 0
+    },
+    "clearsky_dni": {
+      "type": "number",
+      "description": "Clear-sky Direct Normal Irradiance in W/m².",
+      "minimum": 0
+    },
+    "clearsky_dhi": {
+      "type": "number",
+      "description": "Clear-sky Diffuse Horizontal Irradiance in W/m².",
+      "minimum": 0
+    },
+    "precipitable_water": {
+      "type": "number",
+      "description": "Total column precipitable water in kg/m².",
+      "minimum": 0
+    },
+    "azimuth": {
+      "type": "number",
+      "description": "Solar azimuth angle in degrees (0 = north, 90 = east, 180 = south, 270 = west).",
+      "minimum": -180,
+      "maximum": 360
+    },
+    "zenith": {
+      "type": "number",
+      "description": "Solar zenith angle in degrees (0 = directly overhead, 90 = horizon).",
+      "minimum": 0,
+      "maximum": 180
+    },
+    "elevation": {
+      "type": "number",
+      "description": "Solar elevation angle in degrees above the horizon (complement of zenith).",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "relative_humidity": {
+      "type": "number",
+      "description": "Relative humidity at 2m height as a percentage.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "surface_pressure": {
+      "type": "number",
+      "description": "Surface atmospheric pressure in hPa.",
+      "examples": [1013.25]
+    },
+    "snow_depth": {
+      "type": "number",
+      "description": "Snow depth in metres.",
+      "minimum": 0
+    },
+    "snow_water_equivalent": {
+      "type": "number",
+      "description": "Snow water equivalent in kg/m².",
+      "minimum": 0
+    },
+    "snow_soiling_rooftop": {
+      "type": "number",
+      "description": "Estimated snow soiling loss factor for rooftop panels (0 = no loss, 1 = fully blocked).",
+      "minimum": 0,
+      "maximum": 1
+    }
+  },
+  "required": ["period_end", "period"],
+  "examples": [
+    {
+      "period_end": "2026-05-02T06:30:00.0000000Z",
+      "period": "PT30M",
+      "ghi": 850.2,
+      "dni": 750.5,
+      "dhi": 99.7,
+      "air_temp": 28.3,
+      "cloud_opacity": 5.2,
+      "wind_speed_10m": 3.7,
+      "clearsky_ghi": 880.0
+    }
+  ]
+}

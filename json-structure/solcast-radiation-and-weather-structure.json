@@ -1,0 +1,94 @@
+{
+  "title": "Radiation and Weather Response Structure",
+  "description": "Hierarchical structure of the Solcast radiation and weather API response. Used across /data/live/radiation_and_weather, /data/forecast/radiation_and_weather, /data/historic/radiation_and_weather, and /data/tmy/radiation_and_weather endpoints.",
+  "type": "object",
+  "structure": {
+    "root": {
+      "description": "Top-level response envelope containing either estimated_actuals (live/historic) or forecasts (forecast/TMY) arrays.",
+      "fields": {
+        "estimated_actuals": {
+          "type": "array",
+          "description": "Present for live and historic endpoints. Array of time-period data points ordered by period_end ascending.",
+          "items": {
+            "$ref": "radiation-and-weather-data-point"
+          }
+        },
+        "forecasts": {
+          "type": "array",
+          "description": "Present for forecast and TMY endpoints. Array of forecast time-period data points ordered by period_end ascending.",
+          "items": {
+            "$ref": "radiation-and-weather-data-point"
+          }
+        }
+      }
+    },
+    "radiation-and-weather-data-point": {
+      "description": "A single time-period data point containing irradiance and weather measurements.",
+      "fields": {
+        "period_end": {
+          "type": "string (ISO 8601 datetime)",
+          "description": "End timestamp of the time period in UTC. The primary time key for all data.",
+          "required": true
+        },
+        "period": {
+          "type": "string (ISO 8601 duration)",
+          "description": "Duration of the time interval (e.g., PT30M = 30 minutes, PT60M = 60 minutes).",
+          "required": true
+        },
+        "irradiance_fields": {
+          "type": "group",
+          "description": "Solar irradiance measurements in W/m².",
+          "fields": {
+            "ghi": "Global Horizontal Irradiance — total solar radiation on a horizontal surface.",
+            "ghi10": "GHI at 10th percentile (pessimistic bound).",
+            "ghi90": "GHI at 90th percentile (optimistic bound).",
+            "ebh": "Beam Horizontal Irradiance — direct beam on a horizontal surface.",
+            "dni": "Direct Normal Irradiance — direct beam perpendicular to sun.",
+            "dhi": "Diffuse Horizontal Irradiance — scattered sky radiation.",
+            "clearsky_ghi": "Clear-sky GHI (cloud-free reference).",
+            "clearsky_ebh": "Clear-sky Beam Horizontal Irradiance.",
+            "clearsky_dni": "Clear-sky Direct Normal Irradiance.",
+            "clearsky_dhi": "Clear-sky Diffuse Horizontal Irradiance."
+          }
+        },
+        "weather_fields": {
+          "type": "group",
+          "description": "Atmospheric and meteorological measurements.",
+          "fields": {
+            "air_temp": "Air temperature at 2m height in °C.",
+            "cloud_opacity": "Cloud opacity as a percentage (0–100).",
+            "wind_speed_10m": "Wind speed at 10m height in m/s.",
+            "wind_direction_10m": "Wind direction at 10m in degrees from north.",
+            "relative_humidity": "Relative humidity at 2m as a percentage.",
+            "surface_pressure": "Atmospheric pressure at the surface in hPa.",
+            "precipitable_water": "Total column precipitable water in kg/m²."
+          }
+        },
+        "solar_geometry_fields": {
+          "type": "group",
+          "description": "Solar position angles for the period.",
+          "fields": {
+            "azimuth": "Solar azimuth angle in degrees.",
+            "zenith": "Solar zenith angle in degrees.",
+            "elevation": "Solar elevation above horizon in degrees."
+          }
+        },
+        "snow_fields": {
+          "type": "group",
+          "description": "Snow-related measurements relevant to PV soiling.",
+          "fields": {
+            "snow_depth": "Snow depth in metres.",
+            "snow_water_equivalent": "Snow water equivalent in kg/m².",
+            "snow_soiling_rooftop": "Estimated snow soiling loss factor for rooftop panels (0–1)."
+          }
+        }
+      }
+    }
+  },
+  "notes": [
+    "Only the output_parameters requested are returned — not all fields appear in every response.",
+    "period_end is always present and is the primary temporal index.",
+    "Percentile fields (ghi10, ghi90) provide probabilistic uncertainty bounds.",
+    "Clear-sky fields enable computation of the clear-sky index (GHI / clearsky_GHI)."
+  ]
+}

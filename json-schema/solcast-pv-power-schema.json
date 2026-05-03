@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/solcast/main/json-schema/solcast-pv-power-schema.json",
+  "title": "PV Power Estimated",
+  "description": "A single time period of PV power output data returned by Solcast's live, forecast, historic, and TMY PV power endpoints.",
+  "type": "object",
+  "properties": {
+    "period_end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End time of the data period in UTC (ISO 8601).",
+      "examples": ["2026-05-02T06:30:00.0000000Z"]
+    },
+    "period": {
+      "type": "string",
+      "description": "Duration of the time period in ISO 8601 duration format.",
+      "examples": ["PT30M", "PT60M", "PT5M"]
+    },
+    "pv_estimate": {
+      "type": "number",
+      "description": "Estimated PV power output as a fraction of system capacity (0–1, where 1 = full capacity).",
+      "minimum": 0,
+      "maximum": 1,
+      "examples": [0.742]
+    },
+    "pv_estimate10": {
+      "type": "number",
+      "description": "PV estimate at the 10th percentile — pessimistic scenario (0–1).",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "pv_estimate90": {
+      "type": "number",
+      "description": "PV estimate at the 90th percentile — optimistic scenario (0–1).",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "pv_power_rooftop": {
+      "type": "number",
+      "description": "Estimated rooftop PV power output in kilowatts (kW).",
+      "minimum": 0,
+      "examples": [3.71]
+    },
+    "pv_power_advanced": {
+      "type": "number",
+      "description": "Advanced model PV power output in kilowatts (kW) for registered sites.",
+      "minimum": 0
+    }
+  },
+  "required": ["period_end", "period"],
+  "examples": [
+    {
+      "period_end": "2026-05-02T06:30:00.0000000Z",
+      "period": "PT30M",
+      "pv_estimate": 0.742,
+      "pv_estimate10": 0.690,
+      "pv_estimate90": 0.795,
+      "pv_power_rooftop": 3.71
+    }
+  ]
+}

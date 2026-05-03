@@ -1,0 +1,188 @@
+extends:
+  - spectral:oas
+
+rules:
+  # ─── Info Object Rules ────────────────────────────────────────────────────
+  solcast-info-contact:
+    description: API info object must include a contact with a URL.
+    message: "Info contact must have a url field pointing to Solcast support."
+    severity: warn
+    given: "$.info.contact"
+    then:
+      field: url
+      function: truthy
+
+  solcast-info-version:
+    description: API info must have a version field.
+    message: "Info object must specify a version string."
+    severity: error
+    given: "$.info"
+    then:
+      field: version
+      function: truthy
+
+  # ─── Operation Rules ──────────────────────────────────────────────────────
+  solcast-operation-summary-title-case:
+    description: All operation summaries must use Title Case.
+    message: "Operation summary '{{value}}' must use Title Case."
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-z0-9]*)( [A-Z][a-z0-9]*)*$"
+
+  solcast-operation-has-tags:
+    description: Every operation must have at least one tag.
+    message: "Operation '{{path}}' must have at least one tag."
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  solcast-operation-has-description:
+    description: Every operation must have a description.
+    message: "Operation '{{path}}' must have a description."
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: description
+      function: truthy
+
+  solcast-operation-has-operationid:
+    description: Every operation must have an operationId.
+    message: "Operation at '{{path}}' is missing an operationId."
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: truthy
+
+  solcast-operationid-camel-case:
+    description: operationId must use camelCase.
+    message: "operationId '{{value}}' must use camelCase (e.g., getLiveRadiationAndWeather)."
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  # ─── Parameter Rules ──────────────────────────────────────────────────────
+  solcast-parameter-has-description:
+    description: All parameters must have a description.
+    message: "Parameter '{{path}}' is missing a description."
+    severity: warn
+    given: "$.paths[*][*].parameters[*]"
+    then:
+      field: description
+      function: truthy
+
+  solcast-lat-lon-parameter-range:
+    description: Latitude query parameter must specify minimum/maximum range constraints.
+    message: "Latitude parameter '{{path}}' must declare minimum: -90 and maximum: 90."
+    severity: warn
+    given: "$.paths[*][*].parameters[?(@.name == 'latitude')]"
+    then:
+      field: schema.minimum
+      function: defined
+
+  solcast-format-parameter-enum:
+    description: Format query parameters must restrict to valid values using enum.
+    message: "The 'format' parameter must use an enum restricting values to json and csv."
+    severity: warn
+    given: "$.paths[*][*].parameters[?(@.name == 'format')]"
+    then:
+      field: schema.enum
+      function: truthy
+
+  # ─── Response Rules ───────────────────────────────────────────────────────
+  solcast-response-200-defined:
+    description: Every GET operation must define a 200 response.
+    message: "GET operation at '{{path}}' must define a 200 response."
+    severity: error
+    given: "$.paths[*].get"
+    then:
+      field: responses.200
+      function: truthy
+
+  solcast-response-401-defined:
+    description: Every operation must define a 401 Unauthorized response.
+    message: "Operation '{{path}}' must define a 401 response (API key required)."
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: responses.401
+      function: truthy
+
+  solcast-response-429-defined:
+    description: Every operation must define a 429 Too Many Requests response.
+    message: "Operation '{{path}}' must define a 429 response (rate limiting enforced)."
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: responses.429
+      function: truthy
+
+  # ─── Schema Rules ─────────────────────────────────────────────────────────
+  solcast-schema-properties-described:
+    description: All schema properties must have descriptions.
+    message: "Schema property '{{path}}' is missing a description."
+    severity: warn
+    given: "$.components.schemas[*].properties[*]"
+    then:
+      field: description
+      function: truthy
+
+  solcast-no-empty-schemas:
+    description: Schema objects must not be empty (must have properties or $ref).
+    message: "Schema '{{path}}' appears to be empty — add properties or a $ref."
+    severity: error
+    given: "$.components.schemas[*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: [properties]
+            - required: [$ref]
+            - required: [allOf]
+            - required: [oneOf]
+            - required: [anyOf]
+
+  # ─── Path Rules ───────────────────────────────────────────────────────────
+  solcast-path-kebab-case:
+    description: API paths must use kebab-case or snake_case segments consistently.
+    message: "Path '{{path}}' must use lowercase path segments."
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/[a-z0-9/_{}.-]+$"
+
+  # ─── Security Rules ───────────────────────────────────────────────────────
+  solcast-global-security-defined:
+    description: API must define global security (Bearer token required).
+    message: "The API must define a global security requirement for Bearer token auth."
+    severity: error
+    given: "$"
+    then:
+      field: security
+      function: truthy
+
+  solcast-security-scheme-bearer:
+    description: The security scheme must be a Bearer token scheme.
+    message: "Security scheme must use type:http with scheme:bearer (Solcast API key)."
+    severity: error
+    given: "$.components.securitySchemes[*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          properties:
+            type:
+              const: http
+            scheme:
+              const: bearer

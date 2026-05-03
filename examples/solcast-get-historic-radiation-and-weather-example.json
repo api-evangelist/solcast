@@ -1,0 +1,53 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.solcast.com.au/data/historic/radiation_and_weather",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY",
+      "Accept": "application/json"
+    },
+    "parameters": {
+      "latitude": -33.856784,
+      "longitude": 151.215297,
+      "start": "2023-01-01",
+      "end": "2023-01-07",
+      "output_parameters": "ghi,dni,dhi,air_temp",
+      "period": "PT60M",
+      "format": "json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "estimated_actuals": [
+        {
+          "period_end": "2023-01-01T01:00:00.0000000Z",
+          "period": "PT60M",
+          "ghi": 0.0,
+          "dni": 0.0,
+          "dhi": 0.0,
+          "air_temp": 18.5
+        },
+        {
+          "period_end": "2023-01-01T07:00:00.0000000Z",
+          "period": "PT60M",
+          "ghi": 420.1,
+          "dni": 380.5,
+          "dhi": 39.6,
+          "air_temp": 21.2
+        },
+        {
+          "period_end": "2023-01-01T13:00:00.0000000Z",
+          "period": "PT60M",
+          "ghi": 860.3,
+          "dni": 755.7,
+          "dhi": 104.6,
+          "air_temp": 27.8
+        }
+      ]
+    }
+  }
+}

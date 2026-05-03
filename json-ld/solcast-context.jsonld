@@ -1,0 +1,274 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "qudt": "http://qudt.org/schema/qudt/",
+    "unit": "http://qudt.org/vocab/unit/",
+    "time": "http://www.w3.org/2006/time#",
+    "solcast": "https://docs.solcast.com.au/#",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+
+    "RadiationAndWeatherEstimated": {
+      "@id": "solcast:RadiationAndWeatherEstimated",
+      "@type": "@id"
+    },
+    "PvPowerEstimated": {
+      "@id": "solcast:PvPowerEstimated",
+      "@type": "@id"
+    },
+    "SoilingEstimated": {
+      "@id": "solcast:SoilingEstimated",
+      "@type": "@id"
+    },
+    "AggregationDataPoint": {
+      "@id": "solcast:AggregationDataPoint",
+      "@type": "@id"
+    },
+    "PvPowerSite": {
+      "@id": "solcast:PvPowerSite",
+      "@type": "@id"
+    },
+
+    "period_end": {
+      "@id": "time:hasEnd",
+      "@type": "xsd:dateTime"
+    },
+    "period": {
+      "@id": "time:hasDuration",
+      "@type": "xsd:string"
+    },
+
+    "ghi": {
+      "@id": "solcast:globalHorizontalIrradiance",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:W-PER-M2" }
+    },
+    "ghi10": {
+      "@id": "solcast:globalHorizontalIrradiance10thPercentile",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:W-PER-M2" }
+    },
+    "ghi90": {
+      "@id": "solcast:globalHorizontalIrradiance90thPercentile",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:W-PER-M2" }
+    },
+    "ebh": {
+      "@id": "solcast:beamHorizontalIrradiance",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:W-PER-M2" }
+    },
+    "dni": {
+      "@id": "solcast:directNormalIrradiance",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:W-PER-M2" }
+    },
+    "dhi": {
+      "@id": "solcast:diffuseHorizontalIrradiance",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:W-PER-M2" }
+    },
+    "clearsky_ghi": {
+      "@id": "solcast:clearSkyGlobalHorizontalIrradiance",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:W-PER-M2" }
+    },
+    "clearsky_ebh": {
+      "@id": "solcast:clearSkyBeamHorizontalIrradiance",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:W-PER-M2" }
+    },
+    "clearsky_dni": {
+      "@id": "solcast:clearSkyDirectNormalIrradiance",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:W-PER-M2" }
+    },
+    "clearsky_dhi": {
+      "@id": "solcast:clearSkyDiffuseHorizontalIrradiance",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:W-PER-M2" }
+    },
+
+    "air_temp": {
+      "@id": "schema:temperature",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:DEG_C" }
+    },
+    "cloud_opacity": {
+      "@id": "solcast:cloudOpacity",
+      "@type": "xsd:decimal"
+    },
+    "wind_speed_10m": {
+      "@id": "solcast:windSpeedAt10m",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:M-PER-SEC" }
+    },
+    "wind_direction_10m": {
+      "@id": "solcast:windDirectionAt10m",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:DEG" }
+    },
+    "relative_humidity": {
+      "@id": "schema:humidity",
+      "@type": "xsd:decimal"
+    },
+    "surface_pressure": {
+      "@id": "solcast:surfacePressure",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:HectoPA" }
+    },
+    "precipitable_water": {
+      "@id": "solcast:precipitableWater",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:KiloGM-PER-M2" }
+    },
+
+    "azimuth": {
+      "@id": "solcast:solarAzimuth",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:DEG" }
+    },
+    "zenith": {
+      "@id": "solcast:solarZenith",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:DEG" }
+    },
+    "elevation": {
+      "@id": "solcast:solarElevation",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:DEG" }
+    },
+
+    "snow_depth": {
+      "@id": "solcast:snowDepth",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:M" }
+    },
+    "snow_water_equivalent": {
+      "@id": "solcast:snowWaterEquivalent",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:KiloGM-PER-M2" }
+    },
+    "snow_soiling_rooftop": {
+      "@id": "solcast:snowSoilingRooftop",
+      "@type": "xsd:decimal"
+    },
+
+    "pv_estimate": {
+      "@id": "solcast:pvEstimate",
+      "@type": "xsd:decimal"
+    },
+    "pv_estimate10": {
+      "@id": "solcast:pvEstimate10thPercentile",
+      "@type": "xsd:decimal"
+    },
+    "pv_estimate90": {
+      "@id": "solcast:pvEstimate90thPercentile",
+      "@type": "xsd:decimal"
+    },
+    "pv_power_rooftop": {
+      "@id": "solcast:pvPowerRooftop",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:KiloW" }
+    },
+    "pv_power_advanced": {
+      "@id": "solcast:pvPowerAdvanced",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:KiloW" }
+    },
+
+    "soiling_loss": {
+      "@id": "solcast:soilingLoss",
+      "@type": "xsd:decimal"
+    },
+    "cleanliness": {
+      "@id": "solcast:panelCleanliness",
+      "@type": "xsd:decimal"
+    },
+
+    "resource_id": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "latitude": {
+      "@id": "geo:lat",
+      "@type": "xsd:decimal"
+    },
+    "longitude": {
+      "@id": "geo:long",
+      "@type": "xsd:decimal"
+    },
+    "capacity": {
+      "@id": "solcast:systemCapacity",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:KiloW" }
+    },
+    "ac_capacity": {
+      "@id": "solcast:acCapacity",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:KiloW" }
+    },
+    "dc_capacity": {
+      "@id": "solcast:dcCapacity",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:KiloW" }
+    },
+    "tilt": {
+      "@id": "solcast:panelTilt",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:DEG" }
+    },
+    "azimuth_panel": {
+      "@id": "solcast:panelAzimuth",
+      "@type": "xsd:decimal",
+      "qudt:hasUnit": { "@id": "unit:DEG" }
+    },
+    "install_date": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:date"
+    },
+    "loss_factor": {
+      "@id": "solcast:systemLossFactor",
+      "@type": "xsd:decimal"
+    },
+    "tracking_type": {
+      "@id": "solcast:trackingType",
+      "@type": "xsd:string"
+    },
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+
+    "collection_id": {
+      "@id": "solcast:aggregationCollectionId",
+      "@type": "xsd:string"
+    },
+    "aggregation_id": {
+      "@id": "solcast:aggregationId",
+      "@type": "xsd:string"
+    },
+
+    "estimated_actuals": {
+      "@id": "solcast:estimatedActuals",
+      "@container": "@set"
+    },
+    "forecasts": {
+      "@id": "solcast:forecasts",
+      "@container": "@set"
+    },
+    "pv_power_sites": {
+      "@id": "solcast:pvPowerSites",
+      "@container": "@set"
+    }
+  }
+}
