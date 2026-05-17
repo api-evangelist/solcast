@@ -49,7 +49,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.solcast.com.au/
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.solcast.com.au/docs/getting-started
       - type: Authentication
         url: https://docs.solcast.com.au/docs/api-authentication
@@ -140,11 +140,11 @@ common:
     url: https://docs.solcast.com.au/
   - type: SDKs
     url: https://solcast.com/sdk
-  - type: Sign Up
+  - type: SignUp
     url: https://toolkit.solcast.com.au/register
   - type: Pricing
     url: https://solcast.com/pricing/irradiance-weather
-  - type: Change Log
+  - type: ChangeLog
     url: https://solcast.com/changelog
   - type: Website
     url: https://solcast.com
@@ -152,9 +152,9 @@ common:
     url: https://github.com/Solcast
   - type: API Toolkit
     url: https://toolkit.solcast.com.au/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://solcast.com/terms-of-service
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://solcast.com/privacy-policy
   - type: Contact
     url: https://solcast.com/contact
