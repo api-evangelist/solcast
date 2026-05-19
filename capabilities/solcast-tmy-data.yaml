@@ -1,0 +1,190 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Solcast API — TMY Data
+  description: 'Solcast API — TMY Data. 2 operations. Lead operation: Get TMY Radiation and Weather. Self-contained Naftiko
+    capability covering one Solcast business surface.'
+  tags:
+  - Solcast
+  - TMY Data
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SOLCAST_API_KEY: SOLCAST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: solcast-tmy-data
+    baseUri: https://api.solcast.com.au
+    description: Solcast API — TMY Data business capability. Self-contained, no shared references.
+    resources:
+    - name: data-tmy-radiation_and_weather
+      path: /data/tmy/radiation_and_weather
+      operations:
+      - name: gettmyradiationandweather
+        method: GET
+        description: Get TMY Radiation and Weather
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: latitude
+          in: query
+          type: number
+          description: Latitude in decimal degrees, between -90 and 90 (north positive).
+          required: true
+        - name: longitude
+          in: query
+          type: number
+          description: Longitude in decimal degrees, between -180 and 180 (east positive).
+          required: true
+        - name: output_parameters
+          in: query
+          type: string
+          description: Comma-separated list of output parameters.
+        - name: period
+          in: query
+          type: string
+          description: Time period between data points in ISO 8601 duration format.
+        - name: format
+          in: query
+          type: string
+          description: Response format.
+    - name: data-tmy-rooftop_pv_power
+      path: /data/tmy/rooftop_pv_power
+      operations:
+      - name: gettmyrooftoppvpower
+        method: GET
+        description: Get TMY Rooftop PV Power
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: latitude
+          in: query
+          type: number
+          description: Latitude in decimal degrees, between -90 and 90 (north positive).
+          required: true
+        - name: longitude
+          in: query
+          type: number
+          description: Longitude in decimal degrees, between -180 and 180 (east positive).
+          required: true
+        - name: capacity
+          in: query
+          type: number
+          description: System capacity in kilowatts.
+        - name: tilt
+          in: query
+          type: number
+          description: Panel tilt angle in degrees from horizontal.
+        - name: azimuth
+          in: query
+          type: number
+          description: Panel azimuth in degrees.
+        - name: output_parameters
+          in: query
+          type: string
+          description: Comma-separated list of output parameters.
+        - name: period
+          in: query
+          type: string
+          description: Time period between data points in ISO 8601 duration format.
+        - name: format
+          in: query
+          type: string
+          description: Response format.
+    authentication:
+      type: bearer
+      token: '{{env.SOLCAST_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: solcast-tmy-data-rest
+    port: 8080
+    description: REST adapter for Solcast API — TMY Data. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/data/tmy/radiation-and-weather
+      name: data-tmy-radiation-and-weather
+      description: REST surface for data-tmy-radiation_and_weather.
+      operations:
+      - method: GET
+        name: gettmyradiationandweather
+        description: Get TMY Radiation and Weather
+        call: solcast-tmy-data.gettmyradiationandweather
+        with:
+          latitude: rest.latitude
+          longitude: rest.longitude
+          output_parameters: rest.output_parameters
+          period: rest.period
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/tmy/rooftop-pv-power
+      name: data-tmy-rooftop-pv-power
+      description: REST surface for data-tmy-rooftop_pv_power.
+      operations:
+      - method: GET
+        name: gettmyrooftoppvpower
+        description: Get TMY Rooftop PV Power
+        call: solcast-tmy-data.gettmyrooftoppvpower
+        with:
+          latitude: rest.latitude
+          longitude: rest.longitude
+          capacity: rest.capacity
+          tilt: rest.tilt
+          azimuth: rest.azimuth
+          output_parameters: rest.output_parameters
+          period: rest.period
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: solcast-tmy-data-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Solcast API — TMY Data. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-tmy-radiation-and-weather
+      description: Get TMY Radiation and Weather
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: solcast-tmy-data.gettmyradiationandweather
+      with:
+        latitude: tools.latitude
+        longitude: tools.longitude
+        output_parameters: tools.output_parameters
+        period: tools.period
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tmy-rooftop-pv-power
+      description: Get TMY Rooftop PV Power
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: solcast-tmy-data.gettmyrooftoppvpower
+      with:
+        latitude: tools.latitude
+        longitude: tools.longitude
+        capacity: tools.capacity
+        tilt: tools.tilt
+        azimuth: tools.azimuth
+        output_parameters: tools.output_parameters
+        period: tools.period
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.

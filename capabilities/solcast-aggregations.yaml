@@ -1,0 +1,158 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Solcast API — Aggregations
+  description: 'Solcast API — Aggregations. 2 operations. Lead operation: Get Forecast Aggregations. Self-contained Naftiko
+    capability covering one Solcast business surface.'
+  tags:
+  - Solcast
+  - Aggregations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SOLCAST_API_KEY: SOLCAST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: solcast-aggregations
+    baseUri: https://api.solcast.com.au
+    description: Solcast API — Aggregations business capability. Self-contained, no shared references.
+    resources:
+    - name: data-forecast-aggregations
+      path: /data/forecast/aggregations
+      operations:
+      - name: getforecastaggregations
+        method: GET
+        description: Get Forecast Aggregations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: collection_id
+          in: query
+          type: string
+          description: Unique identifier for the grid aggregation collection.
+          required: true
+        - name: aggregation_id
+          in: query
+          type: string
+          description: Unique identifier for a specific sub-aggregation within the collection.
+        - name: period
+          in: query
+          type: string
+          description: Time period between data points in ISO 8601 duration format.
+        - name: format
+          in: query
+          type: string
+          description: Response format.
+    - name: data-live-aggregations
+      path: /data/live/aggregations
+      operations:
+      - name: getliveaggregations
+        method: GET
+        description: Get Live Aggregations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: collection_id
+          in: query
+          type: string
+          description: Unique identifier for the grid aggregation collection.
+          required: true
+        - name: aggregation_id
+          in: query
+          type: string
+          description: Unique identifier for a specific sub-aggregation within the collection.
+        - name: period
+          in: query
+          type: string
+          description: Time period between data points in ISO 8601 duration format.
+        - name: format
+          in: query
+          type: string
+          description: Response format.
+    authentication:
+      type: bearer
+      token: '{{env.SOLCAST_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: solcast-aggregations-rest
+    port: 8080
+    description: REST adapter for Solcast API — Aggregations. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/data/forecast/aggregations
+      name: data-forecast-aggregations
+      description: REST surface for data-forecast-aggregations.
+      operations:
+      - method: GET
+        name: getforecastaggregations
+        description: Get Forecast Aggregations
+        call: solcast-aggregations.getforecastaggregations
+        with:
+          collection_id: rest.collection_id
+          aggregation_id: rest.aggregation_id
+          period: rest.period
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/live/aggregations
+      name: data-live-aggregations
+      description: REST surface for data-live-aggregations.
+      operations:
+      - method: GET
+        name: getliveaggregations
+        description: Get Live Aggregations
+        call: solcast-aggregations.getliveaggregations
+        with:
+          collection_id: rest.collection_id
+          aggregation_id: rest.aggregation_id
+          period: rest.period
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: solcast-aggregations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Solcast API — Aggregations. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-forecast-aggregations
+      description: Get Forecast Aggregations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: solcast-aggregations.getforecastaggregations
+      with:
+        collection_id: tools.collection_id
+        aggregation_id: tools.aggregation_id
+        period: tools.period
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-live-aggregations
+      description: Get Live Aggregations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: solcast-aggregations.getliveaggregations
+      with:
+        collection_id: tools.collection_id
+        aggregation_id: tools.aggregation_id
+        period: tools.period
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
