@@ -4,7 +4,7 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Solcast
 providerId: solcast
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-06-13'
 tags:
   - Solar
   - Energy
@@ -13,22 +13,56 @@ tags:
   - Weather
   - Renewable Energy
   - PV Power
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: >
+  Real-data pricing tiers for the Solcast API. Solcast offers Starter, Pro, and Max data tiers
+  across its product lines (Historic Time Series, Live Data, Forecast Data, TMY, PV Power, and
+  Grid Aggregations), with all paid plans priced by quote request. A free evaluation tier is
+  available with up to 10 free live/forecast requests and up to 15 free Historic Time Series
+  requests (15 site-months). Unlimited unmetered test location requests are available on all
+  plans. Pricing source: https://solcast.com/pricing/irradiance-weather
 plans:
   - id: solcast-free
-    name: Free
+    name: Free Evaluation
     type: freemium
-    description: Free entry tier for the Solcast API surface. Intended for evaluation, prototyping, and
-      low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: >
+      Free trial access for new Solcast users. Grants up to 10 free live and forecast API
+      requests at user-defined locations, up to 15 free Historic Time Series requests (15
+      site-months), and unlimited requests at Solcast's designated unmetered test locations.
+      Data granularity is 30 and 60 minutes; forecasts update every 6 hours. Intended for
+      evaluation and integration testing only.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
+      - label: Live and Forecast Requests
+        description: Free live and forecast requests at user-defined locations
+        name: live_forecast_requests
         type: quota
         metric: requests
-        limit: 1000
+        limit: 10
+        timeFrame: lifetime
+        geo: global
+        domains:
+          - https://api.solcast.com.au
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Historic Time Series Requests
+        description: Free historic time series requests (site-months)
+        name: historic_requests
+        type: quota
+        metric: site_months
+        limit: 15
+        timeFrame: lifetime
+        geo: global
+        domains:
+          - https://api.solcast.com.au
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Unmetered Test Location Requests
+        description: Unlimited requests at Solcast-designated unmetered test locations
+        name: unmetered_requests
+        type: quota
+        metric: requests
+        limit: -1
         timeFrame: month
         geo: global
         domains:
@@ -36,13 +70,13 @@ plans:
         unit: 1
         price: '0.00'
         userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
+      - label: Update Frequency
+        description: Forecast data update frequency on the free tier
+        name: update_frequency
+        type: feature
+        metric: hours
+        limit: 6
+        timeFrame: hour
         geo: global
         domains:
           - https://api.solcast.com.au
@@ -52,67 +86,167 @@ plans:
     elements:
       - name: Public Documentation
       - name: Community Support
-      - name: Sandbox Access
-      - name: Solcast API
-  - id: solcast-pro
-    name: Professional
+      - name: Live Data API
+      - name: Forecast Data API
+      - name: Historic Time Series API
+      - name: Unmetered Test Locations
+  - id: solcast-starter
+    name: Starter
     type: paid
-    description: Production tier for Solcast. Provides higher quotas, priority support, and access to
-      the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+    description: >
+      Entry-level commercial tier providing 30 and 60-minute data granularity with 6-hour
+      update frequency. Historic data covers up to 3 years ago for time series and 7 days
+      for live data. Best suited for day-ahead forecasting, remote monitoring, light machine
+      learning, and site commissioning. Pricing requires a quote request from Solcast sales.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
+      - label: Update Frequency
+        description: Data update frequency — every 6 hours
+        name: update_frequency
+        type: feature
+        metric: hours
+        limit: 6
+        timeFrame: hour
         geo: global
         domains:
           - https://api.solcast.com.au
         unit: 1
-        price: TBD
+        price: quote
         userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
+      - label: Time Granularity
+        description: Finest available time granularity in minutes
+        name: granularity
+        type: feature
+        metric: minutes
+        limit: 30
+        timeFrame: request
+        geo: global
+        domains:
+          - https://api.solcast.com.au
+        unit: 1
+        price: quote
+        userMultiplied: false
+    elements:
+      - name: Live Data API
+      - name: Forecast Data API
+      - name: Historic Time Series API (3-year lookback)
+      - name: TMY Pro API
+      - name: Rooftop PV Power API
+      - name: Grid Aggregations API
+      - name: P10/P50/P90 Probabilistic Scenarios
+      - name: Global Coverage
+      - name: JSON and CSV Output Formats
+      - name: Optional SLA Add-on
+      - name: Optional 24/7 Support Add-on
+  - id: solcast-pro
+    name: Pro
+    type: paid
+    description: >
+      Mid-tier commercial offering with 15-minute update frequency and data granularity down
+      to 5 minutes. Historic time series covers up to 7 years. Designed for performance
+      monitoring, high-quality cloud and weather nowcasting, heavy machine learning, and
+      grid modelling. Pricing requires a quote request from Solcast sales.
+    entries:
+      - label: Update Frequency
+        description: Data update frequency — every 15 minutes
+        name: update_frequency
+        type: feature
+        metric: minutes
+        limit: 15
         timeFrame: minute
         geo: global
         domains:
           - https://api.solcast.com.au
         unit: 1
-        price: '0.00'
+        price: quote
         userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
+      - label: Time Granularity
+        description: Finest available time granularity in minutes
+        name: granularity
+        type: feature
+        metric: minutes
+        limit: 5
+        timeFrame: request
         geo: global
         domains:
           - https://api.solcast.com.au
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: quote
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Solcast API
-  - id: solcast-enterprise
-    name: Enterprise
+      - name: Live Data API
+      - name: Forecast Data API
+      - name: Historic Time Series API (7-year lookback)
+      - name: TMY Pro API
+      - name: Rooftop PV Power API
+      - name: Advanced PV Power API
+      - name: Grid Aggregations API
+      - name: P10/P50/P90 Probabilistic Scenarios
+      - name: Global Coverage at 90m Resolution
+      - name: JSON and CSV Output Formats
+      - name: Optional SLA Add-on
+      - name: Optional 24/7 Support Add-on
+  - id: solcast-max
+    name: Max
+    type: paid
+    description: >
+      Premium tier with the highest update frequency (every 5 minutes), finest granularity
+      (5-minute), and the longest historic data coverage (January 2007 to present). Best for
+      sensor gap-filling, QC, highest-quality intraday forecasting, and bankable resource
+      assessment. TMY data includes P50/P75/P90/P95 scenarios at 15-minute granularity.
+      Pricing requires a quote request from Solcast sales.
+    entries:
+      - label: Update Frequency
+        description: Data update frequency — every 5 minutes
+        name: update_frequency
+        type: feature
+        metric: minutes
+        limit: 5
+        timeFrame: minute
+        geo: global
+        domains:
+          - https://api.solcast.com.au
+        unit: 1
+        price: quote
+        userMultiplied: false
+      - label: Time Granularity
+        description: Finest available time granularity in minutes
+        name: granularity
+        type: feature
+        metric: minutes
+        limit: 5
+        timeFrame: request
+        geo: global
+        domains:
+          - https://api.solcast.com.au
+        unit: 1
+        price: quote
+        userMultiplied: false
+    elements:
+      - name: Live Data API (2007 to present)
+      - name: Forecast Data API (+14 days)
+      - name: Historic Time Series API (January 2007 to present)
+      - name: TMY Max API (P50/P75/P90/P95 at 15-minute granularity)
+      - name: Rooftop PV Power API
+      - name: Advanced PV Power API
+      - name: Premium PV Power API
+      - name: Grid Aggregations API
+      - name: P10/P50/P90 Probabilistic Scenarios
+      - name: Global Coverage at 90m Resolution
+      - name: JSON, CSV, SAM, TMY3, PVSyst Output Formats
+      - name: Snow Parameters (snow_water_equivalent, snow_depth)
+      - name: Optional SLA Add-on
+      - name: Optional 24/7 Support Add-on
+  - id: solcast-custom
+    name: Custom
     type: enterprise
-    description: Custom-negotiated tier for Solcast. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
+    description: >
+      Tailored enterprise solutions for organisations with bespoke data needs including gridded
+      data, area averages, historical forecasts, tuned wind models, bulk API access, site
+      adaptation, and custom data dashboards. Pricing and scope negotiated directly with Solcast
+      sales and technical account management.
     entries:
       - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
+        description: Negotiated request volume; uncapped subject to fair use and contract
         name: api_requests
         type: quota
         metric: requests
@@ -124,27 +258,18 @@ plans:
         unit: 1
         price: custom
         userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://api.solcast.com.au
-        unit: 1
-        price: custom
-        userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
+      - name: Gridded Data Products
+      - name: Area Averages
+      - name: Historical Forecast Reanalysis
+      - name: Tuned Wind Models
+      - name: Bulk API Access
+      - name: Site Adaptation
+      - name: Custom Data Dashboards
       - name: 24/7 Dedicated Support
       - name: Contractual SLA
-      - name: Security & Compliance Review
       - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Solcast API
+      - name: All Solcast APIs
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
