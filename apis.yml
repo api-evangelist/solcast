@@ -164,7 +164,7 @@ common:
     url: finops/solcast-finops.yml
   - type: SDKs
     url: https://solcast.com/sdk
-  - type: SignUp
+  - type: Signup
     url: https://toolkit.solcast.com.au/register
   - type: ChangeLog
     url: https://solcast.com/changelog
