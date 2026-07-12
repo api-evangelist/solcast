@@ -140,6 +140,10 @@ apis:
       - name: GeoServer
         url: https://github.com/Solcast/geoserver
 common:
+  - type: DomainSecurity
+    url: security/solcast-domain-security.yml
+  - type: Authentication
+    url: authentication/solcast-authentication.yml
   - type: Website
     url: https://solcast.com
   - type: Portal

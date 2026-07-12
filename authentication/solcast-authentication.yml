@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/solcast-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: apiKeyAuth
+  type: http
+  scheme: bearer
+  description: 'Authenticate using your Solcast API key as a Bearer token in the Authorization
+    header: `Authorization: Bearer {api_key}`. Obtain an API key at https://toolkit.solcast.com.au/register.'
+  sources:
+  - openapi/solcast-openapi.yml
