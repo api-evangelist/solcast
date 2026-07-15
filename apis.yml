@@ -140,6 +140,8 @@ apis:
       - name: GeoServer
         url: https://github.com/Solcast/geoserver
 common:
+  - type: AgenticAccess
+    url: agentic-access/solcast-agentic-access.yml
   - type: DomainSecurity
     url: security/solcast-domain-security.yml
   - type: Authentication
