@@ -1,0 +1,707 @@
+openapi: 3.1.0
+info:
+  title: Solcast Aggregations Historic Data API
+  description: The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.
+  version: 1.0.0
+  contact:
+    name: Solcast Support
+    url: https://solcast.com/contact
+  license:
+    name: Commercial
+    url: https://solcast.com/terms-of-service
+  x-logo:
+    url: https://solcast.com/wp-content/uploads/2021/01/Solcast-Logo.svg
+servers:
+- url: https://api.solcast.com.au
+  description: Solcast Production API
+security:
+- apiKeyAuth: []
+tags:
+- name: Historic Data
+  description: Historical solar radiation and weather data from 2007-01-01 up to 7 days before present.
+paths:
+  /data/historic/radiation_and_weather:
+    get:
+      operationId: getHistoricRadiationAndWeather
+      summary: Get Historic Radiation and Weather
+      description: Get historical irradiance and weather estimated actuals for up to 31 days of data at a time for a requested location. Data is available from 2007-01-01T00:00Z up to 7 days before present.
+      tags:
+      - Historic Data
+      parameters:
+      - name: latitude
+        in: query
+        required: true
+        description: Latitude in decimal degrees, between -90 and 90 (north positive).
+        schema:
+          type: number
+          format: float
+          minimum: -90
+          maximum: 90
+        example: -33.856784
+      - name: longitude
+        in: query
+        required: true
+        description: Longitude in decimal degrees, between -180 and 180 (east positive).
+        schema:
+          type: number
+          format: float
+          minimum: -180
+          maximum: 180
+        example: 151.215297
+      - name: start
+        in: query
+        required: true
+        description: Start of requested period (ISO 8601 date or datetime, e.g., 2023-01-01 or 2023-01-01T00:00Z).
+        schema:
+          type: string
+        example: '2023-01-01'
+      - name: end
+        in: query
+        required: false
+        description: End of requested period (mutually exclusive with duration).
+        schema:
+          type: string
+        example: '2023-01-31'
+      - name: duration
+        in: query
+        required: false
+        description: ISO 8601 duration for the historic data, within 31 days of start (mutually exclusive with end). E.g., P7D for 7 days.
+        schema:
+          type: string
+        example: P7D
+      - name: output_parameters
+        in: query
+        required: false
+        description: Comma-separated list of output parameters.
+        schema:
+          type: string
+        example: ghi,dni,dhi,air_temp
+      - name: period
+        in: query
+        required: false
+        description: Time period between data points in ISO 8601 duration format.
+        schema:
+          type: string
+        example: PT60M
+      - name: format
+        in: query
+        required: false
+        description: Response format.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+        example: json
+      responses:
+        '200':
+          description: Successful response with historic irradiance and weather time series.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadiationAndWeatherResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /data/historic/rooftop_pv_power:
+    get:
+      operationId: getHistoricRooftopPvPower
+      summary: Get Historic Rooftop PV Power
+      description: Get historical basic rooftop PV power estimated actuals for the requested location. Data is available from 2007-01-01 up to 7 days before present. Requests up to 31 days at a time.
+      tags:
+      - Historic Data
+      parameters:
+      - name: latitude
+        in: query
+        required: true
+        description: Latitude in decimal degrees, between -90 and 90 (north positive).
+        schema:
+          type: number
+          format: float
+        example: -33.856784
+      - name: longitude
+        in: query
+        required: true
+        description: Longitude in decimal degrees, between -180 and 180 (east positive).
+        schema:
+          type: number
+          format: float
+        example: 151.215297
+      - name: start
+        in: query
+        required: true
+        description: Start of requested period (ISO 8601 date or datetime).
+        schema:
+          type: string
+        example: '2023-01-01'
+      - name: end
+        in: query
+        required: false
+        description: End of requested period (mutually exclusive with duration).
+        schema:
+          type: string
+        example: '2023-01-31'
+      - name: duration
+        in: query
+        required: false
+        description: ISO 8601 duration within 31 days of start (mutually exclusive with end).
+        schema:
+          type: string
+        example: P7D
+      - name: capacity
+        in: query
+        required: false
+        description: System capacity in kilowatts.
+        schema:
+          type: number
+          format: float
+        example: 5.0
+      - name: tilt
+        in: query
+        required: false
+        description: Panel tilt in degrees from horizontal.
+        schema:
+          type: number
+          format: float
+        example: 25
+      - name: azimuth
+        in: query
+        required: false
+        description: Panel azimuth in degrees.
+        schema:
+          type: number
+          format: float
+        example: 180
+      - name: period
+        in: query
+        required: false
+        description: Time period between data points in ISO 8601 duration format.
+        schema:
+          type: string
+        example: PT60M
+      - name: format
+        in: query
+        required: false
+        description: Response format.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+        example: json
+      responses:
+        '200':
+          description: Successful response with historic rooftop PV power time series.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PvPowerResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /data/historic/advanced_pv_power:
+    get:
+      operationId: getHistoricAdvancedPvPower
+      summary: Get Historic Advanced PV Power
+      description: Get historical high-specification PV power estimated actuals for a registered PV power site. Data available from 2007-01-01 up to 7 days before present. Requests up to 31 days at a time.
+      tags:
+      - Historic Data
+      parameters:
+      - name: resource_id
+        in: query
+        required: true
+        description: Unique resource identifier for a registered Solcast PV power site.
+        schema:
+          type: string
+        example: ba75-e17a-7374-95ed
+      - name: start
+        in: query
+        required: true
+        description: Start of requested period (ISO 8601 date or datetime).
+        schema:
+          type: string
+        example: '2023-01-01'
+      - name: end
+        in: query
+        required: false
+        description: End of requested period (mutually exclusive with duration).
+        schema:
+          type: string
+        example: '2023-01-31'
+      - name: duration
+        in: query
+        required: false
+        description: ISO 8601 duration within 31 days of start (mutually exclusive with end).
+        schema:
+          type: string
+        example: P7D
+      - name: period
+        in: query
+        required: false
+        description: Time period between data points in ISO 8601 duration format.
+        schema:
+          type: string
+        example: PT60M
+      - name: format
+        in: query
+        required: false
+        description: Response format.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+        example: json
+      responses:
+        '200':
+          description: Successful response with historic advanced PV power time series.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PvPowerResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /data/historic/soiling/kimber:
+    get:
+      operationId: getHistoricSoilingKimber
+      summary: Get Historic Soiling (Kimber Model)
+      description: Get hourly historical soiling loss estimates using the Kimber model. Returns a time series of estimated historical cumulative soiling / cleanliness state for the requested location.
+      tags:
+      - Historic Data
+      parameters:
+      - name: latitude
+        in: query
+        required: true
+        description: Latitude in decimal degrees, between -90 and 90 (north positive).
+        schema:
+          type: number
+          format: float
+        example: -33.856784
+      - name: longitude
+        in: query
+        required: true
+        description: Longitude in decimal degrees, between -180 and 180 (east positive).
+        schema:
+          type: number
+          format: float
+        example: 151.215297
+      - name: start
+        in: query
+        required: true
+        description: Start of requested period (ISO 8601 date or datetime).
+        schema:
+          type: string
+        example: '2023-01-01'
+      - name: end
+        in: query
+        required: false
+        description: End of requested period (mutually exclusive with duration).
+        schema:
+          type: string
+        example: '2023-01-31'
+      - name: duration
+        in: query
+        required: false
+        description: ISO 8601 duration within 31 days of start (mutually exclusive with end).
+        schema:
+          type: string
+        example: P7D
+      - name: depo_veloc_pm10
+        in: query
+        required: false
+        description: Deposition velocity for PM10 particles (m/s).
+        schema:
+          type: number
+          format: float
+      - name: initial_soiling
+        in: query
+        required: false
+        description: Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).
+        schema:
+          type: number
+          format: float
+      - name: format
+        in: query
+        required: false
+        description: Response format.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+        example: json
+      responses:
+        '200':
+          description: Successful response with historic soiling time series.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SoilingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /data/historic/soiling/hsu:
+    get:
+      operationId: getHistoricSoilingHsu
+      summary: Get Historic Soiling (HSU Model)
+      description: Get hourly historical soiling loss estimates using Solcast's HSU model. Returns a time series of estimated historical cumulative soiling / cleanliness state for the requested location.
+      tags:
+      - Historic Data
+      parameters:
+      - name: latitude
+        in: query
+        required: true
+        description: Latitude in decimal degrees, between -90 and 90 (north positive).
+        schema:
+          type: number
+          format: float
+        example: -33.856784
+      - name: longitude
+        in: query
+        required: true
+        description: Longitude in decimal degrees, between -180 and 180 (east positive).
+        schema:
+          type: number
+          format: float
+        example: 151.215297
+      - name: start
+        in: query
+        required: true
+        description: Start of requested period (ISO 8601 date or datetime).
+        schema:
+          type: string
+        example: '2023-01-01'
+      - name: end
+        in: query
+        required: false
+        description: End of requested period (mutually exclusive with duration).
+        schema:
+          type: string
+        example: '2023-01-31'
+      - name: duration
+        in: query
+        required: false
+        description: ISO 8601 duration within 31 days of start (mutually exclusive with end).
+        schema:
+          type: string
+        example: P7D
+      - name: depo_veloc_pm10
+        in: query
+        required: false
+        description: Deposition velocity for PM10 particles (m/s).
+        schema:
+          type: number
+          format: float
+      - name: initial_soiling
+        in: query
+        required: false
+        description: Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).
+        schema:
+          type: number
+          format: float
+      - name: format
+        in: query
+        required: false
+        description: Response format.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+        example: json
+      responses:
+        '200':
+          description: Successful response with historic soiling time series.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SoilingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  schemas:
+    PvPowerEstimated:
+      type: object
+      description: A single time period of PV power data.
+      properties:
+        period_end:
+          type: string
+          format: date-time
+          description: The end time of the data period (UTC).
+          example: '2023-01-01T01:00:00.0000000Z'
+        period:
+          type: string
+          description: Duration of the time period in ISO 8601 format.
+          example: PT30M
+        pv_estimate:
+          type: number
+          format: float
+          description: Estimated PV power output as a fraction of system capacity (0–1).
+          example: 0.742
+        pv_estimate10:
+          type: number
+          format: float
+          description: PV estimate at 10th percentile (pessimistic scenario).
+        pv_estimate90:
+          type: number
+          format: float
+          description: PV estimate at 90th percentile (optimistic scenario).
+        pv_power_rooftop:
+          type: number
+          format: float
+          description: Estimated rooftop PV power output in kilowatts.
+          example: 3.71
+        pv_power_advanced:
+          type: number
+          format: float
+          description: Advanced model PV power output in kilowatts.
+    SoilingEstimated:
+      type: object
+      description: A single time period of soiling loss data.
+      properties:
+        period_end:
+          type: string
+          format: date-time
+          description: The end time of the data period (UTC).
+          example: '2023-01-01T01:00:00.0000000Z'
+        period:
+          type: string
+          description: Duration of the time period in ISO 8601 format.
+          example: PT60M
+        soiling_loss:
+          type: number
+          format: float
+          description: Cumulative soiling loss as a fraction (0 = clean, 1 = fully soiled).
+          example: 0.032
+        cleanliness:
+          type: number
+          format: float
+          description: Panel cleanliness as a fraction (1 = clean, 0 = fully soiled).
+          example: 0.968
+    RadiationAndWeatherResponse:
+      type: object
+      description: Response wrapper for irradiance and weather time series data.
+      properties:
+        estimated_actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/RadiationAndWeatherEstimated'
+          description: Array of irradiance and weather data points ordered by period_end ascending.
+        forecasts:
+          type: array
+          items:
+            $ref: '#/components/schemas/RadiationAndWeatherEstimated'
+          description: Array of forecast irradiance and weather data points ordered by period_end ascending.
+    PvPowerResponse:
+      type: object
+      description: Response wrapper for PV power time series data.
+      properties:
+        estimated_actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/PvPowerEstimated'
+          description: Array of PV power estimated actuals ordered by period_end ascending.
+        forecasts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PvPowerEstimated'
+          description: Array of PV power forecast data points ordered by period_end ascending.
+    SoilingResponse:
+      type: object
+      description: Response wrapper for soiling loss time series data.
+      properties:
+        estimated_actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/SoilingEstimated'
+          description: Array of soiling estimated actuals ordered by period_end ascending.
+        forecasts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SoilingEstimated'
+          description: Array of soiling forecast data points ordered by period_end ascending.
+    ErrorResponse:
+      type: object
+      description: Standard error response body.
+      properties:
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Invalid latitude value provided.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    RadiationAndWeatherEstimated:
+      type: object
+      description: A single time period of irradiance and weather data.
+      properties:
+        period_end:
+          type: string
+          format: date-time
+          description: The end time of the data period (UTC).
+          example: '2023-01-01T01:00:00.0000000Z'
+        period:
+          type: string
+          description: Duration of the time period in ISO 8601 format.
+          example: PT30M
+        ghi:
+          type: number
+          format: float
+          description: Global Horizontal Irradiance in W/m².
+          example: 850.2
+        ghi90:
+          type: number
+          format: float
+          description: GHI at 90th percentile (optimistic scenario) in W/m².
+        ghi10:
+          type: number
+          format: float
+          description: GHI at 10th percentile (pessimistic scenario) in W/m².
+        ebh:
+          type: number
+          format: float
+          description: Beam Horizontal Irradiance in W/m².
+        dni:
+          type: number
+          format: float
+          description: Direct Normal Irradiance in W/m².
+          example: 750.5
+        dhi:
+          type: number
+          format: float
+          description: Diffuse Horizontal Irradiance in W/m².
+          example: 99.7
+        air_temp:
+          type: number
+          format: float
+          description: Air temperature at 2m height in degrees Celsius.
+          example: 28.3
+        cloud_opacity:
+          type: number
+          format: float
+          description: Cloud opacity as a fraction (0 = clear, 100 = fully overcast).
+          example: 5.2
+        wind_speed_10m:
+          type: number
+          format: float
+          description: Wind speed at 10m height in m/s.
+          example: 3.7
+        wind_direction_10m:
+          type: number
+          format: float
+          description: Wind direction at 10m height in degrees from north.
+          example: 215.0
+        clearsky_ghi:
+          type: number
+          format: float
+          description: Clear-sky Global Horizontal Irradiance in W/m².
+          example: 880.0
+        clearsky_ebh:
+          type: number
+          format: float
+          description: Clear-sky Beam Horizontal Irradiance in W/m².
+        clearsky_dni:
+          type: number
+          format: float
+          description: Clear-sky Direct Normal Irradiance in W/m².
+        clearsky_dhi:
+          type: number
+          format: float
+          description: Clear-sky Diffuse Horizontal Irradiance in W/m².
+        precipitable_water:
+          type: number
+          format: float
+          description: Total column precipitable water in kg/m².
+        azimuth:
+          type: number
+          format: float
+          description: Solar azimuth angle in degrees.
+        zenith:
+          type: number
+          format: float
+          description: Solar zenith angle in degrees.
+        elevation:
+          type: number
+          format: float
+          description: Solar elevation angle in degrees above the horizon.
+        relative_humidity:
+          type: number
+          format: float
+          description: Relative humidity at 2m height as a percentage.
+        surface_pressure:
+          type: number
+          format: float
+          description: Surface atmospheric pressure in hPa.
+        snow_depth:
+          type: number
+          format: float
+          description: Snow depth in metres.
+        snow_water_equivalent:
+          type: number
+          format: float
+          description: Snow water equivalent in kg/m².
+        snow_soiling_rooftop:
+          type: number
+          format: float
+          description: Estimated snow soiling loss factor for rooftop panels (0–1).
+  responses:
+    Unauthorized:
+      description: Unauthorized — API key is missing, invalid, or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Too many requests — API rate limit or quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    apiKeyAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate using your Solcast API key as a Bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Obtain an API key at https://toolkit.solcast.com.au/register.'

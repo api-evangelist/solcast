@@ -1,0 +1,213 @@
+openapi: 3.1.0
+info:
+  title: Solcast Aggregations API
+  description: The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.
+  version: 1.0.0
+  contact:
+    name: Solcast Support
+    url: https://solcast.com/contact
+  license:
+    name: Commercial
+    url: https://solcast.com/terms-of-service
+  x-logo:
+    url: https://solcast.com/wp-content/uploads/2021/01/Solcast-Logo.svg
+servers:
+- url: https://api.solcast.com.au
+  description: Solcast Production API
+security:
+- apiKeyAuth: []
+tags:
+- name: Aggregations
+  description: Live and forecast aggregated generation data for grid collections and sub-aggregations.
+paths:
+  /data/forecast/aggregations:
+    get:
+      operationId: getForecastAggregations
+      summary: Get Forecast Aggregations
+      description: Get forecast aggregation data for up to 7 days ahead for a requested grid collection or sub-aggregation. Used for portfolio and grid management.
+      tags:
+      - Aggregations
+      parameters:
+      - name: collection_id
+        in: query
+        required: true
+        description: Unique identifier for the grid aggregation collection.
+        schema:
+          type: string
+      - name: aggregation_id
+        in: query
+        required: false
+        description: Unique identifier for a specific sub-aggregation within the collection.
+        schema:
+          type: string
+      - name: period
+        in: query
+        required: false
+        description: Time period between data points in ISO 8601 duration format.
+        schema:
+          type: string
+        example: PT30M
+      - name: format
+        in: query
+        required: false
+        description: Response format.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+        example: json
+      responses:
+        '200':
+          description: Successful response with aggregation forecast time series.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AggregationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /data/live/aggregations:
+    get:
+      operationId: getLiveAggregations
+      summary: Get Live Aggregations
+      description: Get live aggregation data for up to 7 days of data at a time for a requested grid collection or sub-aggregation. Used for grid and portfolio management.
+      tags:
+      - Aggregations
+      parameters:
+      - name: collection_id
+        in: query
+        required: true
+        description: Unique identifier for the grid aggregation collection.
+        schema:
+          type: string
+      - name: aggregation_id
+        in: query
+        required: false
+        description: Unique identifier for a specific sub-aggregation within the collection.
+        schema:
+          type: string
+      - name: period
+        in: query
+        required: false
+        description: Time period between data points in ISO 8601 duration format.
+        schema:
+          type: string
+        example: PT30M
+      - name: format
+        in: query
+        required: false
+        description: Response format.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+        example: json
+      responses:
+        '200':
+          description: Successful response with live aggregation time series.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AggregationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — API key is missing, invalid, or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Too many requests — API rate limit or quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    AggregationDataPoint:
+      type: object
+      description: A single time period of aggregation data.
+      properties:
+        period_end:
+          type: string
+          format: date-time
+          description: The end time of the data period (UTC).
+          example: '2023-01-01T01:00:00.0000000Z'
+        period:
+          type: string
+          description: Duration of the time period in ISO 8601 format.
+          example: PT30M
+        pv_estimate:
+          type: number
+          format: float
+          description: Aggregated PV power estimate for the collection in kilowatts.
+          example: 125000.5
+        pv_estimate10:
+          type: number
+          format: float
+          description: Aggregated PV estimate at 10th percentile.
+        pv_estimate90:
+          type: number
+          format: float
+          description: Aggregated PV estimate at 90th percentile.
+    AggregationResponse:
+      type: object
+      description: Response wrapper for aggregation time series data.
+      properties:
+        estimated_actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationDataPoint'
+          description: Array of live aggregation data points.
+        forecasts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationDataPoint'
+          description: Array of forecast aggregation data points.
+    ErrorResponse:
+      type: object
+      description: Standard error response body.
+      properties:
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Invalid latitude value provided.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+  securitySchemes:
+    apiKeyAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate using your Solcast API key as a Bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Obtain an API key at https://toolkit.solcast.com.au/register.'

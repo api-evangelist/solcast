@@ -1,0 +1,440 @@
+openapi: 3.1.0
+info:
+  title: Solcast Aggregations PV Power Sites API
+  description: The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.
+  version: 1.0.0
+  contact:
+    name: Solcast Support
+    url: https://solcast.com/contact
+  license:
+    name: Commercial
+    url: https://solcast.com/terms-of-service
+  x-logo:
+    url: https://solcast.com/wp-content/uploads/2021/01/Solcast-Logo.svg
+servers:
+- url: https://api.solcast.com.au
+  description: Solcast Production API
+security:
+- apiKeyAuth: []
+tags:
+- name: PV Power Sites
+  description: CRUD management of registered PV power sites for use with the advanced PV power model.
+paths:
+  /resources/pv_power_sites:
+    get:
+      operationId: listPvPowerSites
+      summary: List PV Power Sites
+      description: List all registered PV power sites associated with the authenticated account. Sites are used with the advanced PV power model.
+      tags:
+      - PV Power Sites
+      parameters:
+      - name: format
+        in: query
+        required: false
+        description: Response format.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+        example: json
+      responses:
+        '200':
+          description: Successful response with list of PV power sites.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PvPowerSiteListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /resources/pv_power_site:
+    get:
+      operationId: getPvPowerSite
+      summary: Get PV Power Site
+      description: Retrieve specifications and metadata for a specific registered PV power site identified by its resource_id.
+      tags:
+      - PV Power Sites
+      parameters:
+      - name: resource_id
+        in: query
+        required: true
+        description: Unique identifier for the PV power site.
+        schema:
+          type: string
+        example: ba75-e17a-7374-95ed
+      - name: format
+        in: query
+        required: false
+        description: Response format.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+        example: json
+      responses:
+        '200':
+          description: Successful response with PV power site details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PvPowerSite'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+    post:
+      operationId: createPvPowerSite
+      summary: Create PV Power Site
+      description: Create a new PV power site for use with Solcast's advanced PV power model. Returns a unique resource_id for subsequent data queries.
+      tags:
+      - PV Power Sites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PvPowerSiteCreate'
+      responses:
+        '201':
+          description: PV power site created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PvPowerSite'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+    patch:
+      operationId: patchPvPowerSite
+      summary: Patch PV Power Site
+      description: Partially update specifications of an existing PV power site. Only provided fields are updated; all other fields remain unchanged.
+      tags:
+      - PV Power Sites
+      parameters:
+      - name: resource_id
+        in: query
+        required: true
+        description: Unique identifier for the PV power site to update.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PvPowerSiteUpdate'
+      responses:
+        '200':
+          description: PV power site updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PvPowerSite'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+    put:
+      operationId: updatePvPowerSite
+      summary: Update PV Power Site
+      description: Fully overwrite specifications of an existing PV power site. All current field values are replaced with the provided values.
+      tags:
+      - PV Power Sites
+      parameters:
+      - name: resource_id
+        in: query
+        required: true
+        description: Unique identifier for the PV power site to overwrite.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PvPowerSiteCreate'
+      responses:
+        '200':
+          description: PV power site overwritten successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PvPowerSite'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+    delete:
+      operationId: deletePvPowerSite
+      summary: Delete PV Power Site
+      description: Permanently delete a registered PV power site. This action cannot be undone.
+      tags:
+      - PV Power Sites
+      parameters:
+      - name: resource_id
+        in: query
+        required: true
+        description: Unique identifier for the PV power site to delete.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: PV power site deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  schemas:
+    PvPowerSiteCreate:
+      type: object
+      description: Payload for creating or replacing a PV power site.
+      properties:
+        name:
+          type: string
+          description: User-defined name for the site.
+          example: My Rooftop Solar
+        latitude:
+          type: number
+          format: float
+          description: Site latitude in decimal degrees, between -90 and 90.
+          example: -33.856784
+        longitude:
+          type: number
+          format: float
+          description: Site longitude in decimal degrees, between -180 and 180.
+          example: 151.215297
+        capacity:
+          type: number
+          format: float
+          description: System capacity in kilowatts.
+          example: 10.0
+        tilt:
+          type: number
+          format: float
+          description: Panel tilt angle in degrees from horizontal (0 = flat).
+          example: 25
+        azimuth:
+          type: number
+          format: float
+          description: Panel azimuth in degrees.
+          example: 180
+        install_date:
+          type: string
+          format: date
+          description: Date the PV system was installed (YYYY-MM-DD).
+          example: '2020-06-01'
+        loss_factor:
+          type: number
+          format: float
+          description: System loss factor as a fraction (0–1).
+          example: 0.9
+        tracking_type:
+          type: string
+          description: Tracking type.
+          example: fixed
+          enum:
+          - fixed
+          - horizontal_single_axis
+          - vertical_single_axis
+          - two_axis
+      required:
+      - name
+      - latitude
+      - longitude
+    ErrorResponse:
+      type: object
+      description: Standard error response body.
+      properties:
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Invalid latitude value provided.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    PvPowerSiteUpdate:
+      type: object
+      description: Payload for partially updating a PV power site (PATCH).
+      properties:
+        name:
+          type: string
+          description: User-defined name for the site.
+        capacity:
+          type: number
+          format: float
+          description: System capacity in kilowatts.
+        tilt:
+          type: number
+          format: float
+          description: Panel tilt angle in degrees from horizontal.
+        azimuth:
+          type: number
+          format: float
+          description: Panel azimuth in degrees.
+        install_date:
+          type: string
+          format: date
+          description: Date the PV system was installed (YYYY-MM-DD).
+        loss_factor:
+          type: number
+          format: float
+          description: System loss factor as a fraction (0–1).
+        tracking_type:
+          type: string
+          description: Tracking type.
+          enum:
+          - fixed
+          - horizontal_single_axis
+          - vertical_single_axis
+          - two_axis
+    PvPowerSite:
+      type: object
+      description: A registered Solcast PV power site with its specifications.
+      properties:
+        resource_id:
+          type: string
+          description: Unique identifier for the PV power site assigned by Solcast.
+          example: ba75-e17a-7374-95ed
+        name:
+          type: string
+          description: User-defined name for the site.
+          example: My Rooftop Solar
+        latitude:
+          type: number
+          format: float
+          description: Site latitude in decimal degrees.
+          example: -33.856784
+        longitude:
+          type: number
+          format: float
+          description: Site longitude in decimal degrees.
+          example: 151.215297
+        capacity:
+          type: number
+          format: float
+          description: System capacity in kilowatts.
+          example: 10.0
+        tilt:
+          type: number
+          format: float
+          description: Panel tilt angle in degrees from horizontal.
+          example: 25
+        azimuth:
+          type: number
+          format: float
+          description: Panel azimuth in degrees (0/360 = north, 180 = south).
+          example: 180
+        install_date:
+          type: string
+          format: date
+          description: Date the PV system was installed (YYYY-MM-DD).
+          example: '2020-06-01'
+        ac_capacity:
+          type: number
+          format: float
+          description: AC inverter capacity in kilowatts.
+        dc_capacity:
+          type: number
+          format: float
+          description: DC system capacity in kilowatts.
+        loss_factor:
+          type: number
+          format: float
+          description: System loss factor as a fraction (0–1).
+          example: 0.9
+        tracking_type:
+          type: string
+          description: Tracking type (e.g., fixed, horizontal_single_axis, vertical_single_axis, two_axis).
+          example: fixed
+          enum:
+          - fixed
+          - horizontal_single_axis
+          - vertical_single_axis
+          - two_axis
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the site was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the site was last updated.
+      required:
+      - resource_id
+      - name
+      - latitude
+      - longitude
+    PvPowerSiteListResponse:
+      type: object
+      description: Response containing a list of registered PV power sites.
+      properties:
+        pv_power_sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/PvPowerSite'
+          description: List of registered PV power sites.
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Too many requests — API rate limit or quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized — API key is missing, invalid, or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not found — the requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    apiKeyAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate using your Solcast API key as a Bearer token in the Authorization header: `Authorization: Bearer {api_key}`. Obtain an API key at https://toolkit.solcast.com.au/register.'
