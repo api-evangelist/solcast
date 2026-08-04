@@ -1,0 +1,986 @@
+{
+  "info": {
+    "_postman_id": "4dbee9cb-0513-438c-8f1f-4ecab70338c9",
+    "name": "Solcast Aggregations TMY Data API",
+    "description": "The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.\n\nContact Support:\n Name: Solcast Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:58:46.000Z",
+    "updatedAt": "2026-07-28T02:58:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4dbee9cb-0513-438c-8f1f-4ecab70338c9"
+  },
+  "item": [
+    {
+      "name": "data",
+      "item": [
+        {
+          "name": "tmy",
+          "item": [
+            {
+              "name": "radiation_and_weather",
+              "item": [
+                {
+                  "name": "Get TMY Radiation and Weather",
+                  "id": "89a8f7b1-176a-4357-b787-c025b44a6095",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/data/tmy/radiation_and_weather?latitude=<float>&longitude=<float>&output_parameters=<string>&period=<string>&format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "data",
+                        "tmy",
+                        "radiation_and_weather"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                          "key": "latitude",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                          "key": "longitude",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Comma-separated list of output parameters.",
+                          "key": "output_parameters",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Time period between data points in ISO 8601 duration format.",
+                          "key": "period",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "description": "Get the irradiance and weather for a Typical Meteorological Year (TMY) at the requested location, derived from satellite data and numerical weather models. The TMY is calculated with data from 2007 to 2023."
+                  },
+                  "response": [
+                    {
+                      "id": "e021d8d2-6693-40f0-892d-fd7229a5ed20",
+                      "name": "Successful response with TMY irradiance and weather data.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/tmy/radiation_and_weather?latitude=<float>&longitude=<float>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "tmy",
+                            "radiation_and_weather"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"ghi\": \"<float>\",\n      \"ghi90\": \"<float>\",\n      \"ghi10\": \"<float>\",\n      \"ebh\": \"<float>\",\n      \"dni\": \"<float>\",\n      \"dhi\": \"<float>\",\n      \"air_temp\": \"<float>\",\n      \"cloud_opacity\": \"<float>\",\n      \"wind_speed_10m\": \"<float>\",\n      \"wind_direction_10m\": \"<float>\",\n      \"clearsky_ghi\": \"<float>\",\n      \"clearsky_ebh\": \"<float>\",\n      \"clearsky_dni\": \"<float>\",\n      \"clearsky_dhi\": \"<float>\",\n      \"precipitable_water\": \"<float>\",\n      \"azimuth\": \"<float>\",\n      \"zenith\": \"<float>\",\n      \"elevation\": \"<float>\",\n      \"relative_humidity\": \"<float>\",\n      \"surface_pressure\": \"<float>\",\n      \"snow_depth\": \"<float>\",\n      \"snow_water_equivalent\": \"<float>\",\n      \"snow_soiling_rooftop\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"ghi\": \"<float>\",\n      \"ghi90\": \"<float>\",\n      \"ghi10\": \"<float>\",\n      \"ebh\": \"<float>\",\n      \"dni\": \"<float>\",\n      \"dhi\": \"<float>\",\n      \"air_temp\": \"<float>\",\n      \"cloud_opacity\": \"<float>\",\n      \"wind_speed_10m\": \"<float>\",\n      \"wind_direction_10m\": \"<float>\",\n      \"clearsky_ghi\": \"<float>\",\n      \"clearsky_ebh\": \"<float>\",\n      \"clearsky_dni\": \"<float>\",\n      \"clearsky_dhi\": \"<float>\",\n      \"precipitable_water\": \"<float>\",\n      \"azimuth\": \"<float>\",\n      \"zenith\": \"<float>\",\n      \"elevation\": \"<float>\",\n      \"relative_humidity\": \"<float>\",\n      \"surface_pressure\": \"<float>\",\n      \"snow_depth\": \"<float>\",\n      \"snow_water_equivalent\": \"<float>\",\n      \"snow_soiling_rooftop\": \"<float>\"\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"ghi\": \"<float>\",\n      \"ghi90\": \"<float>\",\n      \"ghi10\": \"<float>\",\n      \"ebh\": \"<float>\",\n      \"dni\": \"<float>\",\n      \"dhi\": \"<float>\",\n      \"air_temp\": \"<float>\",\n      \"cloud_opacity\": \"<float>\",\n      \"wind_speed_10m\": \"<float>\",\n      \"wind_direction_10m\": \"<float>\",\n      \"clearsky_ghi\": \"<float>\",\n      \"clearsky_ebh\": \"<float>\",\n      \"clearsky_dni\": \"<float>\",\n      \"clearsky_dhi\": \"<float>\",\n      \"precipitable_water\": \"<float>\",\n      \"azimuth\": \"<float>\",\n      \"zenith\": \"<float>\",\n      \"elevation\": \"<float>\",\n      \"relative_humidity\": \"<float>\",\n      \"surface_pressure\": \"<float>\",\n      \"snow_depth\": \"<float>\",\n      \"snow_water_equivalent\": \"<float>\",\n      \"snow_soiling_rooftop\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"ghi\": \"<float>\",\n      \"ghi90\": \"<float>\",\n      \"ghi10\": \"<float>\",\n      \"ebh\": \"<float>\",\n      \"dni\": \"<float>\",\n      \"dhi\": \"<float>\",\n      \"air_temp\": \"<float>\",\n      \"cloud_opacity\": \"<float>\",\n      \"wind_speed_10m\": \"<float>\",\n      \"wind_direction_10m\": \"<float>\",\n      \"clearsky_ghi\": \"<float>\",\n      \"clearsky_ebh\": \"<float>\",\n      \"clearsky_dni\": \"<float>\",\n      \"clearsky_dhi\": \"<float>\",\n      \"precipitable_water\": \"<float>\",\n      \"azimuth\": \"<float>\",\n      \"zenith\": \"<float>\",\n      \"elevation\": \"<float>\",\n      \"relative_humidity\": \"<float>\",\n      \"surface_pressure\": \"<float>\",\n      \"snow_depth\": \"<float>\",\n      \"snow_water_equivalent\": \"<float>\",\n      \"snow_soiling_rooftop\": \"<float>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:58:46.000Z",
+                      "updatedAt": "2026-07-28T02:58:46.000Z",
+                      "uid": "35240-e021d8d2-6693-40f0-892d-fd7229a5ed20"
+                    },
+                    {
+                      "id": "e5df80b7-a015-452f-b016-58cc46d4cf0d",
+                      "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/tmy/radiation_and_weather?latitude=<float>&longitude=<float>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "tmy",
+                            "radiation_and_weather"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"pariatur446\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:46.000Z",
+                      "updatedAt": "2026-07-28T02:58:46.000Z",
+                      "uid": "35240-e5df80b7-a015-452f-b016-58cc46d4cf0d"
+                    },
+                    {
+                      "id": "b25581cf-9964-4eb8-9d37-87875d528cec",
+                      "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/tmy/radiation_and_weather?latitude=<float>&longitude=<float>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "tmy",
+                            "radiation_and_weather"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"pariatur446\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:46.000Z",
+                      "updatedAt": "2026-07-28T02:58:46.000Z",
+                      "uid": "35240-b25581cf-9964-4eb8-9d37-87875d528cec"
+                    },
+                    {
+                      "id": "7d2b6896-63fc-433d-a496-aa0e97b4c4a4",
+                      "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/tmy/radiation_and_weather?latitude=<float>&longitude=<float>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "tmy",
+                            "radiation_and_weather"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"pariatur446\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:46.000Z",
+                      "updatedAt": "2026-07-28T02:58:46.000Z",
+                      "uid": "35240-7d2b6896-63fc-433d-a496-aa0e97b4c4a4"
+                    },
+                    {
+                      "id": "6d724b24-67ef-4114-aac1-a4313ddfb4b8",
+                      "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/tmy/radiation_and_weather?latitude=<float>&longitude=<float>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "tmy",
+                            "radiation_and_weather"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"pariatur446\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:46.000Z",
+                      "updatedAt": "2026-07-28T02:58:46.000Z",
+                      "uid": "35240-6d724b24-67ef-4114-aac1-a4313ddfb4b8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:58:46.000Z",
+                  "updatedAt": "2026-07-28T02:58:46.000Z",
+                  "uid": "35240-89a8f7b1-176a-4357-b787-c025b44a6095"
+                }
+              ],
+              "id": "04af2eeb-1757-431f-9ea0-ecb8ac8fe4a5",
+              "createdAt": "2026-07-28T02:58:46.000Z",
+              "updatedAt": "2026-07-28T02:58:46.000Z",
+              "uid": "35240-04af2eeb-1757-431f-9ea0-ecb8ac8fe4a5"
+            },
+            {
+              "name": "rooftop_pv_power",
+              "item": [
+                {
+                  "name": "Get TMY Rooftop PV Power",
+                  "id": "cbf15af2-fac2-4b8f-a648-c4ea7f7f25a0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/data/tmy/rooftop_pv_power?latitude=<float>&longitude=<float>&capacity=<float>&tilt=<float>&azimuth=<float>&output_parameters=<string>&period=<string>&format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "data",
+                        "tmy",
+                        "rooftop_pv_power"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                          "key": "latitude",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                          "key": "longitude",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "System capacity in kilowatts.",
+                          "key": "capacity",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Panel tilt angle in degrees from horizontal.",
+                          "key": "tilt",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Panel azimuth in degrees.",
+                          "key": "azimuth",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Comma-separated list of output parameters.",
+                          "key": "output_parameters",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Time period between data points in ISO 8601 duration format.",
+                          "key": "period",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "description": "Get the basic rooftop PV power for a Typical Meteorological Year (TMY) at the requested location. The TMY is calculated with data from 2007 to 2023."
+                  },
+                  "response": [
+                    {
+                      "id": "0e3f3406-8bbc-4bc1-ab08-de7acf3ab1a8",
+                      "name": "Successful response with TMY rooftop PV power data.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/tmy/rooftop_pv_power?latitude=<float>&longitude=<float>&capacity=<float>&tilt=<float>&azimuth=<float>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "tmy",
+                            "rooftop_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "System capacity in kilowatts.",
+                              "key": "capacity",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel tilt angle in degrees from horizontal.",
+                              "key": "tilt",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel azimuth in degrees.",
+                              "key": "azimuth",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:58:46.000Z",
+                      "updatedAt": "2026-07-28T02:58:46.000Z",
+                      "uid": "35240-0e3f3406-8bbc-4bc1-ab08-de7acf3ab1a8"
+                    },
+                    {
+                      "id": "846ec69b-47a6-4f7a-b7a2-693d4ffd2619",
+                      "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/tmy/rooftop_pv_power?latitude=<float>&longitude=<float>&capacity=<float>&tilt=<float>&azimuth=<float>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "tmy",
+                            "rooftop_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "System capacity in kilowatts.",
+                              "key": "capacity",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel tilt angle in degrees from horizontal.",
+                              "key": "tilt",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel azimuth in degrees.",
+                              "key": "azimuth",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"pariatur446\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:46.000Z",
+                      "updatedAt": "2026-07-28T02:58:46.000Z",
+                      "uid": "35240-846ec69b-47a6-4f7a-b7a2-693d4ffd2619"
+                    },
+                    {
+                      "id": "930afc44-2770-422a-b3a0-c123a9b58299",
+                      "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/tmy/rooftop_pv_power?latitude=<float>&longitude=<float>&capacity=<float>&tilt=<float>&azimuth=<float>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "tmy",
+                            "rooftop_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "System capacity in kilowatts.",
+                              "key": "capacity",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel tilt angle in degrees from horizontal.",
+                              "key": "tilt",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel azimuth in degrees.",
+                              "key": "azimuth",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"pariatur446\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:46.000Z",
+                      "updatedAt": "2026-07-28T02:58:46.000Z",
+                      "uid": "35240-930afc44-2770-422a-b3a0-c123a9b58299"
+                    },
+                    {
+                      "id": "4aed41cf-b64f-4c21-9d01-105e56e99d52",
+                      "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/tmy/rooftop_pv_power?latitude=<float>&longitude=<float>&capacity=<float>&tilt=<float>&azimuth=<float>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "tmy",
+                            "rooftop_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "System capacity in kilowatts.",
+                              "key": "capacity",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel tilt angle in degrees from horizontal.",
+                              "key": "tilt",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel azimuth in degrees.",
+                              "key": "azimuth",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"pariatur446\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:46.000Z",
+                      "updatedAt": "2026-07-28T02:58:46.000Z",
+                      "uid": "35240-4aed41cf-b64f-4c21-9d01-105e56e99d52"
+                    },
+                    {
+                      "id": "30a1a0ef-201f-4040-a6ff-e485db13cd96",
+                      "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/tmy/rooftop_pv_power?latitude=<float>&longitude=<float>&capacity=<float>&tilt=<float>&azimuth=<float>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "tmy",
+                            "rooftop_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "System capacity in kilowatts.",
+                              "key": "capacity",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel tilt angle in degrees from horizontal.",
+                              "key": "tilt",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel azimuth in degrees.",
+                              "key": "azimuth",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"pariatur446\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:46.000Z",
+                      "updatedAt": "2026-07-28T02:58:46.000Z",
+                      "uid": "35240-30a1a0ef-201f-4040-a6ff-e485db13cd96"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:58:46.000Z",
+                  "updatedAt": "2026-07-28T02:58:46.000Z",
+                  "uid": "35240-cbf15af2-fac2-4b8f-a648-c4ea7f7f25a0"
+                }
+              ],
+              "id": "05c7914b-8eee-4d9a-99a6-dec099c1c8ef",
+              "createdAt": "2026-07-28T02:58:46.000Z",
+              "updatedAt": "2026-07-28T02:58:46.000Z",
+              "uid": "35240-05c7914b-8eee-4d9a-99a6-dec099c1c8ef"
+            }
+          ],
+          "id": "36bffe38-068a-492b-b092-7411f43f06ae",
+          "createdAt": "2026-07-28T02:58:46.000Z",
+          "updatedAt": "2026-07-28T02:58:46.000Z",
+          "uid": "35240-36bffe38-068a-492b-b092-7411f43f06ae"
+        }
+      ],
+      "id": "39cf481c-afe1-4c5d-aebc-59bb5cfaae54",
+      "createdAt": "2026-07-28T02:58:46.000Z",
+      "updatedAt": "2026-07-28T02:58:46.000Z",
+      "uid": "35240-39cf481c-afe1-4c5d-aebc-59bb5cfaae54"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.solcast.com.au"
+    }
+  ]
+}

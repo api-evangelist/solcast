@@ -1,0 +1,2639 @@
+{
+  "info": {
+    "_postman_id": "2dfb0c62-e085-4f48-874c-1c86e2b79754",
+    "name": "Solcast Aggregations Historic Data API",
+    "description": "The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.\n\nContact Support:\n Name: Solcast Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:58:35.000Z",
+    "updatedAt": "2026-07-28T02:58:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2dfb0c62-e085-4f48-874c-1c86e2b79754"
+  },
+  "item": [
+    {
+      "name": "data",
+      "item": [
+        {
+          "name": "historic",
+          "item": [
+            {
+              "name": "radiation_and_weather",
+              "item": [
+                {
+                  "name": "Get Historic Radiation and Weather",
+                  "id": "d7d13e96-51a4-4c39-bf6c-0672f1e266d7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/data/historic/radiation_and_weather?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&output_parameters=<string>&period=<string>&format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "data",
+                        "historic",
+                        "radiation_and_weather"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                          "key": "latitude",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                          "key": "longitude",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Start of requested period (ISO 8601 date or datetime, e.g., 2023-01-01 or 2023-01-01T00:00Z).",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "End of requested period (mutually exclusive with duration).",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "ISO 8601 duration for the historic data, within 31 days of start (mutually exclusive with end). E.g., P7D for 7 days.",
+                          "key": "duration",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated list of output parameters.",
+                          "key": "output_parameters",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Time period between data points in ISO 8601 duration format.",
+                          "key": "period",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "description": "Get historical irradiance and weather estimated actuals for up to 31 days of data at a time for a requested location. Data is available from 2007-01-01T00:00Z up to 7 days before present."
+                  },
+                  "response": [
+                    {
+                      "id": "58c5c656-3446-4fcb-ada7-937a70f7588f",
+                      "name": "Successful response with historic irradiance and weather time series.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/radiation_and_weather?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "radiation_and_weather"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime, e.g., 2023-01-01 or 2023-01-01T00:00Z).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration for the historic data, within 31 days of start (mutually exclusive with end). E.g., P7D for 7 days.",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"ghi\": \"<float>\",\n      \"ghi90\": \"<float>\",\n      \"ghi10\": \"<float>\",\n      \"ebh\": \"<float>\",\n      \"dni\": \"<float>\",\n      \"dhi\": \"<float>\",\n      \"air_temp\": \"<float>\",\n      \"cloud_opacity\": \"<float>\",\n      \"wind_speed_10m\": \"<float>\",\n      \"wind_direction_10m\": \"<float>\",\n      \"clearsky_ghi\": \"<float>\",\n      \"clearsky_ebh\": \"<float>\",\n      \"clearsky_dni\": \"<float>\",\n      \"clearsky_dhi\": \"<float>\",\n      \"precipitable_water\": \"<float>\",\n      \"azimuth\": \"<float>\",\n      \"zenith\": \"<float>\",\n      \"elevation\": \"<float>\",\n      \"relative_humidity\": \"<float>\",\n      \"surface_pressure\": \"<float>\",\n      \"snow_depth\": \"<float>\",\n      \"snow_water_equivalent\": \"<float>\",\n      \"snow_soiling_rooftop\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"ghi\": \"<float>\",\n      \"ghi90\": \"<float>\",\n      \"ghi10\": \"<float>\",\n      \"ebh\": \"<float>\",\n      \"dni\": \"<float>\",\n      \"dhi\": \"<float>\",\n      \"air_temp\": \"<float>\",\n      \"cloud_opacity\": \"<float>\",\n      \"wind_speed_10m\": \"<float>\",\n      \"wind_direction_10m\": \"<float>\",\n      \"clearsky_ghi\": \"<float>\",\n      \"clearsky_ebh\": \"<float>\",\n      \"clearsky_dni\": \"<float>\",\n      \"clearsky_dhi\": \"<float>\",\n      \"precipitable_water\": \"<float>\",\n      \"azimuth\": \"<float>\",\n      \"zenith\": \"<float>\",\n      \"elevation\": \"<float>\",\n      \"relative_humidity\": \"<float>\",\n      \"surface_pressure\": \"<float>\",\n      \"snow_depth\": \"<float>\",\n      \"snow_water_equivalent\": \"<float>\",\n      \"snow_soiling_rooftop\": \"<float>\"\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"ghi\": \"<float>\",\n      \"ghi90\": \"<float>\",\n      \"ghi10\": \"<float>\",\n      \"ebh\": \"<float>\",\n      \"dni\": \"<float>\",\n      \"dhi\": \"<float>\",\n      \"air_temp\": \"<float>\",\n      \"cloud_opacity\": \"<float>\",\n      \"wind_speed_10m\": \"<float>\",\n      \"wind_direction_10m\": \"<float>\",\n      \"clearsky_ghi\": \"<float>\",\n      \"clearsky_ebh\": \"<float>\",\n      \"clearsky_dni\": \"<float>\",\n      \"clearsky_dhi\": \"<float>\",\n      \"precipitable_water\": \"<float>\",\n      \"azimuth\": \"<float>\",\n      \"zenith\": \"<float>\",\n      \"elevation\": \"<float>\",\n      \"relative_humidity\": \"<float>\",\n      \"surface_pressure\": \"<float>\",\n      \"snow_depth\": \"<float>\",\n      \"snow_water_equivalent\": \"<float>\",\n      \"snow_soiling_rooftop\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"ghi\": \"<float>\",\n      \"ghi90\": \"<float>\",\n      \"ghi10\": \"<float>\",\n      \"ebh\": \"<float>\",\n      \"dni\": \"<float>\",\n      \"dhi\": \"<float>\",\n      \"air_temp\": \"<float>\",\n      \"cloud_opacity\": \"<float>\",\n      \"wind_speed_10m\": \"<float>\",\n      \"wind_direction_10m\": \"<float>\",\n      \"clearsky_ghi\": \"<float>\",\n      \"clearsky_ebh\": \"<float>\",\n      \"clearsky_dni\": \"<float>\",\n      \"clearsky_dhi\": \"<float>\",\n      \"precipitable_water\": \"<float>\",\n      \"azimuth\": \"<float>\",\n      \"zenith\": \"<float>\",\n      \"elevation\": \"<float>\",\n      \"relative_humidity\": \"<float>\",\n      \"surface_pressure\": \"<float>\",\n      \"snow_depth\": \"<float>\",\n      \"snow_water_equivalent\": \"<float>\",\n      \"snow_soiling_rooftop\": \"<float>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-58c5c656-3446-4fcb-ada7-937a70f7588f"
+                    },
+                    {
+                      "id": "1b9d68d2-7127-411f-ad67-14fdab230d0b",
+                      "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/radiation_and_weather?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "radiation_and_weather"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime, e.g., 2023-01-01 or 2023-01-01T00:00Z).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration for the historic data, within 31 days of start (mutually exclusive with end). E.g., P7D for 7 days.",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-1b9d68d2-7127-411f-ad67-14fdab230d0b"
+                    },
+                    {
+                      "id": "28e1da3a-e240-4920-a182-fab8f250028c",
+                      "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/radiation_and_weather?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "radiation_and_weather"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime, e.g., 2023-01-01 or 2023-01-01T00:00Z).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration for the historic data, within 31 days of start (mutually exclusive with end). E.g., P7D for 7 days.",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-28e1da3a-e240-4920-a182-fab8f250028c"
+                    },
+                    {
+                      "id": "9be1d20f-8b50-4fe6-8fa4-5f2050655550",
+                      "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/radiation_and_weather?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "radiation_and_weather"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime, e.g., 2023-01-01 or 2023-01-01T00:00Z).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration for the historic data, within 31 days of start (mutually exclusive with end). E.g., P7D for 7 days.",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-9be1d20f-8b50-4fe6-8fa4-5f2050655550"
+                    },
+                    {
+                      "id": "ed6fd49f-59de-4ab9-a2c2-5af3bdf269cb",
+                      "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/radiation_and_weather?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&output_parameters=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "radiation_and_weather"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime, e.g., 2023-01-01 or 2023-01-01T00:00Z).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration for the historic data, within 31 days of start (mutually exclusive with end). E.g., P7D for 7 days.",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Comma-separated list of output parameters.",
+                              "key": "output_parameters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-ed6fd49f-59de-4ab9-a2c2-5af3bdf269cb"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:58:35.000Z",
+                  "updatedAt": "2026-07-28T02:58:35.000Z",
+                  "uid": "35240-d7d13e96-51a4-4c39-bf6c-0672f1e266d7"
+                }
+              ],
+              "id": "eb9ea65f-a3e6-4f56-89b2-993cea271228",
+              "createdAt": "2026-07-28T02:58:35.000Z",
+              "updatedAt": "2026-07-28T02:58:35.000Z",
+              "uid": "35240-eb9ea65f-a3e6-4f56-89b2-993cea271228"
+            },
+            {
+              "name": "rooftop_pv_power",
+              "item": [
+                {
+                  "name": "Get Historic Rooftop PV Power",
+                  "id": "ab6550c0-2f99-44a6-98a5-71f6f0eef2c1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/data/historic/rooftop_pv_power?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&capacity=<float>&tilt=<float>&azimuth=<float>&period=<string>&format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "data",
+                        "historic",
+                        "rooftop_pv_power"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                          "key": "latitude",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                          "key": "longitude",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "End of requested period (mutually exclusive with duration).",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                          "key": "duration",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "System capacity in kilowatts.",
+                          "key": "capacity",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Panel tilt in degrees from horizontal.",
+                          "key": "tilt",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Panel azimuth in degrees.",
+                          "key": "azimuth",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Time period between data points in ISO 8601 duration format.",
+                          "key": "period",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "description": "Get historical basic rooftop PV power estimated actuals for the requested location. Data is available from 2007-01-01 up to 7 days before present. Requests up to 31 days at a time."
+                  },
+                  "response": [
+                    {
+                      "id": "ba11f739-c4a6-4913-b661-65db65d2e716",
+                      "name": "Successful response with historic rooftop PV power time series.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/rooftop_pv_power?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&capacity=<float>&tilt=<float>&azimuth=<float>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "rooftop_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "System capacity in kilowatts.",
+                              "key": "capacity",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel tilt in degrees from horizontal.",
+                              "key": "tilt",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel azimuth in degrees.",
+                              "key": "azimuth",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-ba11f739-c4a6-4913-b661-65db65d2e716"
+                    },
+                    {
+                      "id": "8a5e72bb-4125-4540-8966-45cbe59c4241",
+                      "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/rooftop_pv_power?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&capacity=<float>&tilt=<float>&azimuth=<float>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "rooftop_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "System capacity in kilowatts.",
+                              "key": "capacity",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel tilt in degrees from horizontal.",
+                              "key": "tilt",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel azimuth in degrees.",
+                              "key": "azimuth",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-8a5e72bb-4125-4540-8966-45cbe59c4241"
+                    },
+                    {
+                      "id": "1868d84a-f90b-454d-9e5d-74822c9b8535",
+                      "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/rooftop_pv_power?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&capacity=<float>&tilt=<float>&azimuth=<float>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "rooftop_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "System capacity in kilowatts.",
+                              "key": "capacity",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel tilt in degrees from horizontal.",
+                              "key": "tilt",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel azimuth in degrees.",
+                              "key": "azimuth",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-1868d84a-f90b-454d-9e5d-74822c9b8535"
+                    },
+                    {
+                      "id": "a0128bc8-002c-455b-bdc7-34f80eb6067d",
+                      "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/rooftop_pv_power?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&capacity=<float>&tilt=<float>&azimuth=<float>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "rooftop_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "System capacity in kilowatts.",
+                              "key": "capacity",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel tilt in degrees from horizontal.",
+                              "key": "tilt",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel azimuth in degrees.",
+                              "key": "azimuth",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-a0128bc8-002c-455b-bdc7-34f80eb6067d"
+                    },
+                    {
+                      "id": "7e584d65-13c4-465e-81fa-6d0f4fd03c85",
+                      "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/rooftop_pv_power?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&capacity=<float>&tilt=<float>&azimuth=<float>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "rooftop_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "System capacity in kilowatts.",
+                              "key": "capacity",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel tilt in degrees from horizontal.",
+                              "key": "tilt",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Panel azimuth in degrees.",
+                              "key": "azimuth",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-7e584d65-13c4-465e-81fa-6d0f4fd03c85"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:58:35.000Z",
+                  "updatedAt": "2026-07-28T02:58:35.000Z",
+                  "uid": "35240-ab6550c0-2f99-44a6-98a5-71f6f0eef2c1"
+                }
+              ],
+              "id": "f5517746-960b-4d17-b500-4a1d956c7cd1",
+              "createdAt": "2026-07-28T02:58:35.000Z",
+              "updatedAt": "2026-07-28T02:58:35.000Z",
+              "uid": "35240-f5517746-960b-4d17-b500-4a1d956c7cd1"
+            },
+            {
+              "name": "advanced_pv_power",
+              "item": [
+                {
+                  "name": "Get Historic Advanced PV Power",
+                  "id": "e7a704bf-a106-417a-a332-449040aed4b0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/data/historic/advanced_pv_power?resource_id=<string>&start=<string>&end=<string>&duration=<string>&period=<string>&format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "data",
+                        "historic",
+                        "advanced_pv_power"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique resource identifier for a registered Solcast PV power site.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "End of requested period (mutually exclusive with duration).",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                          "key": "duration",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Time period between data points in ISO 8601 duration format.",
+                          "key": "period",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "description": "Get historical high-specification PV power estimated actuals for a registered PV power site. Data available from 2007-01-01 up to 7 days before present. Requests up to 31 days at a time."
+                  },
+                  "response": [
+                    {
+                      "id": "4c023ff6-f946-450b-b7ca-f6b0d6443258",
+                      "name": "Successful response with historic advanced PV power time series.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/advanced_pv_power?resource_id=<string>&start=<string>&end=<string>&duration=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "advanced_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique resource identifier for a registered Solcast PV power site.",
+                              "key": "resource_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\",\n      \"pv_power_rooftop\": \"<float>\",\n      \"pv_power_advanced\": \"<float>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-4c023ff6-f946-450b-b7ca-f6b0d6443258"
+                    },
+                    {
+                      "id": "280db425-df26-4f97-80ce-40283853b9e0",
+                      "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/advanced_pv_power?resource_id=<string>&start=<string>&end=<string>&duration=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "advanced_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique resource identifier for a registered Solcast PV power site.",
+                              "key": "resource_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-280db425-df26-4f97-80ce-40283853b9e0"
+                    },
+                    {
+                      "id": "b407fc72-a2bd-4db6-bd34-33f7ba8d3f8f",
+                      "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/advanced_pv_power?resource_id=<string>&start=<string>&end=<string>&duration=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "advanced_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique resource identifier for a registered Solcast PV power site.",
+                              "key": "resource_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-b407fc72-a2bd-4db6-bd34-33f7ba8d3f8f"
+                    },
+                    {
+                      "id": "723a4bab-b823-4fa1-af22-9c7319a176db",
+                      "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/advanced_pv_power?resource_id=<string>&start=<string>&end=<string>&duration=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "advanced_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique resource identifier for a registered Solcast PV power site.",
+                              "key": "resource_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-723a4bab-b823-4fa1-af22-9c7319a176db"
+                    },
+                    {
+                      "id": "8b845e32-7fce-4d49-91c1-36133e673359",
+                      "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/advanced_pv_power?resource_id=<string>&start=<string>&end=<string>&duration=<string>&period=<string>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "advanced_pv_power"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique resource identifier for a registered Solcast PV power site.",
+                              "key": "resource_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-8b845e32-7fce-4d49-91c1-36133e673359"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:58:35.000Z",
+                  "updatedAt": "2026-07-28T02:58:35.000Z",
+                  "uid": "35240-e7a704bf-a106-417a-a332-449040aed4b0"
+                }
+              ],
+              "id": "67cf134a-e275-4e18-ad33-13d6e31034d9",
+              "createdAt": "2026-07-28T02:58:35.000Z",
+              "updatedAt": "2026-07-28T02:58:35.000Z",
+              "uid": "35240-67cf134a-e275-4e18-ad33-13d6e31034d9"
+            },
+            {
+              "name": "soiling",
+              "item": [
+                {
+                  "name": "kimber",
+                  "item": [
+                    {
+                      "name": "Get Historic Soiling (Kimber Model)",
+                      "id": "c7a30a22-7da6-4b28-a813-dcc43d1079ef",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/soiling/kimber?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "soiling",
+                            "kimber"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Deposition velocity for PM10 particles (m/s).",
+                              "key": "depo_veloc_pm10",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                              "key": "initial_soiling",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        },
+                        "description": "Get hourly historical soiling loss estimates using the Kimber model. Returns a time series of estimated historical cumulative soiling / cleanliness state for the requested location."
+                      },
+                      "response": [
+                        {
+                          "id": "d842d3be-3268-4579-bcbb-9e325668b208",
+                          "name": "Successful response with historic soiling time series.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/data/historic/soiling/kimber?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "data",
+                                "historic",
+                                "soiling",
+                                "kimber"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                                  "key": "latitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                                  "key": "longitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                                  "key": "start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of requested period (mutually exclusive with duration).",
+                                  "key": "end",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                                  "key": "duration",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Deposition velocity for PM10 particles (m/s).",
+                                  "key": "depo_veloc_pm10",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                                  "key": "initial_soiling",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Response format.",
+                                  "key": "format",
+                                  "value": "json"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"soiling_loss\": \"<float>\",\n      \"cleanliness\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"soiling_loss\": \"<float>\",\n      \"cleanliness\": \"<float>\"\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"soiling_loss\": \"<float>\",\n      \"cleanliness\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"soiling_loss\": \"<float>\",\n      \"cleanliness\": \"<float>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:58:35.000Z",
+                          "updatedAt": "2026-07-28T02:58:35.000Z",
+                          "uid": "35240-d842d3be-3268-4579-bcbb-9e325668b208"
+                        },
+                        {
+                          "id": "03519a9d-4898-47e5-a48f-ad2dc19f5c7d",
+                          "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/data/historic/soiling/kimber?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "data",
+                                "historic",
+                                "soiling",
+                                "kimber"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                                  "key": "latitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                                  "key": "longitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                                  "key": "start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of requested period (mutually exclusive with duration).",
+                                  "key": "end",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                                  "key": "duration",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Deposition velocity for PM10 particles (m/s).",
+                                  "key": "depo_veloc_pm10",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                                  "key": "initial_soiling",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Response format.",
+                                  "key": "format",
+                                  "value": "json"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:58:35.000Z",
+                          "updatedAt": "2026-07-28T02:58:35.000Z",
+                          "uid": "35240-03519a9d-4898-47e5-a48f-ad2dc19f5c7d"
+                        },
+                        {
+                          "id": "a06e1029-7f7f-42a2-8b55-4e567c693c2a",
+                          "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/data/historic/soiling/kimber?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "data",
+                                "historic",
+                                "soiling",
+                                "kimber"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                                  "key": "latitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                                  "key": "longitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                                  "key": "start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of requested period (mutually exclusive with duration).",
+                                  "key": "end",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                                  "key": "duration",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Deposition velocity for PM10 particles (m/s).",
+                                  "key": "depo_veloc_pm10",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                                  "key": "initial_soiling",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Response format.",
+                                  "key": "format",
+                                  "value": "json"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:58:35.000Z",
+                          "updatedAt": "2026-07-28T02:58:35.000Z",
+                          "uid": "35240-a06e1029-7f7f-42a2-8b55-4e567c693c2a"
+                        },
+                        {
+                          "id": "1a866b01-9bf3-4667-be08-a39d6513e133",
+                          "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/data/historic/soiling/kimber?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "data",
+                                "historic",
+                                "soiling",
+                                "kimber"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                                  "key": "latitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                                  "key": "longitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                                  "key": "start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of requested period (mutually exclusive with duration).",
+                                  "key": "end",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                                  "key": "duration",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Deposition velocity for PM10 particles (m/s).",
+                                  "key": "depo_veloc_pm10",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                                  "key": "initial_soiling",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Response format.",
+                                  "key": "format",
+                                  "value": "json"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:58:35.000Z",
+                          "updatedAt": "2026-07-28T02:58:35.000Z",
+                          "uid": "35240-1a866b01-9bf3-4667-be08-a39d6513e133"
+                        },
+                        {
+                          "id": "202dcd7a-5cde-44f9-bbde-3af3d4ef2435",
+                          "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/data/historic/soiling/kimber?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "data",
+                                "historic",
+                                "soiling",
+                                "kimber"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                                  "key": "latitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                                  "key": "longitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                                  "key": "start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of requested period (mutually exclusive with duration).",
+                                  "key": "end",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                                  "key": "duration",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Deposition velocity for PM10 particles (m/s).",
+                                  "key": "depo_veloc_pm10",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                                  "key": "initial_soiling",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Response format.",
+                                  "key": "format",
+                                  "value": "json"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:58:35.000Z",
+                          "updatedAt": "2026-07-28T02:58:35.000Z",
+                          "uid": "35240-202dcd7a-5cde-44f9-bbde-3af3d4ef2435"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-c7a30a22-7da6-4b28-a813-dcc43d1079ef"
+                    }
+                  ],
+                  "id": "52cbad77-5ce7-4d01-9dd0-fbca100f8fd5",
+                  "createdAt": "2026-07-28T02:58:35.000Z",
+                  "updatedAt": "2026-07-28T02:58:35.000Z",
+                  "uid": "35240-52cbad77-5ce7-4d01-9dd0-fbca100f8fd5"
+                },
+                {
+                  "name": "hsu",
+                  "item": [
+                    {
+                      "name": "Get Historic Soiling (HSU Model)",
+                      "id": "a303ba08-bbe2-4e2d-997f-2290c2c0a359",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/historic/soiling/hsu?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "historic",
+                            "soiling",
+                            "hsu"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                              "key": "latitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                              "key": "longitude",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                              "key": "start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of requested period (mutually exclusive with duration).",
+                              "key": "end",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                              "key": "duration",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Deposition velocity for PM10 particles (m/s).",
+                              "key": "depo_veloc_pm10",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                              "key": "initial_soiling",
+                              "value": "<float>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "json"
+                            }
+                          ]
+                        },
+                        "description": "Get hourly historical soiling loss estimates using Solcast's HSU model. Returns a time series of estimated historical cumulative soiling / cleanliness state for the requested location."
+                      },
+                      "response": [
+                        {
+                          "id": "3693b80e-e892-456c-96bc-226f063dcd20",
+                          "name": "Successful response with historic soiling time series.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/data/historic/soiling/hsu?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "data",
+                                "historic",
+                                "soiling",
+                                "hsu"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                                  "key": "latitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                                  "key": "longitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                                  "key": "start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of requested period (mutually exclusive with duration).",
+                                  "key": "end",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                                  "key": "duration",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Deposition velocity for PM10 particles (m/s).",
+                                  "key": "depo_veloc_pm10",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                                  "key": "initial_soiling",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Response format.",
+                                  "key": "format",
+                                  "value": "json"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"soiling_loss\": \"<float>\",\n      \"cleanliness\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"soiling_loss\": \"<float>\",\n      \"cleanliness\": \"<float>\"\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"soiling_loss\": \"<float>\",\n      \"cleanliness\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"soiling_loss\": \"<float>\",\n      \"cleanliness\": \"<float>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:58:35.000Z",
+                          "updatedAt": "2026-07-28T02:58:35.000Z",
+                          "uid": "35240-3693b80e-e892-456c-96bc-226f063dcd20"
+                        },
+                        {
+                          "id": "b32ba541-4460-4cf8-8d2d-73542184421b",
+                          "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/data/historic/soiling/hsu?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "data",
+                                "historic",
+                                "soiling",
+                                "hsu"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                                  "key": "latitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                                  "key": "longitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                                  "key": "start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of requested period (mutually exclusive with duration).",
+                                  "key": "end",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                                  "key": "duration",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Deposition velocity for PM10 particles (m/s).",
+                                  "key": "depo_veloc_pm10",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                                  "key": "initial_soiling",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Response format.",
+                                  "key": "format",
+                                  "value": "json"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:58:35.000Z",
+                          "updatedAt": "2026-07-28T02:58:35.000Z",
+                          "uid": "35240-b32ba541-4460-4cf8-8d2d-73542184421b"
+                        },
+                        {
+                          "id": "53904c36-71d2-4e75-ac4c-fc62e2202a57",
+                          "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/data/historic/soiling/hsu?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "data",
+                                "historic",
+                                "soiling",
+                                "hsu"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                                  "key": "latitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                                  "key": "longitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                                  "key": "start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of requested period (mutually exclusive with duration).",
+                                  "key": "end",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                                  "key": "duration",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Deposition velocity for PM10 particles (m/s).",
+                                  "key": "depo_veloc_pm10",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                                  "key": "initial_soiling",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Response format.",
+                                  "key": "format",
+                                  "value": "json"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:58:35.000Z",
+                          "updatedAt": "2026-07-28T02:58:35.000Z",
+                          "uid": "35240-53904c36-71d2-4e75-ac4c-fc62e2202a57"
+                        },
+                        {
+                          "id": "e2b00884-42bf-4311-8169-a93c006076b0",
+                          "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/data/historic/soiling/hsu?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "data",
+                                "historic",
+                                "soiling",
+                                "hsu"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                                  "key": "latitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                                  "key": "longitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                                  "key": "start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of requested period (mutually exclusive with duration).",
+                                  "key": "end",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                                  "key": "duration",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Deposition velocity for PM10 particles (m/s).",
+                                  "key": "depo_veloc_pm10",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                                  "key": "initial_soiling",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Response format.",
+                                  "key": "format",
+                                  "value": "json"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:58:35.000Z",
+                          "updatedAt": "2026-07-28T02:58:35.000Z",
+                          "uid": "35240-e2b00884-42bf-4311-8169-a93c006076b0"
+                        },
+                        {
+                          "id": "bc6dc169-1fbb-46db-ab07-9abf78ab6b5e",
+                          "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/data/historic/soiling/hsu?latitude=<float>&longitude=<float>&start=<string>&end=<string>&duration=<string>&depo_veloc_pm10=<float>&initial_soiling=<float>&format=json",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "data",
+                                "historic",
+                                "soiling",
+                                "hsu"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive).",
+                                  "key": "latitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive).",
+                                  "key": "longitude",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "(Required) Start of requested period (ISO 8601 date or datetime).",
+                                  "key": "start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of requested period (mutually exclusive with duration).",
+                                  "key": "end",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end).",
+                                  "key": "duration",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Deposition velocity for PM10 particles (m/s).",
+                                  "key": "depo_veloc_pm10",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled).",
+                                  "key": "initial_soiling",
+                                  "value": "<float>"
+                                },
+                                {
+                                  "description": "Response format.",
+                                  "key": "format",
+                                  "value": "json"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"sunt3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"consequat___9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Ut_18\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:58:35.000Z",
+                          "updatedAt": "2026-07-28T02:58:35.000Z",
+                          "uid": "35240-bc6dc169-1fbb-46db-ab07-9abf78ab6b5e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:58:35.000Z",
+                      "updatedAt": "2026-07-28T02:58:35.000Z",
+                      "uid": "35240-a303ba08-bbe2-4e2d-997f-2290c2c0a359"
+                    }
+                  ],
+                  "id": "13b2208c-6704-4a8c-b35f-4f10534a84e1",
+                  "createdAt": "2026-07-28T02:58:35.000Z",
+                  "updatedAt": "2026-07-28T02:58:35.000Z",
+                  "uid": "35240-13b2208c-6704-4a8c-b35f-4f10534a84e1"
+                }
+              ],
+              "id": "2b43a7a2-a839-45ca-a2ba-730c0ff2b27f",
+              "createdAt": "2026-07-28T02:58:35.000Z",
+              "updatedAt": "2026-07-28T02:58:35.000Z",
+              "uid": "35240-2b43a7a2-a839-45ca-a2ba-730c0ff2b27f"
+            }
+          ],
+          "id": "6bc3ac84-18bc-46e6-ac4b-693b790e763f",
+          "createdAt": "2026-07-28T02:58:35.000Z",
+          "updatedAt": "2026-07-28T02:58:35.000Z",
+          "uid": "35240-6bc3ac84-18bc-46e6-ac4b-693b790e763f"
+        }
+      ],
+      "id": "0990cc8a-7e4e-4167-905f-c8298f9a7879",
+      "createdAt": "2026-07-28T02:58:35.000Z",
+      "updatedAt": "2026-07-28T02:58:35.000Z",
+      "uid": "35240-0990cc8a-7e4e-4167-905f-c8298f9a7879"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.solcast.com.au"
+    }
+  ]
+}

@@ -1,0 +1,1945 @@
+{
+  "info": {
+    "_postman_id": "f353b1c3-060e-417e-9688-8b2effa9ba6b",
+    "name": "Solcast Aggregations PV Power Sites API",
+    "description": "The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.\n\nContact Support:\n Name: Solcast Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:58:44.000Z",
+    "updatedAt": "2026-07-28T02:58:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f353b1c3-060e-417e-9688-8b2effa9ba6b"
+  },
+  "item": [
+    {
+      "name": "resources",
+      "item": [
+        {
+          "name": "pv_power_sites",
+          "item": [
+            {
+              "name": "List PV Power Sites",
+              "id": "53acb0a7-5a16-428e-b163-5865adb27b57",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resources/pv_power_sites?format=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources",
+                    "pv_power_sites"
+                  ],
+                  "query": [
+                    {
+                      "description": "Response format.",
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ]
+                },
+                "description": "List all registered PV power sites associated with the authenticated account. Sites are used with the advanced PV power model."
+              },
+              "response": [
+                {
+                  "id": "b39cec87-afef-4bbd-aa84-48519efc269c",
+                  "name": "Successful response with list of PV power sites.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_sites?format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_sites"
+                      ],
+                      "query": [
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"pv_power_sites\": [\n    {\n      \"resource_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"capacity\": \"<float>\",\n      \"tilt\": \"<float>\",\n      \"azimuth\": \"<float>\",\n      \"install_date\": \"<date>\",\n      \"ac_capacity\": \"<float>\",\n      \"dc_capacity\": \"<float>\",\n      \"loss_factor\": \"<float>\",\n      \"tracking_type\": \"fixed\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"resource_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"capacity\": \"<float>\",\n      \"tilt\": \"<float>\",\n      \"azimuth\": \"<float>\",\n      \"install_date\": \"<date>\",\n      \"ac_capacity\": \"<float>\",\n      \"dc_capacity\": \"<float>\",\n      \"loss_factor\": \"<float>\",\n      \"tracking_type\": \"fixed\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-b39cec87-afef-4bbd-aa84-48519efc269c"
+                },
+                {
+                  "id": "6c5b9fa9-0fe0-4031-b485-3a6bc9a814bc",
+                  "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_sites?format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_sites"
+                      ],
+                      "query": [
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-6c5b9fa9-0fe0-4031-b485-3a6bc9a814bc"
+                },
+                {
+                  "id": "456c3cad-3971-43a7-8c4c-af73826bea1d",
+                  "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_sites?format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_sites"
+                      ],
+                      "query": [
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-456c3cad-3971-43a7-8c4c-af73826bea1d"
+                }
+              ],
+              "createdAt": "2026-07-28T02:58:45.000Z",
+              "updatedAt": "2026-07-28T02:58:45.000Z",
+              "uid": "35240-53acb0a7-5a16-428e-b163-5865adb27b57"
+            }
+          ],
+          "id": "2c220f18-43b4-4145-b0d2-3f64dac46ee8",
+          "createdAt": "2026-07-28T02:58:45.000Z",
+          "updatedAt": "2026-07-28T02:58:45.000Z",
+          "uid": "35240-2c220f18-43b4-4145-b0d2-3f64dac46ee8"
+        },
+        {
+          "name": "pv_power_site",
+          "item": [
+            {
+              "name": "Get PV Power Site",
+              "id": "ccb80bb1-b32f-41f8-9402-becb8e2e37fe",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>&format=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources",
+                    "pv_power_site"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Unique identifier for the PV power site.",
+                      "key": "resource_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response format.",
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ]
+                },
+                "description": "Retrieve specifications and metadata for a specific registered PV power site identified by its resource_id."
+              },
+              "response": [
+                {
+                  "id": "f58a5018-61f5-48f5-a470-f8278dfe7d8a",
+                  "name": "Successful response with PV power site details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>&format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"ac_capacity\": \"<float>\",\n  \"dc_capacity\": \"<float>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-f58a5018-61f5-48f5-a470-f8278dfe7d8a"
+                },
+                {
+                  "id": "3399c593-6494-4000-a081-97e6f7944daa",
+                  "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>&format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-3399c593-6494-4000-a081-97e6f7944daa"
+                },
+                {
+                  "id": "cfedf1f3-42a5-4a25-99d4-d4f8649dca8f",
+                  "name": "Not found \u2014 the requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>&format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-cfedf1f3-42a5-4a25-99d4-d4f8649dca8f"
+                },
+                {
+                  "id": "6fc6c43d-7f13-4bc9-a316-e59aa9116264",
+                  "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>&format=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "json"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-6fc6c43d-7f13-4bc9-a316-e59aa9116264"
+                }
+              ],
+              "createdAt": "2026-07-28T02:58:45.000Z",
+              "updatedAt": "2026-07-28T02:58:45.000Z",
+              "uid": "35240-ccb80bb1-b32f-41f8-9402-becb8e2e37fe"
+            },
+            {
+              "name": "Create PV Power Site",
+              "id": "13ae567e-bada-4c0d-ae1f-8b2a9ddffd92",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources/pv_power_site",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources",
+                    "pv_power_site"
+                  ]
+                },
+                "description": "Create a new PV power site for use with Solcast's advanced PV power model. Returns a unique resource_id for subsequent data queries."
+              },
+              "response": [
+                {
+                  "id": "7c2ff956-7564-42a9-bf3d-142330c40354",
+                  "name": "PV power site created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"ac_capacity\": \"<float>\",\n  \"dc_capacity\": \"<float>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-7c2ff956-7564-42a9-bf3d-142330c40354"
+                },
+                {
+                  "id": "d8aa49cf-2508-407c-a718-5a5ccfa2af90",
+                  "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-d8aa49cf-2508-407c-a718-5a5ccfa2af90"
+                },
+                {
+                  "id": "10b5f2df-627d-4885-9f7d-1f9a9ad752e6",
+                  "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-10b5f2df-627d-4885-9f7d-1f9a9ad752e6"
+                },
+                {
+                  "id": "e1e3b50d-c785-48d3-bf29-2f8b371efc8e",
+                  "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-e1e3b50d-c785-48d3-bf29-2f8b371efc8e"
+                },
+                {
+                  "id": "2b42e2cb-dba2-4d8e-94f8-abc49ed134a8",
+                  "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-2b42e2cb-dba2-4d8e-94f8-abc49ed134a8"
+                }
+              ],
+              "createdAt": "2026-07-28T02:58:45.000Z",
+              "updatedAt": "2026-07-28T02:58:45.000Z",
+              "uid": "35240-13ae567e-bada-4c0d-ae1f-8b2a9ddffd92"
+            },
+            {
+              "name": "Patch PV Power Site",
+              "id": "04900ce4-bab1-4d12-9c12-e019c7dcd87a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"fixed\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources",
+                    "pv_power_site"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Unique identifier for the PV power site to update.",
+                      "key": "resource_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Partially update specifications of an existing PV power site. Only provided fields are updated; all other fields remain unchanged."
+              },
+              "response": [
+                {
+                  "id": "4aa2eb63-a295-48ef-8202-446c82518a2c",
+                  "name": "PV power site updated successfully.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"fixed\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to update.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"ac_capacity\": \"<float>\",\n  \"dc_capacity\": \"<float>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-4aa2eb63-a295-48ef-8202-446c82518a2c"
+                },
+                {
+                  "id": "649855c1-d393-4e77-98a2-3468c278fc74",
+                  "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"fixed\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to update.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-649855c1-d393-4e77-98a2-3468c278fc74"
+                },
+                {
+                  "id": "9386efbd-6203-4fc1-a34c-7539d7fe6a1f",
+                  "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"fixed\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to update.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-9386efbd-6203-4fc1-a34c-7539d7fe6a1f"
+                },
+                {
+                  "id": "3c407cb8-dcc8-4ca0-a5e7-4b33f596a416",
+                  "name": "Not found \u2014 the requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"fixed\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to update.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-3c407cb8-dcc8-4ca0-a5e7-4b33f596a416"
+                },
+                {
+                  "id": "a9245119-3ecf-4387-a06c-feec2c7bdfdf",
+                  "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"fixed\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to update.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-a9245119-3ecf-4387-a06c-feec2c7bdfdf"
+                },
+                {
+                  "id": "1b6e0799-217a-4189-9e52-a6ad742e9efb",
+                  "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"fixed\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to update.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-1b6e0799-217a-4189-9e52-a6ad742e9efb"
+                }
+              ],
+              "createdAt": "2026-07-28T02:58:45.000Z",
+              "updatedAt": "2026-07-28T02:58:45.000Z",
+              "uid": "35240-04900ce4-bab1-4d12-9c12-e019c7dcd87a"
+            },
+            {
+              "name": "Update PV Power Site",
+              "id": "624b29d5-9b1a-4958-8d63-6be48f3c0054",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources",
+                    "pv_power_site"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Unique identifier for the PV power site to overwrite.",
+                      "key": "resource_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Fully overwrite specifications of an existing PV power site. All current field values are replaced with the provided values."
+              },
+              "response": [
+                {
+                  "id": "a4d714f1-2502-40c3-9b2a-ca4bf2a58b22",
+                  "name": "PV power site overwritten successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to overwrite.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"ac_capacity\": \"<float>\",\n  \"dc_capacity\": \"<float>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-a4d714f1-2502-40c3-9b2a-ca4bf2a58b22"
+                },
+                {
+                  "id": "ac31551e-accb-4383-aad0-94a923147e7a",
+                  "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to overwrite.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-ac31551e-accb-4383-aad0-94a923147e7a"
+                },
+                {
+                  "id": "632c1b85-8739-4934-990f-c46376cd08a3",
+                  "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to overwrite.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-632c1b85-8739-4934-990f-c46376cd08a3"
+                },
+                {
+                  "id": "9a6b88ff-8373-4060-b7a8-6b7b09612d5c",
+                  "name": "Not found \u2014 the requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to overwrite.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-9a6b88ff-8373-4060-b7a8-6b7b09612d5c"
+                },
+                {
+                  "id": "6bfe5b80-e6d4-470d-ae77-e4aa6bab8e7e",
+                  "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to overwrite.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-6bfe5b80-e6d4-470d-ae77-e4aa6bab8e7e"
+                },
+                {
+                  "id": "842f628a-9150-4c98-9ead-0990a8c4117c",
+                  "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"capacity\": \"<float>\",\n  \"tilt\": \"<float>\",\n  \"azimuth\": \"<float>\",\n  \"install_date\": \"<date>\",\n  \"loss_factor\": \"<float>\",\n  \"tracking_type\": \"two_axis\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to overwrite.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-842f628a-9150-4c98-9ead-0990a8c4117c"
+                }
+              ],
+              "createdAt": "2026-07-28T02:58:45.000Z",
+              "updatedAt": "2026-07-28T02:58:45.000Z",
+              "uid": "35240-624b29d5-9b1a-4958-8d63-6be48f3c0054"
+            },
+            {
+              "name": "Delete PV Power Site",
+              "id": "b5e0399e-a7fb-4ac5-a3ae-1169c884846e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources",
+                    "pv_power_site"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Unique identifier for the PV power site to delete.",
+                      "key": "resource_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Permanently delete a registered PV power site. This action cannot be undone."
+              },
+              "response": [
+                {
+                  "id": "855e4bb9-074f-49ce-af45-661328e0b8db",
+                  "name": "PV power site deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to delete.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-855e4bb9-074f-49ce-af45-661328e0b8db"
+                },
+                {
+                  "id": "60dce635-ebb9-4838-adf8-eb929b091e94",
+                  "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to delete.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-60dce635-ebb9-4838-adf8-eb929b091e94"
+                },
+                {
+                  "id": "5b96301b-e011-4035-8de7-433f381335e4",
+                  "name": "Not found \u2014 the requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to delete.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-5b96301b-e011-4035-8de7-433f381335e4"
+                },
+                {
+                  "id": "383ea0ef-2a2b-45ed-905d-1fab42228bec",
+                  "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/pv_power_site?resource_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "pv_power_site"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the PV power site to delete.",
+                          "key": "resource_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"quis_55\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:58:45.000Z",
+                  "updatedAt": "2026-07-28T02:58:45.000Z",
+                  "uid": "35240-383ea0ef-2a2b-45ed-905d-1fab42228bec"
+                }
+              ],
+              "createdAt": "2026-07-28T02:58:45.000Z",
+              "updatedAt": "2026-07-28T02:58:45.000Z",
+              "uid": "35240-b5e0399e-a7fb-4ac5-a3ae-1169c884846e"
+            }
+          ],
+          "id": "e4b36475-6d88-40e5-b041-af12f8a4470c",
+          "createdAt": "2026-07-28T02:58:45.000Z",
+          "updatedAt": "2026-07-28T02:58:45.000Z",
+          "uid": "35240-e4b36475-6d88-40e5-b041-af12f8a4470c"
+        }
+      ],
+      "id": "491cff29-f8ca-4270-b093-9f8a09f62583",
+      "createdAt": "2026-07-28T02:58:45.000Z",
+      "updatedAt": "2026-07-28T02:58:45.000Z",
+      "uid": "35240-491cff29-f8ca-4270-b093-9f8a09f62583"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.solcast.com.au"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "provider": "solcast",
+  "sources": [
+    "solcast-aggregations-api-openapi.yml",
+    "solcast-forecast-data-api-openapi.yml",
+    "solcast-historic-data-api-openapi.yml",
+    "solcast-live-data-api-openapi.yml",
+    "solcast-pv-power-sites-api-openapi.yml",
+    "solcast-tmy-data-api-openapi.yml"
+  ],
+  "outputs": [
+    "solcast-aggregations-api-openapi.yml",
+    "solcast-forecast-data-api-openapi.yml",
+    "solcast-historic-data-api-openapi.yml",
+    "solcast-live-data-api-openapi.yml",
+    "solcast-pv-power-sites-api-openapi.yml",
+    "solcast-tmy-data-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

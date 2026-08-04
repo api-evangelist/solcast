@@ -1,0 +1,845 @@
+{
+  "info": {
+    "_postman_id": "5a521105-9431-4ded-bebb-73ccccfe50aa",
+    "name": "Solcast Aggregations API",
+    "description": "The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.\n\nContact Support:\n Name: Solcast Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:57:32.000Z",
+    "updatedAt": "2026-07-28T02:57:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5a521105-9431-4ded-bebb-73ccccfe50aa"
+  },
+  "item": [
+    {
+      "name": "data",
+      "item": [
+        {
+          "name": "forecast",
+          "item": [
+            {
+              "name": "aggregations",
+              "item": [
+                {
+                  "name": "Get Forecast Aggregations",
+                  "id": "1c5d3c72-35d4-4a02-81df-2424db8f150c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/data/forecast/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "data",
+                        "forecast",
+                        "aggregations"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the grid aggregation collection.",
+                          "key": "collection_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                          "key": "aggregation_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Time period between data points in ISO 8601 duration format.",
+                          "key": "period",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "csv"
+                        }
+                      ]
+                    },
+                    "description": "Get forecast aggregation data for up to 7 days ahead for a requested grid collection or sub-aggregation. Used for portfolio and grid management."
+                  },
+                  "response": [
+                    {
+                      "id": "a1ea631b-caea-48c2-baed-9ab0ce5b6213",
+                      "name": "Successful response with aggregation forecast time series.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/forecast/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "forecast",
+                            "aggregations"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique identifier for the grid aggregation collection.",
+                              "key": "collection_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                              "key": "aggregation_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "csv"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\"\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:57:33.000Z",
+                      "updatedAt": "2026-07-28T02:57:33.000Z",
+                      "uid": "35240-a1ea631b-caea-48c2-baed-9ab0ce5b6213"
+                    },
+                    {
+                      "id": "988a0b1e-700a-4c5c-ba66-3e774d19d111",
+                      "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/forecast/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "forecast",
+                            "aggregations"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique identifier for the grid aggregation collection.",
+                              "key": "collection_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                              "key": "aggregation_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "csv"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"inf5e\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"culpa34\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:57:33.000Z",
+                      "updatedAt": "2026-07-28T02:57:33.000Z",
+                      "uid": "35240-988a0b1e-700a-4c5c-ba66-3e774d19d111"
+                    },
+                    {
+                      "id": "55eef876-d2ee-44f7-b661-49c86ae57755",
+                      "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/forecast/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "forecast",
+                            "aggregations"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique identifier for the grid aggregation collection.",
+                              "key": "collection_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                              "key": "aggregation_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "csv"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"inf5e\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"culpa34\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:57:33.000Z",
+                      "updatedAt": "2026-07-28T02:57:33.000Z",
+                      "uid": "35240-55eef876-d2ee-44f7-b661-49c86ae57755"
+                    },
+                    {
+                      "id": "8b7a777e-e5ad-4c72-a3e7-d52c4f7a0bfc",
+                      "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/forecast/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "forecast",
+                            "aggregations"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique identifier for the grid aggregation collection.",
+                              "key": "collection_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                              "key": "aggregation_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "csv"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"inf5e\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"culpa34\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:57:33.000Z",
+                      "updatedAt": "2026-07-28T02:57:33.000Z",
+                      "uid": "35240-8b7a777e-e5ad-4c72-a3e7-d52c4f7a0bfc"
+                    },
+                    {
+                      "id": "fccc0401-9801-4592-a0d9-e25876dd9c4d",
+                      "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/forecast/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "forecast",
+                            "aggregations"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique identifier for the grid aggregation collection.",
+                              "key": "collection_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                              "key": "aggregation_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "csv"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"inf5e\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"culpa34\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:57:33.000Z",
+                      "updatedAt": "2026-07-28T02:57:33.000Z",
+                      "uid": "35240-fccc0401-9801-4592-a0d9-e25876dd9c4d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:57:33.000Z",
+                  "updatedAt": "2026-07-28T02:57:33.000Z",
+                  "uid": "35240-1c5d3c72-35d4-4a02-81df-2424db8f150c"
+                }
+              ],
+              "id": "03d8909c-d52e-40f5-861a-fb3b7f50acc8",
+              "createdAt": "2026-07-28T02:57:33.000Z",
+              "updatedAt": "2026-07-28T02:57:33.000Z",
+              "uid": "35240-03d8909c-d52e-40f5-861a-fb3b7f50acc8"
+            }
+          ],
+          "id": "652551da-12fc-4a60-bf48-d7b83d3c3862",
+          "createdAt": "2026-07-28T02:57:33.000Z",
+          "updatedAt": "2026-07-28T02:57:33.000Z",
+          "uid": "35240-652551da-12fc-4a60-bf48-d7b83d3c3862"
+        },
+        {
+          "name": "live",
+          "item": [
+            {
+              "name": "aggregations",
+              "item": [
+                {
+                  "name": "Get Live Aggregations",
+                  "id": "e2a2e022-7279-4b6f-b6b4-9a2a3307308c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/data/live/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "data",
+                        "live",
+                        "aggregations"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Unique identifier for the grid aggregation collection.",
+                          "key": "collection_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                          "key": "aggregation_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Time period between data points in ISO 8601 duration format.",
+                          "key": "period",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response format.",
+                          "key": "format",
+                          "value": "csv"
+                        }
+                      ]
+                    },
+                    "description": "Get live aggregation data for up to 7 days of data at a time for a requested grid collection or sub-aggregation. Used for grid and portfolio management."
+                  },
+                  "response": [
+                    {
+                      "id": "1db2381a-59af-4c66-b3e0-2365f81307f6",
+                      "name": "Successful response with live aggregation time series.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/live/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "live",
+                            "aggregations"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique identifier for the grid aggregation collection.",
+                              "key": "collection_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                              "key": "aggregation_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "csv"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\"\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\"\n    },\n    {\n      \"period_end\": \"<dateTime>\",\n      \"period\": \"<string>\",\n      \"pv_estimate\": \"<float>\",\n      \"pv_estimate10\": \"<float>\",\n      \"pv_estimate90\": \"<float>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:57:33.000Z",
+                      "updatedAt": "2026-07-28T02:57:33.000Z",
+                      "uid": "35240-1db2381a-59af-4c66-b3e0-2365f81307f6"
+                    },
+                    {
+                      "id": "87c29b4c-3390-4a28-8d58-27357ffd34df",
+                      "name": "Bad request \u2014 invalid parameters or missing required fields.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/live/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "live",
+                            "aggregations"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique identifier for the grid aggregation collection.",
+                              "key": "collection_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                              "key": "aggregation_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "csv"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"inf5e\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"culpa34\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:57:33.000Z",
+                      "updatedAt": "2026-07-28T02:57:33.000Z",
+                      "uid": "35240-87c29b4c-3390-4a28-8d58-27357ffd34df"
+                    },
+                    {
+                      "id": "be3925d4-a510-496e-84fc-07fba1f54f61",
+                      "name": "Unauthorized \u2014 API key is missing, invalid, or expired.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/live/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "live",
+                            "aggregations"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique identifier for the grid aggregation collection.",
+                              "key": "collection_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                              "key": "aggregation_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "csv"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"inf5e\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"culpa34\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:57:33.000Z",
+                      "updatedAt": "2026-07-28T02:57:33.000Z",
+                      "uid": "35240-be3925d4-a510-496e-84fc-07fba1f54f61"
+                    },
+                    {
+                      "id": "51d21391-1697-4c97-99f9-123f376b8528",
+                      "name": "Unprocessable entity \u2014 request parameters are syntactically valid but semantically incorrect.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/live/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "live",
+                            "aggregations"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique identifier for the grid aggregation collection.",
+                              "key": "collection_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                              "key": "aggregation_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "csv"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"inf5e\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"culpa34\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:57:33.000Z",
+                      "updatedAt": "2026-07-28T02:57:33.000Z",
+                      "uid": "35240-51d21391-1697-4c97-99f9-123f376b8528"
+                    },
+                    {
+                      "id": "8d70f69f-42fa-4958-97c7-8d23b57233f5",
+                      "name": "Too many requests \u2014 API rate limit or quota exceeded.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/data/live/aggregations?collection_id=<string>&aggregation_id=<string>&period=<string>&format=csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data",
+                            "live",
+                            "aggregations"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Unique identifier for the grid aggregation collection.",
+                              "key": "collection_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Unique identifier for a specific sub-aggregation within the collection.",
+                              "key": "aggregation_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time period between data points in ISO 8601 duration format.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Response format.",
+                              "key": "format",
+                              "value": "csv"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": {\n    \"inf5e\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"culpa34\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:57:33.000Z",
+                      "updatedAt": "2026-07-28T02:57:33.000Z",
+                      "uid": "35240-8d70f69f-42fa-4958-97c7-8d23b57233f5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:57:33.000Z",
+                  "updatedAt": "2026-07-28T02:57:33.000Z",
+                  "uid": "35240-e2a2e022-7279-4b6f-b6b4-9a2a3307308c"
+                }
+              ],
+              "id": "bb3c47ec-6a31-4bbe-91ce-d9a55967a397",
+              "createdAt": "2026-07-28T02:57:33.000Z",
+              "updatedAt": "2026-07-28T02:57:33.000Z",
+              "uid": "35240-bb3c47ec-6a31-4bbe-91ce-d9a55967a397"
+            }
+          ],
+          "id": "2c619b9c-0347-4470-9f01-bca265dd79d1",
+          "createdAt": "2026-07-28T02:57:33.000Z",
+          "updatedAt": "2026-07-28T02:57:33.000Z",
+          "uid": "35240-2c619b9c-0347-4470-9f01-bca265dd79d1"
+        }
+      ],
+      "id": "aced0641-28dc-4c22-a783-925c6ab7890c",
+      "createdAt": "2026-07-28T02:57:33.000Z",
+      "updatedAt": "2026-07-28T02:57:33.000Z",
+      "uid": "35240-aced0641-28dc-4c22-a783-925c6ab7890c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.solcast.com.au"
+    }
+  ]
+}
