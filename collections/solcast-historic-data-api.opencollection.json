@@ -1,0 +1,329 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Solcast Aggregations Historic Data API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Historic Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Historic Radiation and Weather",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.solcast.com.au/data/historic/radiation_and_weather",
+            "params": [
+              {
+                "name": "latitude",
+                "value": "-33.856784",
+                "type": "query",
+                "description": "Latitude in decimal degrees, between -90 and 90 (north positive)."
+              },
+              {
+                "name": "longitude",
+                "value": "151.215297",
+                "type": "query",
+                "description": "Longitude in decimal degrees, between -180 and 180 (east positive)."
+              },
+              {
+                "name": "start",
+                "value": "2023-01-01",
+                "type": "query",
+                "description": "Start of requested period (ISO 8601 date or datetime, e.g., 2023-01-01 or 2023-01-01T00:00Z)."
+              },
+              {
+                "name": "end",
+                "value": "2023-01-31",
+                "type": "query",
+                "description": "End of requested period (mutually exclusive with duration)."
+              },
+              {
+                "name": "duration",
+                "value": "P7D",
+                "type": "query",
+                "description": "ISO 8601 duration for the historic data, within 31 days of start (mutually exclusive with end). E.g., P7D for 7 days."
+              },
+              {
+                "name": "output_parameters",
+                "value": "ghi,dni,dhi,air_temp",
+                "type": "query",
+                "description": "Comma-separated list of output parameters."
+              },
+              {
+                "name": "period",
+                "value": "PT60M",
+                "type": "query",
+                "description": "Time period between data points in ISO 8601 duration format."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Get historical irradiance and weather estimated actuals for up to 31 days of data at a time for a requested location. Data is available from 2007-01-01T00:00Z up to 7 days before present."
+        },
+        {
+          "info": {
+            "name": "Get Historic Rooftop PV Power",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.solcast.com.au/data/historic/rooftop_pv_power",
+            "params": [
+              {
+                "name": "latitude",
+                "value": "-33.856784",
+                "type": "query",
+                "description": "Latitude in decimal degrees, between -90 and 90 (north positive)."
+              },
+              {
+                "name": "longitude",
+                "value": "151.215297",
+                "type": "query",
+                "description": "Longitude in decimal degrees, between -180 and 180 (east positive)."
+              },
+              {
+                "name": "start",
+                "value": "2023-01-01",
+                "type": "query",
+                "description": "Start of requested period (ISO 8601 date or datetime)."
+              },
+              {
+                "name": "end",
+                "value": "2023-01-31",
+                "type": "query",
+                "description": "End of requested period (mutually exclusive with duration)."
+              },
+              {
+                "name": "duration",
+                "value": "P7D",
+                "type": "query",
+                "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end)."
+              },
+              {
+                "name": "capacity",
+                "value": "5",
+                "type": "query",
+                "description": "System capacity in kilowatts."
+              },
+              {
+                "name": "tilt",
+                "value": "25",
+                "type": "query",
+                "description": "Panel tilt in degrees from horizontal."
+              },
+              {
+                "name": "azimuth",
+                "value": "180",
+                "type": "query",
+                "description": "Panel azimuth in degrees."
+              },
+              {
+                "name": "period",
+                "value": "PT60M",
+                "type": "query",
+                "description": "Time period between data points in ISO 8601 duration format."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Get historical basic rooftop PV power estimated actuals for the requested location. Data is available from 2007-01-01 up to 7 days before present. Requests up to 31 days at a time."
+        },
+        {
+          "info": {
+            "name": "Get Historic Advanced PV Power",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.solcast.com.au/data/historic/advanced_pv_power",
+            "params": [
+              {
+                "name": "resource_id",
+                "value": "ba75-e17a-7374-95ed",
+                "type": "query",
+                "description": "Unique resource identifier for a registered Solcast PV power site."
+              },
+              {
+                "name": "start",
+                "value": "2023-01-01",
+                "type": "query",
+                "description": "Start of requested period (ISO 8601 date or datetime)."
+              },
+              {
+                "name": "end",
+                "value": "2023-01-31",
+                "type": "query",
+                "description": "End of requested period (mutually exclusive with duration)."
+              },
+              {
+                "name": "duration",
+                "value": "P7D",
+                "type": "query",
+                "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end)."
+              },
+              {
+                "name": "period",
+                "value": "PT60M",
+                "type": "query",
+                "description": "Time period between data points in ISO 8601 duration format."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Get historical high-specification PV power estimated actuals for a registered PV power site. Data available from 2007-01-01 up to 7 days before present. Requests up to 31 days at a time."
+        },
+        {
+          "info": {
+            "name": "Get Historic Soiling (Kimber Model)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.solcast.com.au/data/historic/soiling/kimber",
+            "params": [
+              {
+                "name": "latitude",
+                "value": "-33.856784",
+                "type": "query",
+                "description": "Latitude in decimal degrees, between -90 and 90 (north positive)."
+              },
+              {
+                "name": "longitude",
+                "value": "151.215297",
+                "type": "query",
+                "description": "Longitude in decimal degrees, between -180 and 180 (east positive)."
+              },
+              {
+                "name": "start",
+                "value": "2023-01-01",
+                "type": "query",
+                "description": "Start of requested period (ISO 8601 date or datetime)."
+              },
+              {
+                "name": "end",
+                "value": "2023-01-31",
+                "type": "query",
+                "description": "End of requested period (mutually exclusive with duration)."
+              },
+              {
+                "name": "duration",
+                "value": "P7D",
+                "type": "query",
+                "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end)."
+              },
+              {
+                "name": "depo_veloc_pm10",
+                "value": "",
+                "type": "query",
+                "description": "Deposition velocity for PM10 particles (m/s)."
+              },
+              {
+                "name": "initial_soiling",
+                "value": "",
+                "type": "query",
+                "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled)."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Get hourly historical soiling loss estimates using the Kimber model. Returns a time series of estimated historical cumulative soiling / cleanliness state for the requested location."
+        },
+        {
+          "info": {
+            "name": "Get Historic Soiling (HSU Model)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.solcast.com.au/data/historic/soiling/hsu",
+            "params": [
+              {
+                "name": "latitude",
+                "value": "-33.856784",
+                "type": "query",
+                "description": "Latitude in decimal degrees, between -90 and 90 (north positive)."
+              },
+              {
+                "name": "longitude",
+                "value": "151.215297",
+                "type": "query",
+                "description": "Longitude in decimal degrees, between -180 and 180 (east positive)."
+              },
+              {
+                "name": "start",
+                "value": "2023-01-01",
+                "type": "query",
+                "description": "Start of requested period (ISO 8601 date or datetime)."
+              },
+              {
+                "name": "end",
+                "value": "2023-01-31",
+                "type": "query",
+                "description": "End of requested period (mutually exclusive with duration)."
+              },
+              {
+                "name": "duration",
+                "value": "P7D",
+                "type": "query",
+                "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end)."
+              },
+              {
+                "name": "depo_veloc_pm10",
+                "value": "",
+                "type": "query",
+                "description": "Deposition velocity for PM10 particles (m/s)."
+              },
+              {
+                "name": "initial_soiling",
+                "value": "",
+                "type": "query",
+                "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled)."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Get hourly historical soiling loss estimates using Solcast's HSU model. Returns a time series of estimated historical cumulative soiling / cleanliness state for the requested location."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2433 @@
+{
+  "item": [
+    {
+      "id": "c2a8176a-1d4b-4fea-8c92-26e80c169581",
+      "name": "Historic Data",
+      "description": {
+        "content": "Historical solar radiation and weather data from 2007-01-01 up to 7 days before present.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6a727929-00dd-4bbd-a34a-2b7d254820b3",
+          "name": "Get Historic Radiation and Weather",
+          "request": {
+            "name": "Get Historic Radiation and Weather",
+            "description": {
+              "content": "Get historical irradiance and weather estimated actuals for up to 31 days of data at a time for a requested location. Data is available from 2007-01-01T00:00Z up to 7 days before present.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "historic",
+                "radiation_and_weather"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<float>",
+                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<float>",
+                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Start of requested period (ISO 8601 date or datetime, e.g., 2023-01-01 or 2023-01-01T00:00Z)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End of requested period (mutually exclusive with duration)."
+                },
+                {
+                  "disabled": false,
+                  "key": "duration",
+                  "value": "<string>",
+                  "description": "ISO 8601 duration for the historic data, within 31 days of start (mutually exclusive with end). E.g., P7D for 7 days."
+                },
+                {
+                  "disabled": false,
+                  "key": "output_parameters",
+                  "value": "<string>",
+                  "description": "Comma-separated list of output parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Time period between data points in ISO 8601 duration format."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46d33033-8f19-40ad-be40-ec81580f4f5f",
+              "name": "Successful response with historic irradiance and weather time series.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "radiation_and_weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "ghi,dni,dhi,air_temp"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"ghi\": 850.2,\n      \"ghi90\": 6327.865898162396,\n      \"ghi10\": 839.9596913152408,\n      \"ebh\": 8317.13924389481,\n      \"dni\": 750.5,\n      \"dhi\": 99.7,\n      \"air_temp\": 28.3,\n      \"cloud_opacity\": 5.2,\n      \"wind_speed_10m\": 3.7,\n      \"wind_direction_10m\": 215,\n      \"clearsky_ghi\": 880,\n      \"clearsky_ebh\": 1790.7275166379643,\n      \"clearsky_dni\": 3601.3883021175043,\n      \"clearsky_dhi\": 7653.190843982223,\n      \"precipitable_water\": 1478.0916050375636,\n      \"azimuth\": 3702.0125391364622,\n      \"zenith\": 2290.9579184750273,\n      \"elevation\": 314.35411063308607,\n      \"relative_humidity\": 6324.254778398168,\n      \"surface_pressure\": 2129.0798106145958,\n      \"snow_depth\": 4100.773208783805,\n      \"snow_water_equivalent\": 865.3822333758632,\n      \"snow_soiling_rooftop\": 8147.985672981033\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"ghi\": 850.2,\n      \"ghi90\": 5818.307512590421,\n      \"ghi10\": 38.86180205037504,\n      \"ebh\": 8763.183271472899,\n      \"dni\": 750.5,\n      \"dhi\": 99.7,\n      \"air_temp\": 28.3,\n      \"cloud_opacity\": 5.2,\n      \"wind_speed_10m\": 3.7,\n      \"wind_direction_10m\": 215,\n      \"clearsky_ghi\": 880,\n      \"clearsky_ebh\": 6136.730575209509,\n      \"clearsky_dni\": 1148.183041380375,\n      \"clearsky_dhi\": 2137.5658548553943,\n      \"precipitable_water\": 6299.787744409426,\n      \"azimuth\": 2904.356060730737,\n      \"zenith\": 4257.581821498095,\n      \"elevation\": 877.3197085198448,\n      \"relative_humidity\": 960.8050248905442,\n      \"surface_pressure\": 1259.6988167475554,\n      \"snow_depth\": 7836.4722246147885,\n      \"snow_water_equivalent\": 3774.3859757837126,\n      \"snow_soiling_rooftop\": 9381.600330578383\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"ghi\": 850.2,\n      \"ghi90\": 5938.010635258935,\n      \"ghi10\": 7858.900391165841,\n      \"ebh\": 854.4666197116768,\n      \"dni\": 750.5,\n      \"dhi\": 99.7,\n      \"air_temp\": 28.3,\n      \"cloud_opacity\": 5.2,\n      \"wind_speed_10m\": 3.7,\n      \"wind_direction_10m\": 215,\n      \"clearsky_ghi\": 880,\n      \"clearsky_ebh\": 2065.9834919411846,\n      \"clearsky_dni\": 269.7317460268922,\n      \"clearsky_dhi\": 1388.832718525944,\n      \"precipitable_water\": 9934.57600788225,\n      \"azimuth\": 9467.00174030603,\n      \"zenith\": 1405.4018670913026,\n      \"elevation\": 1134.0398797429295,\n      \"relative_humidity\": 6807.971695193985,\n      \"surface_pressure\": 8574.860803648706,\n      \"snow_depth\": 270.431709424358,\n      \"snow_water_equivalent\": 4982.9002089473815,\n      \"snow_soiling_rooftop\": 5528.611232053163\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"ghi\": 850.2,\n      \"ghi90\": 1302.747958379762,\n      \"ghi10\": 8227.230349213522,\n      \"ebh\": 7227.801402151783,\n      \"dni\": 750.5,\n      \"dhi\": 99.7,\n      \"air_temp\": 28.3,\n      \"cloud_opacity\": 5.2,\n      \"wind_speed_10m\": 3.7,\n      \"wind_direction_10m\": 215,\n      \"clearsky_ghi\": 880,\n      \"clearsky_ebh\": 5747.408689332749,\n      \"clearsky_dni\": 874.788139017736,\n      \"clearsky_dhi\": 6932.573240622829,\n      \"precipitable_water\": 5437.043868511181,\n      \"azimuth\": 1547.658815881916,\n      \"zenith\": 9799.85101100739,\n      \"elevation\": 4055.9359597383414,\n      \"relative_humidity\": 1016.4199723092537,\n      \"surface_pressure\": 1600.7678258779567,\n      \"snow_depth\": 6157.388562618793,\n      \"snow_water_equivalent\": 7457.9055683906545,\n      \"snow_soiling_rooftop\": 3734.1594206201244\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcb3189a-57ba-407b-90b8-aa299050c0ca",
+              "name": "Bad request — invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "radiation_and_weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "ghi,dni,dhi,air_temp"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14f858d2-7e5a-40c2-a5a7-f77113e589f9",
+              "name": "Unauthorized — API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "radiation_and_weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "ghi,dni,dhi,air_temp"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94383904-a9df-4d1d-8b61-15d9b5010a38",
+              "name": "Unprocessable entity — request parameters are syntactically valid but semantically incorrect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "radiation_and_weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "ghi,dni,dhi,air_temp"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f6ae454-b512-4e99-bbc8-97a4a385c462",
+              "name": "Too many requests — API rate limit or quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "radiation_and_weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "ghi,dni,dhi,air_temp"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9814845e-e6f3-48cc-96e3-91629e8b5bb4",
+          "name": "Get Historic Rooftop PV Power",
+          "request": {
+            "name": "Get Historic Rooftop PV Power",
+            "description": {
+              "content": "Get historical basic rooftop PV power estimated actuals for the requested location. Data is available from 2007-01-01 up to 7 days before present. Requests up to 31 days at a time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "historic",
+                "rooftop_pv_power"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<float>",
+                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<float>",
+                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Start of requested period (ISO 8601 date or datetime)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End of requested period (mutually exclusive with duration)."
+                },
+                {
+                  "disabled": false,
+                  "key": "duration",
+                  "value": "<string>",
+                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end)."
+                },
+                {
+                  "disabled": false,
+                  "key": "capacity",
+                  "value": "<float>",
+                  "description": "System capacity in kilowatts."
+                },
+                {
+                  "disabled": false,
+                  "key": "tilt",
+                  "value": "<float>",
+                  "description": "Panel tilt in degrees from horizontal."
+                },
+                {
+                  "disabled": false,
+                  "key": "azimuth",
+                  "value": "<float>",
+                  "description": "Panel azimuth in degrees."
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Time period between data points in ISO 8601 duration format."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4277a358-9fe8-4b38-bb7e-f5533b4f2ed5",
+              "name": "Successful response with historic rooftop PV power time series.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "rooftop_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "5"
+                    },
+                    {
+                      "key": "tilt",
+                      "value": "25"
+                    },
+                    {
+                      "key": "azimuth",
+                      "value": "180"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 3522.1745165723482,\n      \"pv_estimate90\": 6076.537358031357,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 898.4544882740242\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 8431.532919290443,\n      \"pv_estimate90\": 5530.699614234562,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 9000.287894221121\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 4553.881380551592,\n      \"pv_estimate90\": 8572.354314937003,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 7731.3613081166695\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 8324.964352046673,\n      \"pv_estimate90\": 1325.8290101401149,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 2597.200332684537\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f180519-eb48-411a-a4f9-7f45156ed4a4",
+              "name": "Bad request — invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "rooftop_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "5"
+                    },
+                    {
+                      "key": "tilt",
+                      "value": "25"
+                    },
+                    {
+                      "key": "azimuth",
+                      "value": "180"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbe58fc9-bebc-485e-8a11-dae3c7d3347d",
+              "name": "Unauthorized — API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "rooftop_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "5"
+                    },
+                    {
+                      "key": "tilt",
+                      "value": "25"
+                    },
+                    {
+                      "key": "azimuth",
+                      "value": "180"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2112ef98-04b5-42a4-b644-31f48a432c1e",
+              "name": "Unprocessable entity — request parameters are syntactically valid but semantically incorrect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "rooftop_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "5"
+                    },
+                    {
+                      "key": "tilt",
+                      "value": "25"
+                    },
+                    {
+                      "key": "azimuth",
+                      "value": "180"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f6c5d08-d24d-481e-b2d2-c3058aaf33d9",
+              "name": "Too many requests — API rate limit or quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "rooftop_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "5"
+                    },
+                    {
+                      "key": "tilt",
+                      "value": "25"
+                    },
+                    {
+                      "key": "azimuth",
+                      "value": "180"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eba6d4d7-97f7-49ec-9a37-231c5e72dcbc",
+          "name": "Get Historic Advanced PV Power",
+          "request": {
+            "name": "Get Historic Advanced PV Power",
+            "description": {
+              "content": "Get historical high-specification PV power estimated actuals for a registered PV power site. Data available from 2007-01-01 up to 7 days before present. Requests up to 31 days at a time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "historic",
+                "advanced_pv_power"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "resource_id",
+                  "value": "<string>",
+                  "description": "(Required) Unique resource identifier for a registered Solcast PV power site."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Start of requested period (ISO 8601 date or datetime)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End of requested period (mutually exclusive with duration)."
+                },
+                {
+                  "disabled": false,
+                  "key": "duration",
+                  "value": "<string>",
+                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end)."
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Time period between data points in ISO 8601 duration format."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb2fb166-c21c-4110-8e12-947c921a6cd3",
+              "name": "Successful response with historic advanced PV power time series.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "advanced_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_id",
+                      "value": "ba75-e17a-7374-95ed"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 3522.1745165723482,\n      \"pv_estimate90\": 6076.537358031357,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 898.4544882740242\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 8431.532919290443,\n      \"pv_estimate90\": 5530.699614234562,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 9000.287894221121\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 4553.881380551592,\n      \"pv_estimate90\": 8572.354314937003,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 7731.3613081166695\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 8324.964352046673,\n      \"pv_estimate90\": 1325.8290101401149,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 2597.200332684537\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dae1d72-4811-46e3-a532-ba0600884f5a",
+              "name": "Bad request — invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "advanced_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_id",
+                      "value": "ba75-e17a-7374-95ed"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91b1a41e-b0e7-4cf5-b01f-2d67b12d5aee",
+              "name": "Unauthorized — API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "advanced_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_id",
+                      "value": "ba75-e17a-7374-95ed"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ff0b4d9-c242-40ca-82ec-a2ca6cc1c434",
+              "name": "Unprocessable entity — request parameters are syntactically valid but semantically incorrect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "advanced_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_id",
+                      "value": "ba75-e17a-7374-95ed"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c63953c-ebcd-4a9c-b471-c3bcf1e71f21",
+              "name": "Too many requests — API rate limit or quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "advanced_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_id",
+                      "value": "ba75-e17a-7374-95ed"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c70843c-c263-472e-9154-4fd951140998",
+          "name": "Get Historic Soiling (Kimber Model)",
+          "request": {
+            "name": "Get Historic Soiling (Kimber Model)",
+            "description": {
+              "content": "Get hourly historical soiling loss estimates using the Kimber model. Returns a time series of estimated historical cumulative soiling / cleanliness state for the requested location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "historic",
+                "soiling",
+                "kimber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<float>",
+                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<float>",
+                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Start of requested period (ISO 8601 date or datetime)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End of requested period (mutually exclusive with duration)."
+                },
+                {
+                  "disabled": false,
+                  "key": "duration",
+                  "value": "<string>",
+                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end)."
+                },
+                {
+                  "disabled": false,
+                  "key": "depo_veloc_pm10",
+                  "value": "<float>",
+                  "description": "Deposition velocity for PM10 particles (m/s)."
+                },
+                {
+                  "disabled": false,
+                  "key": "initial_soiling",
+                  "value": "<float>",
+                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e558e568-e481-4ca1-9b9a-233d8df597d7",
+              "name": "Successful response with historic soiling time series.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "soiling",
+                    "kimber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "depo_veloc_pm10",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "initial_soiling",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT60M\",\n      \"soiling_loss\": 0.032,\n      \"cleanliness\": 0.968\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT60M\",\n      \"soiling_loss\": 0.032,\n      \"cleanliness\": 0.968\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT60M\",\n      \"soiling_loss\": 0.032,\n      \"cleanliness\": 0.968\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT60M\",\n      \"soiling_loss\": 0.032,\n      \"cleanliness\": 0.968\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4409055-421e-4854-b66c-4fa16d024a9d",
+              "name": "Bad request — invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "soiling",
+                    "kimber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "depo_veloc_pm10",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "initial_soiling",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e07435c-3ca5-4016-861f-b5af1b7d3d1a",
+              "name": "Unauthorized — API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "soiling",
+                    "kimber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "depo_veloc_pm10",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "initial_soiling",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2785922e-38f1-4bd0-849c-16228bbeaee9",
+              "name": "Unprocessable entity — request parameters are syntactically valid but semantically incorrect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "soiling",
+                    "kimber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "depo_veloc_pm10",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "initial_soiling",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11deeab0-0571-4c32-9d2b-03198e6b6aff",
+              "name": "Too many requests — API rate limit or quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "soiling",
+                    "kimber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "depo_veloc_pm10",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "initial_soiling",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85f14571-30b9-46f8-b70a-40d4db24e199",
+          "name": "Get Historic Soiling (HSU Model)",
+          "request": {
+            "name": "Get Historic Soiling (HSU Model)",
+            "description": {
+              "content": "Get hourly historical soiling loss estimates using Solcast's HSU model. Returns a time series of estimated historical cumulative soiling / cleanliness state for the requested location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "historic",
+                "soiling",
+                "hsu"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<float>",
+                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<float>",
+                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Start of requested period (ISO 8601 date or datetime)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End of requested period (mutually exclusive with duration)."
+                },
+                {
+                  "disabled": false,
+                  "key": "duration",
+                  "value": "<string>",
+                  "description": "ISO 8601 duration within 31 days of start (mutually exclusive with end)."
+                },
+                {
+                  "disabled": false,
+                  "key": "depo_veloc_pm10",
+                  "value": "<float>",
+                  "description": "Deposition velocity for PM10 particles (m/s)."
+                },
+                {
+                  "disabled": false,
+                  "key": "initial_soiling",
+                  "value": "<float>",
+                  "description": "Initial soiling fraction (0.0 = clean, 1.0 = fully soiled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e04869b-2ab4-4230-9e67-6dc376959319",
+              "name": "Successful response with historic soiling time series.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "soiling",
+                    "hsu"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "depo_veloc_pm10",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "initial_soiling",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT60M\",\n      \"soiling_loss\": 0.032,\n      \"cleanliness\": 0.968\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT60M\",\n      \"soiling_loss\": 0.032,\n      \"cleanliness\": 0.968\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT60M\",\n      \"soiling_loss\": 0.032,\n      \"cleanliness\": 0.968\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT60M\",\n      \"soiling_loss\": 0.032,\n      \"cleanliness\": 0.968\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8eee7459-dbdf-4e34-9a76-b745b4211087",
+              "name": "Bad request — invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "soiling",
+                    "hsu"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "depo_veloc_pm10",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "initial_soiling",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3efb7b11-b356-49c9-ac5b-9f81bb5517cc",
+              "name": "Unauthorized — API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "soiling",
+                    "hsu"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "depo_veloc_pm10",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "initial_soiling",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba7f7c9f-3138-4bdd-8b6f-5cfe7f6184f8",
+              "name": "Unprocessable entity — request parameters are syntactically valid but semantically incorrect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "soiling",
+                    "hsu"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "depo_veloc_pm10",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "initial_soiling",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1a5b429-2ed7-4ac9-a82c-64d0722be7da",
+              "name": "Too many requests — API rate limit or quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "historic",
+                    "soiling",
+                    "hsu"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2023-01-31"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "P7D"
+                    },
+                    {
+                      "key": "depo_veloc_pm10",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "initial_soiling",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.solcast.com.au",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1734d9e4-9d88-4c0a-a710-5779d0bf2c03",
+    "name": "Solcast Aggregations Historic Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.\n\nContact Support:\n Name: Solcast Support",
+      "type": "text/plain"
+    }
+  }
+}

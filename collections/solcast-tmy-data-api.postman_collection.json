@@ -1,0 +1,915 @@
+{
+  "item": [
+    {
+      "id": "f60d364c-e21c-4a75-8071-f08acc3e81c1",
+      "name": "TMY Data",
+      "description": {
+        "content": "Typical Meteorological Year data computed from 2007 to 2023 satellite observations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fdfa480f-7330-4554-9e98-77c71163f6e9",
+          "name": "Get TMY Radiation and Weather",
+          "request": {
+            "name": "Get TMY Radiation and Weather",
+            "description": {
+              "content": "Get the irradiance and weather for a Typical Meteorological Year (TMY) at the requested location, derived from satellite data and numerical weather models. The TMY is calculated with data from 2007 to 2023.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "tmy",
+                "radiation_and_weather"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<float>",
+                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<float>",
+                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "output_parameters",
+                  "value": "<string>",
+                  "description": "Comma-separated list of output parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Time period between data points in ISO 8601 duration format."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1b5ce72-2fbd-4f12-a8a3-8185874ad357",
+              "name": "Successful response with TMY irradiance and weather data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "tmy",
+                    "radiation_and_weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "ghi,dni,dhi,air_temp"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"ghi\": 850.2,\n      \"ghi90\": 2797.4064492806183,\n      \"ghi10\": 8135.653144205123,\n      \"ebh\": 1324.5435497023007,\n      \"dni\": 750.5,\n      \"dhi\": 99.7,\n      \"air_temp\": 28.3,\n      \"cloud_opacity\": 5.2,\n      \"wind_speed_10m\": 3.7,\n      \"wind_direction_10m\": 215,\n      \"clearsky_ghi\": 880,\n      \"clearsky_ebh\": 1729.4984854161733,\n      \"clearsky_dni\": 1240.2899688745706,\n      \"clearsky_dhi\": 448.85703737495896,\n      \"precipitable_water\": 2648.915231868335,\n      \"azimuth\": 603.5056201997425,\n      \"zenith\": 9135.060153040704,\n      \"elevation\": 5036.58864918427,\n      \"relative_humidity\": 8880.69280532475,\n      \"surface_pressure\": 2261.4758363504416,\n      \"snow_depth\": 3681.8617442063096,\n      \"snow_water_equivalent\": 3177.913024454876,\n      \"snow_soiling_rooftop\": 8047.209252956876\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"ghi\": 850.2,\n      \"ghi90\": 7755.886224691053,\n      \"ghi10\": 9475.918002200347,\n      \"ebh\": 3446.328577816722,\n      \"dni\": 750.5,\n      \"dhi\": 99.7,\n      \"air_temp\": 28.3,\n      \"cloud_opacity\": 5.2,\n      \"wind_speed_10m\": 3.7,\n      \"wind_direction_10m\": 215,\n      \"clearsky_ghi\": 880,\n      \"clearsky_ebh\": 7751.318935760616,\n      \"clearsky_dni\": 9634.786402196365,\n      \"clearsky_dhi\": 5953.834927259304,\n      \"precipitable_water\": 7785.633297702861,\n      \"azimuth\": 58.39871846138656,\n      \"zenith\": 6055.000868657075,\n      \"elevation\": 5766.967459143624,\n      \"relative_humidity\": 6899.992522177208,\n      \"surface_pressure\": 8737.681812480578,\n      \"snow_depth\": 1429.6920099178856,\n      \"snow_water_equivalent\": 455.86636815718174,\n      \"snow_soiling_rooftop\": 6321.7236201948\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"ghi\": 850.2,\n      \"ghi90\": 6648.507926116355,\n      \"ghi10\": 8543.675965628605,\n      \"ebh\": 9480.696437183195,\n      \"dni\": 750.5,\n      \"dhi\": 99.7,\n      \"air_temp\": 28.3,\n      \"cloud_opacity\": 5.2,\n      \"wind_speed_10m\": 3.7,\n      \"wind_direction_10m\": 215,\n      \"clearsky_ghi\": 880,\n      \"clearsky_ebh\": 9973.262137048208,\n      \"clearsky_dni\": 9365.294238304336,\n      \"clearsky_dhi\": 9513.66285869761,\n      \"precipitable_water\": 4220.61591746282,\n      \"azimuth\": 6992.651309994558,\n      \"zenith\": 1339.5053674308233,\n      \"elevation\": 9883.015582365126,\n      \"relative_humidity\": 4253.413109139932,\n      \"surface_pressure\": 8787.599690499272,\n      \"snow_depth\": 5888.763523177248,\n      \"snow_water_equivalent\": 7480.375518149412,\n      \"snow_soiling_rooftop\": 6558.461981455238\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"ghi\": 850.2,\n      \"ghi90\": 5090.083494809167,\n      \"ghi10\": 635.4152579178351,\n      \"ebh\": 1186.183664454118,\n      \"dni\": 750.5,\n      \"dhi\": 99.7,\n      \"air_temp\": 28.3,\n      \"cloud_opacity\": 5.2,\n      \"wind_speed_10m\": 3.7,\n      \"wind_direction_10m\": 215,\n      \"clearsky_ghi\": 880,\n      \"clearsky_ebh\": 6259.2424252859055,\n      \"clearsky_dni\": 4924.617588969379,\n      \"clearsky_dhi\": 2337.649546259458,\n      \"precipitable_water\": 5069.2930129281285,\n      \"azimuth\": 2319.700807412701,\n      \"zenith\": 2544.3752534522346,\n      \"elevation\": 3308.0322541548344,\n      \"relative_humidity\": 708.6963585528295,\n      \"surface_pressure\": 3394.1947040078635,\n      \"snow_depth\": 9695.38119944631,\n      \"snow_water_equivalent\": 8555.4727875452,\n      \"snow_soiling_rooftop\": 1864.5536206904956\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcf77f34-3f57-4dc3-801f-1dc50d96afc5",
+              "name": "Bad request — invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "tmy",
+                    "radiation_and_weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "ghi,dni,dhi,air_temp"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4af2e68-b0e9-4bcf-91b0-3e669ff605e7",
+              "name": "Unauthorized — API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "tmy",
+                    "radiation_and_weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "ghi,dni,dhi,air_temp"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60bab8b0-c736-4940-9586-0529e672129c",
+              "name": "Unprocessable entity — request parameters are syntactically valid but semantically incorrect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "tmy",
+                    "radiation_and_weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "ghi,dni,dhi,air_temp"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1471e186-47d1-4302-abae-ef47e5b6eda2",
+              "name": "Too many requests — API rate limit or quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "tmy",
+                    "radiation_and_weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "ghi,dni,dhi,air_temp"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "723b9127-5e6e-4f38-8b52-a4dec17e0622",
+          "name": "Get TMY Rooftop PV Power",
+          "request": {
+            "name": "Get TMY Rooftop PV Power",
+            "description": {
+              "content": "Get the basic rooftop PV power for a Typical Meteorological Year (TMY) at the requested location. The TMY is calculated with data from 2007 to 2023.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "tmy",
+                "rooftop_pv_power"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<float>",
+                  "description": "(Required) Latitude in decimal degrees, between -90 and 90 (north positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<float>",
+                  "description": "(Required) Longitude in decimal degrees, between -180 and 180 (east positive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "capacity",
+                  "value": "<float>",
+                  "description": "System capacity in kilowatts."
+                },
+                {
+                  "disabled": false,
+                  "key": "tilt",
+                  "value": "<float>",
+                  "description": "Panel tilt angle in degrees from horizontal."
+                },
+                {
+                  "disabled": false,
+                  "key": "azimuth",
+                  "value": "<float>",
+                  "description": "Panel azimuth in degrees."
+                },
+                {
+                  "disabled": false,
+                  "key": "output_parameters",
+                  "value": "<string>",
+                  "description": "Comma-separated list of output parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Time period between data points in ISO 8601 duration format."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96c9655f-d352-4a77-9024-386e8c60f811",
+              "name": "Successful response with TMY rooftop PV power data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "tmy",
+                    "rooftop_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "5"
+                    },
+                    {
+                      "key": "tilt",
+                      "value": "25"
+                    },
+                    {
+                      "key": "azimuth",
+                      "value": "180"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "pv_power_rooftop"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 2305.118074810859,\n      \"pv_estimate90\": 6720.340838816906,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 5393.402317769776\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 5288.038585849374,\n      \"pv_estimate90\": 6478.424108149464,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 6812.051523269758\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 9192.653605641573,\n      \"pv_estimate90\": 1640.5060867749776,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 6404.8899132527795\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 0.742,\n      \"pv_estimate10\": 5023.075615163691,\n      \"pv_estimate90\": 9495.600184134222,\n      \"pv_power_rooftop\": 3.71,\n      \"pv_power_advanced\": 8426.67084878348\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcce0263-743a-4b3d-b097-ae7d026632f9",
+              "name": "Bad request — invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "tmy",
+                    "rooftop_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "5"
+                    },
+                    {
+                      "key": "tilt",
+                      "value": "25"
+                    },
+                    {
+                      "key": "azimuth",
+                      "value": "180"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "pv_power_rooftop"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c52952d0-11ea-4f33-aeec-cd43115cab41",
+              "name": "Unauthorized — API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "tmy",
+                    "rooftop_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "5"
+                    },
+                    {
+                      "key": "tilt",
+                      "value": "25"
+                    },
+                    {
+                      "key": "azimuth",
+                      "value": "180"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "pv_power_rooftop"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d5a28ac-3919-4110-9637-af8c498f9144",
+              "name": "Unprocessable entity — request parameters are syntactically valid but semantically incorrect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "tmy",
+                    "rooftop_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "5"
+                    },
+                    {
+                      "key": "tilt",
+                      "value": "25"
+                    },
+                    {
+                      "key": "azimuth",
+                      "value": "180"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "pv_power_rooftop"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4d24ac5-f29e-4e41-86ab-6dacd57b4cac",
+              "name": "Too many requests — API rate limit or quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "tmy",
+                    "rooftop_pv_power"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "-33.856784"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "151.215297"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "5"
+                    },
+                    {
+                      "key": "tilt",
+                      "value": "25"
+                    },
+                    {
+                      "key": "azimuth",
+                      "value": "180"
+                    },
+                    {
+                      "key": "output_parameters",
+                      "value": "pv_power_rooftop"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT60M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.solcast.com.au",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "80303be3-2baf-43de-881f-8b3d01e842ef",
+    "name": "Solcast Aggregations TMY Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.\n\nContact Support:\n Name: Solcast Support",
+      "type": "text/plain"
+    }
+  }
+}

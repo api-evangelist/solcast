@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Solcast Aggregations TMY Data API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TMY Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get TMY Radiation and Weather",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.solcast.com.au/data/tmy/radiation_and_weather",
+            "params": [
+              {
+                "name": "latitude",
+                "value": "-33.856784",
+                "type": "query",
+                "description": "Latitude in decimal degrees, between -90 and 90 (north positive)."
+              },
+              {
+                "name": "longitude",
+                "value": "151.215297",
+                "type": "query",
+                "description": "Longitude in decimal degrees, between -180 and 180 (east positive)."
+              },
+              {
+                "name": "output_parameters",
+                "value": "ghi,dni,dhi,air_temp",
+                "type": "query",
+                "description": "Comma-separated list of output parameters."
+              },
+              {
+                "name": "period",
+                "value": "PT60M",
+                "type": "query",
+                "description": "Time period between data points in ISO 8601 duration format."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Get the irradiance and weather for a Typical Meteorological Year (TMY) at the requested location, derived from satellite data and numerical weather models. The TMY is calculated with data from 2007 to 2023."
+        },
+        {
+          "info": {
+            "name": "Get TMY Rooftop PV Power",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.solcast.com.au/data/tmy/rooftop_pv_power",
+            "params": [
+              {
+                "name": "latitude",
+                "value": "-33.856784",
+                "type": "query",
+                "description": "Latitude in decimal degrees, between -90 and 90 (north positive)."
+              },
+              {
+                "name": "longitude",
+                "value": "151.215297",
+                "type": "query",
+                "description": "Longitude in decimal degrees, between -180 and 180 (east positive)."
+              },
+              {
+                "name": "capacity",
+                "value": "5",
+                "type": "query",
+                "description": "System capacity in kilowatts."
+              },
+              {
+                "name": "tilt",
+                "value": "25",
+                "type": "query",
+                "description": "Panel tilt angle in degrees from horizontal."
+              },
+              {
+                "name": "azimuth",
+                "value": "180",
+                "type": "query",
+                "description": "Panel azimuth in degrees."
+              },
+              {
+                "name": "output_parameters",
+                "value": "pv_power_rooftop",
+                "type": "query",
+                "description": "Comma-separated list of output parameters."
+              },
+              {
+                "name": "period",
+                "value": "PT60M",
+                "type": "query",
+                "description": "Time period between data points in ISO 8601 duration format."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Get the basic rooftop PV power for a Typical Meteorological Year (TMY) at the requested location. The TMY is calculated with data from 2007 to 2023."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

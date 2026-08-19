@@ -1,0 +1,785 @@
+{
+  "item": [
+    {
+      "id": "aba4f18d-6400-48e8-a447-ad2c3e087660",
+      "name": "Aggregations",
+      "description": {
+        "content": "Live and forecast aggregated generation data for grid collections and sub-aggregations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b301a5bd-266e-45f1-8a12-bde242fbddfe",
+          "name": "Get Forecast Aggregations",
+          "request": {
+            "name": "Get Forecast Aggregations",
+            "description": {
+              "content": "Get forecast aggregation data for up to 7 days ahead for a requested grid collection or sub-aggregation. Used for portfolio and grid management.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "forecast",
+                "aggregations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection_id",
+                  "value": "<string>",
+                  "description": "(Required) Unique identifier for the grid aggregation collection."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregation_id",
+                  "value": "<string>",
+                  "description": "Unique identifier for a specific sub-aggregation within the collection."
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Time period between data points in ISO 8601 duration format."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dab22de4-899d-48ce-b1d1-eb0f1acb6595",
+              "name": "Successful response with aggregation forecast time series.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "forecast",
+                    "aggregations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregation_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT30M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 125000.5,\n      \"pv_estimate10\": 7093.55881237424,\n      \"pv_estimate90\": 6591.764817701838\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 125000.5,\n      \"pv_estimate10\": 4744.4838427343275,\n      \"pv_estimate90\": 4443.595598175514\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 125000.5,\n      \"pv_estimate10\": 8905.161258621198,\n      \"pv_estimate90\": 1758.360494018797\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 125000.5,\n      \"pv_estimate10\": 9019.812695747829,\n      \"pv_estimate90\": 5689.812231831443\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe938f74-0b6a-439a-a324-6418c425f632",
+              "name": "Bad request — invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "forecast",
+                    "aggregations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregation_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT30M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77d8c634-92a7-4a24-9076-69ad31395589",
+              "name": "Unauthorized — API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "forecast",
+                    "aggregations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregation_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT30M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24555437-b838-41c6-af9b-2a1be3eed91d",
+              "name": "Unprocessable entity — request parameters are syntactically valid but semantically incorrect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "forecast",
+                    "aggregations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregation_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT30M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b394c89b-28fa-415a-86c3-b380b1690836",
+              "name": "Too many requests — API rate limit or quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "forecast",
+                    "aggregations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregation_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT30M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c49ecfd5-0e20-4213-9d54-664c3d4208a3",
+          "name": "Get Live Aggregations",
+          "request": {
+            "name": "Get Live Aggregations",
+            "description": {
+              "content": "Get live aggregation data for up to 7 days of data at a time for a requested grid collection or sub-aggregation. Used for grid and portfolio management.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "live",
+                "aggregations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection_id",
+                  "value": "<string>",
+                  "description": "(Required) Unique identifier for the grid aggregation collection."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregation_id",
+                  "value": "<string>",
+                  "description": "Unique identifier for a specific sub-aggregation within the collection."
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Time period between data points in ISO 8601 duration format."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8ffcb49-678a-4893-935e-082f590c3e03",
+              "name": "Successful response with live aggregation time series.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "live",
+                    "aggregations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregation_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT30M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"estimated_actuals\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 125000.5,\n      \"pv_estimate10\": 7093.55881237424,\n      \"pv_estimate90\": 6591.764817701838\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 125000.5,\n      \"pv_estimate10\": 4744.4838427343275,\n      \"pv_estimate90\": 4443.595598175514\n    }\n  ],\n  \"forecasts\": [\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 125000.5,\n      \"pv_estimate10\": 8905.161258621198,\n      \"pv_estimate90\": 1758.360494018797\n    },\n    {\n      \"period_end\": \"2023-01-01T01:00:00.0000000Z\",\n      \"period\": \"PT30M\",\n      \"pv_estimate\": 125000.5,\n      \"pv_estimate10\": 9019.812695747829,\n      \"pv_estimate90\": 5689.812231831443\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4809b34-10f5-432e-b5a5-f2b2f7d3d13f",
+              "name": "Bad request — invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "live",
+                    "aggregations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregation_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT30M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bea8534b-7c94-4ba5-9348-cef9e4ea2ca6",
+              "name": "Unauthorized — API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "live",
+                    "aggregations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregation_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT30M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55a350cc-6c82-47d2-ba07-a6201a1b69a0",
+              "name": "Unprocessable entity — request parameters are syntactically valid but semantically incorrect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "live",
+                    "aggregations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregation_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT30M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bd4d37d-28e4-4fe4-9974-204d29583a09",
+              "name": "Too many requests — API rate limit or quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "live",
+                    "aggregations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregation_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "PT30M"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid latitude value provided.\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.solcast.com.au",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8487a6f5-d736-4885-9f98-90a90a1ea873",
+    "name": "Solcast Aggregations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.\n\nContact Support:\n Name: Solcast Support",
+      "type": "text/plain"
+    }
+  }
+}

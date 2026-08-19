@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Solcast Aggregations PV Power Sites API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PV Power Sites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List PV Power Sites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.solcast.com.au/resources/pv_power_sites",
+            "params": [
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "List all registered PV power sites associated with the authenticated account. Sites are used with the advanced PV power model."
+        },
+        {
+          "info": {
+            "name": "Get PV Power Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.solcast.com.au/resources/pv_power_site",
+            "params": [
+              {
+                "name": "resource_id",
+                "value": "ba75-e17a-7374-95ed",
+                "type": "query",
+                "description": "Unique identifier for the PV power site."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Retrieve specifications and metadata for a specific registered PV power site identified by its resource_id."
+        },
+        {
+          "info": {
+            "name": "Create PV Power Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.solcast.com.au/resources/pv_power_site",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new PV power site for use with Solcast's advanced PV power model. Returns a unique resource_id for subsequent data queries."
+        },
+        {
+          "info": {
+            "name": "Update PV Power Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.solcast.com.au/resources/pv_power_site",
+            "params": [
+              {
+                "name": "resource_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for the PV power site to overwrite."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fully overwrite specifications of an existing PV power site. All current field values are replaced with the provided values."
+        },
+        {
+          "info": {
+            "name": "Patch PV Power Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.solcast.com.au/resources/pv_power_site",
+            "params": [
+              {
+                "name": "resource_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for the PV power site to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update specifications of an existing PV power site. Only provided fields are updated; all other fields remain unchanged."
+        },
+        {
+          "info": {
+            "name": "Delete PV Power Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.solcast.com.au/resources/pv_power_site",
+            "params": [
+              {
+                "name": "resource_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for the PV power site to delete."
+              }
+            ]
+          },
+          "docs": "Permanently delete a registered PV power site. This action cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

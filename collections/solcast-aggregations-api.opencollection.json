@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Solcast Aggregations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Aggregations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Forecast Aggregations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.solcast.com.au/data/forecast/aggregations",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for the grid aggregation collection."
+              },
+              {
+                "name": "aggregation_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for a specific sub-aggregation within the collection."
+              },
+              {
+                "name": "period",
+                "value": "PT30M",
+                "type": "query",
+                "description": "Time period between data points in ISO 8601 duration format."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Get forecast aggregation data for up to 7 days ahead for a requested grid collection or sub-aggregation. Used for portfolio and grid management."
+        },
+        {
+          "info": {
+            "name": "Get Live Aggregations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.solcast.com.au/data/live/aggregations",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for the grid aggregation collection."
+              },
+              {
+                "name": "aggregation_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for a specific sub-aggregation within the collection."
+              },
+              {
+                "name": "period",
+                "value": "PT30M",
+                "type": "query",
+                "description": "Time period between data points in ISO 8601 duration format."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Get live aggregation data for up to 7 days of data at a time for a requested grid collection or sub-aggregation. Used for grid and portfolio management."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
