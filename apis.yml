@@ -392,6 +392,11 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/solcast/refs/heads/main/vocabulary/solcast-vocabulary.yml
 common:
+  - type: ParentCompany
+    url: https://apis.io/providers/dnv/
+    name: DNV
+    x-relationship: acquired
+    x-evidence: "Solcast is a solar and renewable energy data company, acquired by DNV in 2023, that provides high-resolution, satellite-derived solar irradiance, PV power, weather forecasting, and historical climate data via a developer API."
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/solcast/overview
   - type: AgenticAccess
