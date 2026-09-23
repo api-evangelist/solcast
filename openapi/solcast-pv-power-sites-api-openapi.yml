@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Solcast Aggregations PV Power Sites API
+  title: Solcast PV Power Sites API
   description: The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.
   version: 1.0.0
   contact:
@@ -209,113 +209,38 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  responses:
+    UnprocessableEntity:
+      description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized — API key is missing, invalid, or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not found — the requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Too many requests — API rate limit or quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    PvPowerSiteCreate:
-      type: object
-      description: Payload for creating or replacing a PV power site.
-      properties:
-        name:
-          type: string
-          description: User-defined name for the site.
-          example: My Rooftop Solar
-        latitude:
-          type: number
-          format: float
-          description: Site latitude in decimal degrees, between -90 and 90.
-          example: -33.856784
-        longitude:
-          type: number
-          format: float
-          description: Site longitude in decimal degrees, between -180 and 180.
-          example: 151.215297
-        capacity:
-          type: number
-          format: float
-          description: System capacity in kilowatts.
-          example: 10.0
-        tilt:
-          type: number
-          format: float
-          description: Panel tilt angle in degrees from horizontal (0 = flat).
-          example: 25
-        azimuth:
-          type: number
-          format: float
-          description: Panel azimuth in degrees.
-          example: 180
-        install_date:
-          type: string
-          format: date
-          description: Date the PV system was installed (YYYY-MM-DD).
-          example: '2020-06-01'
-        loss_factor:
-          type: number
-          format: float
-          description: System loss factor as a fraction (0–1).
-          example: 0.9
-        tracking_type:
-          type: string
-          description: Tracking type.
-          example: fixed
-          enum:
-          - fixed
-          - horizontal_single_axis
-          - vertical_single_axis
-          - two_axis
-      required:
-      - name
-      - latitude
-      - longitude
-    ErrorResponse:
-      type: object
-      description: Standard error response body.
-      properties:
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Invalid latitude value provided.
-        errors:
-          type: object
-          description: Field-level validation errors.
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    PvPowerSiteUpdate:
-      type: object
-      description: Payload for partially updating a PV power site (PATCH).
-      properties:
-        name:
-          type: string
-          description: User-defined name for the site.
-        capacity:
-          type: number
-          format: float
-          description: System capacity in kilowatts.
-        tilt:
-          type: number
-          format: float
-          description: Panel tilt angle in degrees from horizontal.
-        azimuth:
-          type: number
-          format: float
-          description: Panel azimuth in degrees.
-        install_date:
-          type: string
-          format: date
-          description: Date the PV system was installed (YYYY-MM-DD).
-        loss_factor:
-          type: number
-          format: float
-          description: System loss factor as a fraction (0–1).
-        tracking_type:
-          type: string
-          description: Tracking type.
-          enum:
-          - fixed
-          - horizontal_single_axis
-          - vertical_single_axis
-          - two_axis
     PvPowerSite:
       type: object
       description: A registered Solcast PV power site with its specifications.
@@ -393,6 +318,41 @@ components:
       - name
       - latitude
       - longitude
+    PvPowerSiteUpdate:
+      type: object
+      description: Payload for partially updating a PV power site (PATCH).
+      properties:
+        name:
+          type: string
+          description: User-defined name for the site.
+        capacity:
+          type: number
+          format: float
+          description: System capacity in kilowatts.
+        tilt:
+          type: number
+          format: float
+          description: Panel tilt angle in degrees from horizontal.
+        azimuth:
+          type: number
+          format: float
+          description: Panel azimuth in degrees.
+        install_date:
+          type: string
+          format: date
+          description: Date the PV system was installed (YYYY-MM-DD).
+        loss_factor:
+          type: number
+          format: float
+          description: System loss factor as a fraction (0–1).
+        tracking_type:
+          type: string
+          description: Tracking type.
+          enum:
+          - fixed
+          - horizontal_single_axis
+          - vertical_single_axis
+          - two_axis
     PvPowerSiteListResponse:
       type: object
       description: Response containing a list of registered PV power sites.
@@ -402,37 +362,77 @@ components:
           items:
             $ref: '#/components/schemas/PvPowerSite'
           description: List of registered PV power sites.
-  responses:
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    TooManyRequests:
-      description: Too many requests — API rate limit or quota exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized — API key is missing, invalid, or expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not found — the requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      description: Standard error response body.
+      properties:
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Invalid latitude value provided.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    PvPowerSiteCreate:
+      type: object
+      description: Payload for creating or replacing a PV power site.
+      properties:
+        name:
+          type: string
+          description: User-defined name for the site.
+          example: My Rooftop Solar
+        latitude:
+          type: number
+          format: float
+          description: Site latitude in decimal degrees, between -90 and 90.
+          example: -33.856784
+        longitude:
+          type: number
+          format: float
+          description: Site longitude in decimal degrees, between -180 and 180.
+          example: 151.215297
+        capacity:
+          type: number
+          format: float
+          description: System capacity in kilowatts.
+          example: 10.0
+        tilt:
+          type: number
+          format: float
+          description: Panel tilt angle in degrees from horizontal (0 = flat).
+          example: 25
+        azimuth:
+          type: number
+          format: float
+          description: Panel azimuth in degrees.
+          example: 180
+        install_date:
+          type: string
+          format: date
+          description: Date the PV system was installed (YYYY-MM-DD).
+          example: '2020-06-01'
+        loss_factor:
+          type: number
+          format: float
+          description: System loss factor as a fraction (0–1).
+          example: 0.9
+        tracking_type:
+          type: string
+          description: Tracking type.
+          example: fixed
+          enum:
+          - fixed
+          - horizontal_single_axis
+          - vertical_single_axis
+          - two_axis
+      required:
+      - name
+      - latitude
+      - longitude
   securitySchemes:
     apiKeyAuth:
       type: http

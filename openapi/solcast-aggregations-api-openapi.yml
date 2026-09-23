@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Solcast Aggregations API
   description: The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.
@@ -126,6 +126,18 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   responses:
+    UnprocessableEntity:
+      description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Unauthorized — API key is missing, invalid, or expired.
       content:
@@ -138,19 +150,36 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response body.
+      properties:
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Invalid latitude value provided.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    AggregationResponse:
+      type: object
+      description: Response wrapper for aggregation time series data.
+      properties:
+        estimated_actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationDataPoint'
+          description: Array of live aggregation data points.
+        forecasts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationDataPoint'
+          description: Array of forecast aggregation data points.
     AggregationDataPoint:
       type: object
       description: A single time period of aggregation data.
@@ -177,35 +206,6 @@ components:
           type: number
           format: float
           description: Aggregated PV estimate at 90th percentile.
-    AggregationResponse:
-      type: object
-      description: Response wrapper for aggregation time series data.
-      properties:
-        estimated_actuals:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregationDataPoint'
-          description: Array of live aggregation data points.
-        forecasts:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregationDataPoint'
-          description: Array of forecast aggregation data points.
-    ErrorResponse:
-      type: object
-      description: Standard error response body.
-      properties:
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Invalid latitude value provided.
-        errors:
-          type: object
-          description: Field-level validation errors.
-          additionalProperties:
-            type: array
-            items:
-              type: string
   securitySchemes:
     apiKeyAuth:
       type: http

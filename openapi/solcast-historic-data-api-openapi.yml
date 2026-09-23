@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Solcast Aggregations Historic Data API
+  title: Solcast Historic Data API
   description: The Solcast API provides live, forecast, historical, and typical meteorological year (TMY) solar irradiance, PV power, and weather data derived from a global fleet of weather satellites. Data covers rooftop PV, advanced PV, grid aggregations, and soiling loss models (Kimber and HSU) globally. Solcast is part of DNV's Green Data Products suite. Authentication uses an API key passed via the Authorization header.
   version: 1.0.0
   contact:
@@ -446,42 +446,46 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  responses:
+    UnprocessableEntity:
+      description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized — API key is missing, invalid, or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Too many requests — API rate limit or quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    PvPowerEstimated:
+    PvPowerResponse:
       type: object
-      description: A single time period of PV power data.
+      description: Response wrapper for PV power time series data.
       properties:
-        period_end:
-          type: string
-          format: date-time
-          description: The end time of the data period (UTC).
-          example: '2023-01-01T01:00:00.0000000Z'
-        period:
-          type: string
-          description: Duration of the time period in ISO 8601 format.
-          example: PT30M
-        pv_estimate:
-          type: number
-          format: float
-          description: Estimated PV power output as a fraction of system capacity (0–1).
-          example: 0.742
-        pv_estimate10:
-          type: number
-          format: float
-          description: PV estimate at 10th percentile (pessimistic scenario).
-        pv_estimate90:
-          type: number
-          format: float
-          description: PV estimate at 90th percentile (optimistic scenario).
-        pv_power_rooftop:
-          type: number
-          format: float
-          description: Estimated rooftop PV power output in kilowatts.
-          example: 3.71
-        pv_power_advanced:
-          type: number
-          format: float
-          description: Advanced model PV power output in kilowatts.
+        estimated_actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/PvPowerEstimated'
+          description: Array of PV power estimated actuals ordered by period_end ascending.
+        forecasts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PvPowerEstimated'
+          description: Array of PV power forecast data points ordered by period_end ascending.
     SoilingEstimated:
       type: object
       description: A single time period of soiling loss data.
@@ -519,20 +523,6 @@ components:
           items:
             $ref: '#/components/schemas/RadiationAndWeatherEstimated'
           description: Array of forecast irradiance and weather data points ordered by period_end ascending.
-    PvPowerResponse:
-      type: object
-      description: Response wrapper for PV power time series data.
-      properties:
-        estimated_actuals:
-          type: array
-          items:
-            $ref: '#/components/schemas/PvPowerEstimated'
-          description: Array of PV power estimated actuals ordered by period_end ascending.
-        forecasts:
-          type: array
-          items:
-            $ref: '#/components/schemas/PvPowerEstimated'
-          description: Array of PV power forecast data points ordered by period_end ascending.
     SoilingResponse:
       type: object
       description: Response wrapper for soiling loss time series data.
@@ -562,6 +552,41 @@ components:
             type: array
             items:
               type: string
+    PvPowerEstimated:
+      type: object
+      description: A single time period of PV power data.
+      properties:
+        period_end:
+          type: string
+          format: date-time
+          description: The end time of the data period (UTC).
+          example: '2023-01-01T01:00:00.0000000Z'
+        period:
+          type: string
+          description: Duration of the time period in ISO 8601 format.
+          example: PT30M
+        pv_estimate:
+          type: number
+          format: float
+          description: Estimated PV power output as a fraction of system capacity (0–1).
+          example: 0.742
+        pv_estimate10:
+          type: number
+          format: float
+          description: PV estimate at 10th percentile (pessimistic scenario).
+        pv_estimate90:
+          type: number
+          format: float
+          description: PV estimate at 90th percentile (optimistic scenario).
+        pv_power_rooftop:
+          type: number
+          format: float
+          description: Estimated rooftop PV power output in kilowatts.
+          example: 3.71
+        pv_power_advanced:
+          type: number
+          format: float
+          description: Advanced model PV power output in kilowatts.
     RadiationAndWeatherEstimated:
       type: object
       description: A single time period of irradiance and weather data.
@@ -675,31 +700,6 @@ components:
           type: number
           format: float
           description: Estimated snow soiling loss factor for rooftop panels (0–1).
-  responses:
-    Unauthorized:
-      description: Unauthorized — API key is missing, invalid, or expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    TooManyRequests:
-      description: Too many requests — API rate limit or quota exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     apiKeyAuth:
       type: http
