@@ -132,14 +132,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields.
+    Unauthorized:
+      description: Unauthorized — API key is missing, invalid, or expired.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized — API key is missing, invalid, or expired.
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields.
       content:
         application/json:
           schema:

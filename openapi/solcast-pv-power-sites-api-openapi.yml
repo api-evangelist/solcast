@@ -210,6 +210,12 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   responses:
+    NotFound:
+      description: Not found — the requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     UnprocessableEntity:
       description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
       content:
@@ -224,12 +230,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Unauthorized — API key is missing, invalid, or expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not found — the requested resource does not exist.
       content:
         application/json:
           schema:
@@ -318,50 +318,6 @@ components:
       - name
       - latitude
       - longitude
-    PvPowerSiteUpdate:
-      type: object
-      description: Payload for partially updating a PV power site (PATCH).
-      properties:
-        name:
-          type: string
-          description: User-defined name for the site.
-        capacity:
-          type: number
-          format: float
-          description: System capacity in kilowatts.
-        tilt:
-          type: number
-          format: float
-          description: Panel tilt angle in degrees from horizontal.
-        azimuth:
-          type: number
-          format: float
-          description: Panel azimuth in degrees.
-        install_date:
-          type: string
-          format: date
-          description: Date the PV system was installed (YYYY-MM-DD).
-        loss_factor:
-          type: number
-          format: float
-          description: System loss factor as a fraction (0–1).
-        tracking_type:
-          type: string
-          description: Tracking type.
-          enum:
-          - fixed
-          - horizontal_single_axis
-          - vertical_single_axis
-          - two_axis
-    PvPowerSiteListResponse:
-      type: object
-      description: Response containing a list of registered PV power sites.
-      properties:
-        pv_power_sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/PvPowerSite'
-          description: List of registered PV power sites.
     ErrorResponse:
       type: object
       description: Standard error response body.
@@ -433,6 +389,50 @@ components:
       - name
       - latitude
       - longitude
+    PvPowerSiteUpdate:
+      type: object
+      description: Payload for partially updating a PV power site (PATCH).
+      properties:
+        name:
+          type: string
+          description: User-defined name for the site.
+        capacity:
+          type: number
+          format: float
+          description: System capacity in kilowatts.
+        tilt:
+          type: number
+          format: float
+          description: Panel tilt angle in degrees from horizontal.
+        azimuth:
+          type: number
+          format: float
+          description: Panel azimuth in degrees.
+        install_date:
+          type: string
+          format: date
+          description: Date the PV system was installed (YYYY-MM-DD).
+        loss_factor:
+          type: number
+          format: float
+          description: System loss factor as a fraction (0–1).
+        tracking_type:
+          type: string
+          description: Tracking type.
+          enum:
+          - fixed
+          - horizontal_single_axis
+          - vertical_single_axis
+          - two_axis
+    PvPowerSiteListResponse:
+      type: object
+      description: Response containing a list of registered PV power sites.
+      properties:
+        pv_power_sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/PvPowerSite'
+          description: List of registered PV power sites.
   securitySchemes:
     apiKeyAuth:
       type: http
