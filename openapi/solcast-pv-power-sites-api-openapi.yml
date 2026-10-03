@@ -210,20 +210,8 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   responses:
-    NotFound:
-      description: Not found — the requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     UnprocessableEntity:
       description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields.
       content:
         application/json:
           schema:
@@ -234,13 +222,40 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not found — the requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     TooManyRequests:
       description: Too many requests — API rate limit or quota exceeded.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response body.
+      properties:
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Invalid latitude value provided.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
     PvPowerSite:
       type: object
       description: A registered Solcast PV power site with its specifications.
@@ -318,21 +333,6 @@ components:
       - name
       - latitude
       - longitude
-    ErrorResponse:
-      type: object
-      description: Standard error response body.
-      properties:
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Invalid latitude value provided.
-        errors:
-          type: object
-          description: Field-level validation errors.
-          additionalProperties:
-            type: array
-            items:
-              type: string
     PvPowerSiteCreate:
       type: object
       description: Payload for creating or replacing a PV power site.
@@ -389,6 +389,15 @@ components:
       - name
       - latitude
       - longitude
+    PvPowerSiteListResponse:
+      type: object
+      description: Response containing a list of registered PV power sites.
+      properties:
+        pv_power_sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/PvPowerSite'
+          description: List of registered PV power sites.
     PvPowerSiteUpdate:
       type: object
       description: Payload for partially updating a PV power site (PATCH).
@@ -424,15 +433,6 @@ components:
           - horizontal_single_axis
           - vertical_single_axis
           - two_axis
-    PvPowerSiteListResponse:
-      type: object
-      description: Response containing a list of registered PV power sites.
-      properties:
-        pv_power_sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/PvPowerSite'
-          description: List of registered PV power sites.
   securitySchemes:
     apiKeyAuth:
       type: http

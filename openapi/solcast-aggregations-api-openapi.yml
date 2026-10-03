@@ -125,32 +125,21 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  responses:
-    UnprocessableEntity:
-      description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized — API key is missing, invalid, or expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    TooManyRequests:
-      description: Too many requests — API rate limit or quota exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    AggregationResponse:
+      type: object
+      description: Response wrapper for aggregation time series data.
+      properties:
+        estimated_actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationDataPoint'
+          description: Array of live aggregation data points.
+        forecasts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationDataPoint'
+          description: Array of forecast aggregation data points.
     ErrorResponse:
       type: object
       description: Standard error response body.
@@ -166,20 +155,6 @@ components:
             type: array
             items:
               type: string
-    AggregationResponse:
-      type: object
-      description: Response wrapper for aggregation time series data.
-      properties:
-        estimated_actuals:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregationDataPoint'
-          description: Array of live aggregation data points.
-        forecasts:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregationDataPoint'
-          description: Array of forecast aggregation data points.
     AggregationDataPoint:
       type: object
       description: A single time period of aggregation data.
@@ -206,6 +181,31 @@ components:
           type: number
           format: float
           description: Aggregated PV estimate at 90th percentile.
+  responses:
+    UnprocessableEntity:
+      description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized — API key is missing, invalid, or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Too many requests — API rate limit or quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     apiKeyAuth:
       type: http
