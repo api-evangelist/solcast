@@ -126,35 +126,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   schemas:
-    AggregationResponse:
-      type: object
-      description: Response wrapper for aggregation time series data.
-      properties:
-        estimated_actuals:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregationDataPoint'
-          description: Array of live aggregation data points.
-        forecasts:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregationDataPoint'
-          description: Array of forecast aggregation data points.
-    ErrorResponse:
-      type: object
-      description: Standard error response body.
-      properties:
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Invalid latitude value provided.
-        errors:
-          type: object
-          description: Field-level validation errors.
-          additionalProperties:
-            type: array
-            items:
-              type: string
     AggregationDataPoint:
       type: object
       description: A single time period of aggregation data.
@@ -181,9 +152,44 @@ components:
           type: number
           format: float
           description: Aggregated PV estimate at 90th percentile.
+    ErrorResponse:
+      type: object
+      description: Standard error response body.
+      properties:
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Invalid latitude value provided.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    AggregationResponse:
+      type: object
+      description: Response wrapper for aggregation time series data.
+      properties:
+        estimated_actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationDataPoint'
+          description: Array of live aggregation data points.
+        forecasts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationDataPoint'
+          description: Array of forecast aggregation data points.
   responses:
     UnprocessableEntity:
       description: Unprocessable entity — request parameters are syntactically valid but semantically incorrect.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields.
       content:
         application/json:
           schema:
@@ -196,12 +202,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     TooManyRequests:
       description: Too many requests — API rate limit or quota exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields.
       content:
         application/json:
           schema:
